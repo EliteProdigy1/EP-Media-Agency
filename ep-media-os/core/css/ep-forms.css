@@ -1,0 +1,279 @@
+/* ══════════════════════════════════════════════════════════════════
+   EP MEDIA OS — FORMS ENGINE
+   Shared styles for all Netlify-powered forms across EP projects.
+   Works with ep-forms.js for validation + submission logic.
+
+   Form name pattern: ep-[project]-[purpose]
+   Honeypot pattern: always include bot-field + netlify-honeypot
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Form page layout ── */
+.ep-form-page {
+  min-height: 100svh;
+  background: var(--ep-black);
+  padding-top: 80px;
+}
+
+.ep-form-hero {
+  padding: clamp(80px, 10vw, 140px) var(--ep-gutter) clamp(48px, 6vw, 80px);
+  text-align: center;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+/* ── Card wrapper ── */
+.ep-form-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) var(--ep-gutter);
+}
+
+/* ── Grid ── */
+.ep-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+}
+
+@media (max-width: 600px) {
+  .ep-form-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Fields ── */
+.ep-form-field { display: flex; flex-direction: column; gap: 8px; }
+.ep-form-field--full { grid-column: 1 / -1; }
+
+.ep-form-label {
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 240, 0.65);
+}
+
+.ep-form-label .ep-form-required {
+  color: var(--ep-gold);
+  margin-left: 3px;
+}
+
+/* ── Inputs ── */
+.ep-form-input,
+.ep-form-select,
+.ep-form-textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: var(--ep-radius);
+  padding: 14px 18px;
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-base);
+  color: var(--ep-white);
+  transition: border-color var(--ep-dur-fast) var(--ep-ease),
+              background var(--ep-dur-fast) var(--ep-ease),
+              box-shadow var(--ep-dur-fast) var(--ep-ease);
+  width: 100%;
+  appearance: none;
+}
+
+.ep-form-input:focus,
+.ep-form-select:focus,
+.ep-form-textarea:focus {
+  outline: none;
+  border-color: var(--ep-gold);
+  background: rgba(201, 168, 76, 0.06);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
+}
+
+.ep-form-input::placeholder,
+.ep-form-textarea::placeholder {
+  color: rgba(248, 246, 240, 0.28);
+}
+
+.ep-form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+  cursor: none;
+}
+
+.ep-form-select option {
+  background: var(--ep-black-rich);
+  color: var(--ep-white);
+}
+
+.ep-form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* ── Error state ── */
+.ep-form-input.error,
+.ep-form-select.error,
+.ep-form-textarea.error {
+  border-color: #e05555;
+  box-shadow: 0 0 0 3px rgba(224, 85, 85, 0.12);
+}
+
+.ep-form-error-msg {
+  font-size: var(--ep-text-xs);
+  color: #e05555;
+  display: none;
+}
+
+.ep-form-field.has-error .ep-form-error-msg { display: block; }
+
+/* ── Checkbox / consent ── */
+.ep-form-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  grid-column: 1 / -1;
+  padding: 20px 0;
+}
+
+.ep-form-consent input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: var(--ep-radius-sm);
+  background: transparent;
+  cursor: none;
+  transition: all var(--ep-dur-fast) var(--ep-ease);
+  position: relative;
+  top: 2px;
+}
+
+.ep-form-consent input[type="checkbox"]:checked {
+  background: var(--ep-gold);
+  border-color: var(--ep-gold);
+}
+
+.ep-form-consent input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--ep-black);
+  font-weight: 700;
+}
+
+.ep-form-consent label {
+  font-size: var(--ep-text-xs);
+  color: rgba(248, 246, 240, 0.55);
+  line-height: 1.7;
+  cursor: none;
+}
+
+/* ── Submit button ── */
+.ep-form-submit {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ── Success confirmation ── */
+.ep-form-confirm {
+  display: none;
+  text-align: center;
+  padding: 60px 40px;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: var(--ep-radius-lg);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.ep-form-confirm.visible { display: block; }
+
+.ep-form-confirm-icon {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--ep-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ep-text-xl);
+  color: var(--ep-gold);
+  margin: 0 auto 24px;
+}
+
+.ep-form-confirm-title {
+  font-family: var(--ep-font-display);
+  font-size: var(--ep-text-2xl);
+  font-weight: 700;
+  color: var(--ep-white);
+  margin-bottom: 12px;
+}
+
+.ep-form-confirm p {
+  font-size: var(--ep-text-sm);
+  color: rgba(248, 246, 240, 0.6);
+  line-height: 1.7;
+}
+
+/* ── Progress steps (multi-step forms) ── */
+.ep-form-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 48px;
+  padding: 0 var(--ep-gutter);
+}
+
+.ep-form-progress-step {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.ep-form-progress-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ep-text-xs);
+  font-weight: 700;
+  color: rgba(248, 246, 240, 0.4);
+  background: var(--ep-black);
+  position: relative;
+  z-index: 1;
+  transition: all var(--ep-dur-fast) var(--ep-ease);
+  flex-shrink: 0;
+}
+
+.ep-form-progress-step.active .ep-form-progress-dot {
+  border-color: var(--ep-gold);
+  color: var(--ep-gold);
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.12);
+}
+
+.ep-form-progress-step.done .ep-form-progress-dot {
+  border-color: var(--ep-gold);
+  background: var(--ep-gold);
+  color: var(--ep-black);
+}
+
+.ep-form-progress-line {
+  width: 60px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.2);
+  flex-shrink: 0;
+}
+
+.ep-form-progress-step.done + .ep-form-progress-step .ep-form-progress-line,
+.ep-form-progress-step.done .ep-form-progress-line {
+  background: var(--ep-gold);
+}
+
+@media (max-width: 480px) {
+  .ep-form-progress-line { width: 28px; }
+}

@@ -1,0 +1,157 @@
+{
+  "_comment": "EP MEDIA OS — Project Config. Copy this file to /config/[client]-config.json and fill in values.",
+  "_version": "1.0.0",
+
+  "project": {
+    "id":          "client-slug",
+    "name":        "Business Name",
+    "tagline":     "One-line tagline",
+    "url":         "https://client.netlify.app",
+    "industry":    "sports",
+    "tier":        "premium",
+    "netlify_site":"client.netlify.app"
+  },
+
+  "client": {
+    "name":        "Owner Name",
+    "email":       "owner@business.com",
+    "phone":       "251.000.0000",
+    "address":     "City, State",
+    "venmo":       "@venmo-handle",
+    "cashapp":     "$cashapp-handle"
+  },
+
+  "brand": {
+    "primary":     "#C9A84C",
+    "secondary":   "#050505",
+    "surface":     "#0a0a0a",
+    "text":        "#F8F6F0",
+    "accent":      "#E8D49A",
+    "font_display":"'Playfair Display', serif",
+    "font_body":   "'Montserrat', sans-serif",
+    "logo_svg":    "/assets/logos/logo.svg",
+    "logo_dark":   "/assets/logos/logo-dark.svg"
+  },
+
+  "hero": {
+    "type":        "video",
+    "options":     ["video", "image", "split", "text", "gateway"],
+    "video_src":   "/assets/videos/hero.mp4",
+    "poster":      "/assets/images/hero-poster.jpg",
+    "eyebrow":     "EP · Gulf Coast",
+    "title":       "Hero Title",
+    "title_em":    "Italic Word",
+    "subtitle":    "Supporting subtitle copy goes here.",
+    "cta_primary": { "label": "Get Started", "href": "/contact" },
+    "cta_secondary": { "label": "Learn More", "href": "#about" }
+  },
+
+  "gateway": {
+    "enabled":     false,
+    "type":        "none",
+    "options":     ["helmet", "door", "bowl", "furniture", "roof", "camera-push", "video-reveal", "poster-to-video"],
+    "object_src":  "/assets/gateway/object.glb",
+    "access_code": null,
+    "cta_label":   "Enter"
+  },
+
+  "nav": {
+    "links": [
+      { "label": "Home",       "href": "/" },
+      { "label": "About",      "href": "#about" },
+      { "label": "Services",   "href": "#services" },
+      { "label": "Contact",    "href": "/contact", "cta": true }
+    ],
+    "logo_text": "EP"
+  },
+
+  "sections": {
+    "story":        true,
+    "services":     true,
+    "gallery":      true,
+    "testimonials": true,
+    "stats":        true,
+    "team":         false,
+    "events":       false,
+    "athletes":     false,
+    "listings":     false,
+    "blog":         false
+  },
+
+  "stats": [
+    { "number": 0,  "suffix": "+", "label": "Athletes" },
+    { "number": 0,  "suffix": "+", "label": "Years" },
+    { "number": 0,  "suffix": "",  "label": "Events" },
+    { "number": 0,  "suffix": "%", "label": "Satisfaction" }
+  ],
+
+  "services": [],
+
+  "forms": {
+    "contact": {
+      "enabled":     true,
+      "netlify_name":"client-contact",
+      "redirect":    "/thank-you"
+    },
+    "inquiry": {
+      "enabled":     true,
+      "netlify_name":"client-inquiry",
+      "fields":      ["name", "email", "phone", "service", "message"]
+    },
+    "popup_email": {
+      "enabled":     false,
+      "netlify_name":"client-email-leads",
+      "delay_ms":    2000,
+      "storage_key": "client_popup_seen"
+    },
+    "booking": {
+      "enabled":     false,
+      "provider":    "leagueapps",
+      "url":         ""
+    }
+  },
+
+  "social": {
+    "instagram":  "",
+    "facebook":   "",
+    "twitter":    "",
+    "youtube":    "",
+    "tiktok":     ""
+  },
+
+  "seo": {
+    "title":       "Business Name — Tagline",
+    "description": "160-character SEO description.",
+    "og_image":    "/assets/images/og-image.jpg",
+    "canonical":   "https://client.netlify.app"
+  },
+
+  "analytics": {
+    "ga4_id":      "",
+    "gtm_id":      ""
+  },
+
+  "animations": {
+    "cursor":      true,
+    "parallax":    true,
+    "card_tilt":   true,
+    "scroll_scrub":false,
+    "three_bg":    false,
+    "lenis":       false
+  },
+
+  "deployment": {
+    "host":        "netlify",
+    "branch":      "main",
+    "build_cmd":   "",
+    "publish_dir": ".",
+    "domain":      ""
+  },
+
+  "packages": {
+    "tier":        "premium",
+    "options":     ["starter", "premium", "signature"],
+    "deposit_pct": 50,
+    "payment":     ["venmo", "cashapp", "invoice"]
+  }
+}

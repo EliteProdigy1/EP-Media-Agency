@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BRAND_NAME}} — Roofing &amp; Restoration</title>
+  <meta name="description" content="{{SEO_DESCRIPTION}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  <link rel="icon" href="{{LOGO_SVG}}" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:title" content="{{BRAND_NAME}} — Roofing &amp; Restoration">
+  <meta property="og:description" content="{{SEO_DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="theme-color" content="{{BRAND_SECONDARY}}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../core/css/ep-variables.css">
+  <link rel="stylesheet" href="../core/css/ep-base.css">
+  <link rel="stylesheet" href="../core/css/ep-nav.css">
+  <link rel="stylesheet" href="../core/css/ep-hero.css">
+  <link rel="stylesheet" href="../core/css/ep-components.css">
+  <link rel="stylesheet" href="../core/css/ep-forms.css">
+  <link rel="stylesheet" href="../core/js/ep-cursor.css">
+  <link rel="stylesheet" href="/config/{{CLIENT_SLUG}}-theme.css">
+</head>
+<body>
+
+  <div id="progress-bar" style="position:fixed;top:0;left:0;right:0;height:3px;background:var(--brand-primary,var(--ep-gold));transform:scaleX(0);transform-origin:left;z-index:9999;"></div>
+
+  <nav class="ep-nav" id="main-nav" data-ep-nav>
+    <a class="ep-nav-logo" href="/">
+      <img src="{{LOGO_SVG}}" alt="{{BRAND_NAME}}" width="36" height="36">
+      <span class="ep-nav-logo-name">{{BRAND_NAME}}</span>
+    </a>
+    <ul class="ep-nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact" class="ep-nav-cta">Free Estimate</a></li>
+    </ul>
+    <button class="ep-hamburger" data-ep-hamburger aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="ep-mobile-overlay" data-ep-overlay></div>
+  <nav class="ep-mobile-menu" id="ep-mobile-menu" data-ep-menu aria-hidden="true">
+    <button class="mobile-close ep-hamburger active" aria-label="Close"><span></span><span></span><span></span></button>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">How It Works</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Free Estimate</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO — IMAGE (roofs look better as still shots than video) -->
+  <section id="hero" class="ep-hero ep-hero--image">
+    <img class="ep-hero-img-bg ep-parallax" data-parallax-speed="0.12"
+         src="{{HERO_IMAGE}}" alt="{{BRAND_NAME}} roofing" loading="eager">
+    <div class="ep-hero-overlay"></div>
+    <div class="ep-hero-content">
+      <p class="ep-hero-eyebrow" data-gsap="blur-in" data-delay="0">{{CITY}} · Licensed &amp; Insured</p>
+      <h1 class="ep-hero-title" data-gsap="blur-in" data-delay="0.15">
+        {{HERO_TITLE}}<br><em>{{HERO_TITLE_EM}}</em>
+      </h1>
+      <p class="ep-hero-sub" data-gsap="blur-in" data-delay="0.3">{{HERO_SUBTITLE}}</p>
+      <div class="ep-hero-actions" data-gsap="blur-in" data-delay="0.5">
+        <a href="#contact" class="ep-btn ep-btn--primary">Get Free Estimate</a>
+        <a href="tel:{{PHONE_DIGITS}}" class="ep-btn ep-btn--outline">Call {{PHONE_DISPLAY}}</a>
+      </div>
+    </div>
+    <!-- Trust badges -->
+    <div style="position:absolute;bottom:40px;left:var(--ep-gutter);right:var(--ep-gutter);z-index:10;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;" data-gsap="blur-in" data-delay="0.7">
+      <span style="font-size:var(--ep-text-xs);font-weight:600;letter-spacing:0.14em;color:rgba(248,246,240,0.7);">✓ Licensed &amp; Insured</span>
+      <span style="font-size:var(--ep-text-xs);font-weight:600;letter-spacing:0.14em;color:rgba(248,246,240,0.7);">✓ Free Estimates</span>
+      <span style="font-size:var(--ep-text-xs);font-weight:600;letter-spacing:0.14em;color:rgba(248,246,240,0.7);">✓ {{YEARS_IN_BUSINESS}}+ Years</span>
+      <span style="font-size:var(--ep-text-xs);font-weight:600;letter-spacing:0.14em;color:rgba(248,246,240,0.7);">✓ 5-Star Rated</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="ep-section--sm" style="background:var(--ep-black-mid);">
+    <div class="ep-container">
+      <div class="ep-stats ep-stagger-parent">
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="{{ROOFS_REPLACED}}" data-suffix="+">0</span>
+          <span class="ep-stat-label">Roofs Replaced</span>
+        </div>
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="{{YEARS_IN_BUSINESS}}" data-suffix="+">0</span>
+          <span class="ep-stat-label">Years Experience</span>
+        </div>
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="5" data-suffix="★">0</span>
+          <span class="ep-stat-label">Average Rating</span>
+        </div>
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="{{RESPONSE_HOURS}}" data-suffix="hr">0</span>
+          <span class="ep-stat-label">Response Time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="ep-section">
+    <div class="ep-container">
+      <div style="text-align:center;margin-bottom:clamp(48px,6vw,80px);">
+        <p class="ep-eyebrow reveal">What We Do</p>
+        <h2 class="ep-title reveal" style="margin-top:16px;">Full-Service <em>Roofing</em></h2>
+      </div>
+      <div class="ep-features ep-stagger-parent">
+        <div class="ep-feature">
+          <h3 class="ep-feature-title">Roof Replacement</h3>
+          <p>Complete tear-off and replacement with premium materials. Shingle, metal, tile — we do it all.</p>
+        </div>
+        <div class="ep-feature">
+          <h3 class="ep-feature-title">Roof Repair</h3>
+          <p>Leaks, storm damage, missing shingles. Fast response. Most repairs completed same day.</p>
+        </div>
+        <div class="ep-feature">
+          <h3 class="ep-feature-title">Storm Damage</h3>
+          <p>Insurance claim assistance. We document, file, and work directly with your adjuster.</p>
+        </div>
+        <div class="ep-feature">
+          <h3 class="ep-feature-title">Gutters &amp; Drainage</h3>
+          <p>Installation, cleaning, and repair. Seamless gutters custom-fit to your home.</p>
+        </div>
+        <div class="ep-feature">
+          <h3 class="ep-feature-title">Inspections</h3>
+          <p>Pre-purchase, annual, or after-storm inspections with full written report.</p>
+        </div>
+        <div class="ep-feature">
+          <h3 class="ep-feature-title">Commercial</h3>
+          <p>Flat roofs, TPO, EPDM, and metal panel systems for commercial properties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="process" class="ep-section" style="background:var(--ep-black-mid);">
+    <div class="ep-container">
+      <div style="text-align:center;margin-bottom:clamp(48px,6vw,80px);">
+        <p class="ep-eyebrow reveal">Simple Process</p>
+        <h2 class="ep-title reveal" style="margin-top:16px;">How It <em>Works</em></h2>
+      </div>
+      <div class="ep-process ep-stagger-parent">
+        <div class="ep-process-step">
+          <div class="ep-process-step-num">1</div>
+          <h3 class="ep-process-step-title">Free Estimate</h3>
+          <p>Call or fill out the form. We schedule a free on-site inspection within 24 hours.</p>
+        </div>
+        <div class="ep-process-step">
+          <div class="ep-process-step-num">2</div>
+          <h3 class="ep-process-step-title">Scope &amp; Quote</h3>
+          <p>Detailed written quote with materials, timeline, and warranty. No surprises.</p>
+        </div>
+        <div class="ep-process-step">
+          <div class="ep-process-step-num">3</div>
+          <h3 class="ep-process-step-title">Approved &amp; Scheduled</h3>
+          <p>You approve the scope. We pull permits, order materials, and set a start date.</p>
+        </div>
+        <div class="ep-process-step">
+          <div class="ep-process-step-num">4</div>
+          <h3 class="ep-process-step-title">Complete &amp; Clean</h3>
+          <p>Professional install. Full cleanup. Final walkthrough with you before we leave.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="ep-section">
+    <div class="ep-container">
+      <div style="text-align:center;margin-bottom:clamp(40px,5vw,64px);">
+        <p class="ep-eyebrow reveal">Our Work</p>
+        <h2 class="ep-title reveal" style="margin-top:16px;">Recent <em>Projects</em></h2>
+      </div>
+      <div class="ep-gallery reveal">
+        <div class="ep-gallery-item ep-gallery-item--tall">
+          <img src="{{GALLERY_1}}" alt="Roofing project" loading="lazy">
+        </div>
+        <div class="ep-gallery-item">
+          <img src="{{GALLERY_2}}" alt="Roofing project" loading="lazy">
+        </div>
+        <div class="ep-gallery-item">
+          <img src="{{GALLERY_3}}" alt="Roofing project" loading="lazy">
+        </div>
+        <div class="ep-gallery-item ep-gallery-item--wide">
+          <img src="{{GALLERY_4}}" alt="Roofing project" loading="lazy">
+        </div>
+        <div class="ep-gallery-item">
+          <img src="{{GALLERY_5}}" alt="Roofing project" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / ESTIMATE FORM -->
+  <section id="contact" class="ep-section" style="background:var(--ep-black-mid);">
+    <div class="ep-container ep-container--sm">
+      <div style="text-align:center;margin-bottom:48px;">
+        <p class="ep-eyebrow reveal">Free Estimate</p>
+        <h2 class="ep-title reveal" style="margin-top:16px;">Get Your <em>Quote</em></h2>
+        <p class="ep-body reveal" style="margin-top:12px;">No pressure. No obligation. We'll get back to you within 24 hours.</p>
+      </div>
+      <form name="{{ESTIMATE_FORM_NAME}}" data-netlify="true" netlify-honeypot="bot-field" class="ep-form-card" style="background:var(--ep-black);border:1px solid var(--ep-glass-border);border-radius:var(--ep-radius-lg);padding:48px;">
+        <input type="hidden" name="form-name" value="{{ESTIMATE_FORM_NAME}}">
+        <p style="display:none"><label>Skip: <input name="bot-field"></label></p>
+        <div class="ep-form-grid">
+          <div class="ep-form-field">
+            <label class="ep-form-label">Name <span class="ep-form-required">*</span></label>
+            <input type="text" name="name" class="ep-form-input" required placeholder="Your full name">
+          </div>
+          <div class="ep-form-field">
+            <label class="ep-form-label">Phone <span class="ep-form-required">*</span></label>
+            <input type="tel" name="phone" class="ep-form-input" required placeholder="(251) 000-0000">
+          </div>
+          <div class="ep-form-field">
+            <label class="ep-form-label">Email</label>
+            <input type="email" name="email" class="ep-form-input" placeholder="your@email.com">
+          </div>
+          <div class="ep-form-field">
+            <label class="ep-form-label">Service Needed</label>
+            <select name="service" class="ep-form-select">
+              <option value="">-- Select --</option>
+              <option>Roof Replacement</option>
+              <option>Roof Repair</option>
+              <option>Storm Damage</option>
+              <option>Gutters</option>
+              <option>Inspection</option>
+              <option>Commercial</option>
+            </select>
+          </div>
+          <div class="ep-form-field ep-form-field--full">
+            <label class="ep-form-label">Property Address</label>
+            <input type="text" name="address" class="ep-form-input" placeholder="Street address">
+          </div>
+          <div class="ep-form-field ep-form-field--full">
+            <label class="ep-form-label">Additional Details</label>
+            <textarea name="message" class="ep-form-textarea" placeholder="Tell us more about your project…"></textarea>
+          </div>
+          <div class="ep-form-submit ep-form-field--full">
+            <button type="submit" class="ep-btn ep-btn--primary" style="width:100%;">REQUEST FREE ESTIMATE</button>
+          </div>
+        </div>
+      </form>
+      <div class="ep-form-confirm" style="display:none;">
+        <div class="ep-form-confirm-icon">✓</div>
+        <h2 class="ep-form-confirm-title">Request <em>Received</em></h2>
+        <p>We'll call you within 24 hours to schedule your free estimate. Thank you!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ep-footer">
+    <div class="ep-footer-brand">
+      <img src="{{LOGO_SVG}}" alt="{{BRAND_NAME}}">
+      <span class="ep-footer-brand-name">{{BRAND_NAME}}</span>
+    </div>
+    <nav class="ep-footer-links">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="tel:{{PHONE_DIGITS}}">{{PHONE_DISPLAY}}</a>
+      <a href="mailto:{{CLIENT_EMAIL}}">Email</a>
+    </nav>
+    <div class="ep-footer-legal">
+      <p>&copy; {{YEAR}} {{BRAND_NAME}}. All rights reserved.</p>
+      <p>{{CLIENT_CITY}} · Licensed &amp; Insured</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../core/js/ep-core.js"></script>
+  <script src="../core/js/ep-gsap.js"></script>
+  <script src="../core/js/ep-cursor.js"></script>
+  <script src="../core/js/ep-forms.js" defer></script>
+
+</body>
+</html>

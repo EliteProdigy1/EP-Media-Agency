@@ -1,0 +1,197 @@
+/* ══════════════════════════════════════════════════════════════════
+   EP MEDIA OS — BASE RESET + GLOBAL STYLES
+   Import after ep-variables.css. Never override in component files.
+   ══════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--ep-black);
+  color: var(--ep-white);
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-base);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* cursor: none on desktop, auto on touch */
+@media (pointer: fine) {
+  html, * { cursor: none !important; }
+}
+
+img, video { max-width: 100%; display: block; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--ep-dur-fast) var(--ep-ease);
+}
+
+ul { list-style: none; }
+
+/* ── Container ── */
+.ep-container {
+  width: 100%;
+  max-width: var(--ep-container);
+  margin: 0 auto;
+  padding: 0 var(--ep-gutter);
+}
+
+.ep-container--sm {
+  max-width: var(--ep-container-sm);
+}
+
+/* ── Section wrapper ── */
+.ep-section {
+  padding: var(--ep-section-pad) var(--ep-gutter);
+}
+
+.ep-section--sm {
+  padding: var(--ep-section-pad-sm) var(--ep-gutter);
+}
+
+/* ── Typography utilities ── */
+.ep-eyebrow {
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ep-gold);
+}
+
+.ep-title {
+  font-family: var(--ep-font-display);
+  font-size: var(--ep-text-3xl);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ep-white);
+}
+
+.ep-title em {
+  font-style: italic;
+  color: var(--ep-gold);
+}
+
+.ep-subtitle {
+  font-family: var(--ep-font-editorial);
+  font-size: var(--ep-text-xl);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ep-silver);
+}
+
+.ep-body {
+  font-size: var(--ep-text-md);
+  line-height: 1.75;
+  color: rgba(248, 246, 240, 0.75);
+}
+
+/* ── Gold rule ── */
+.ep-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--ep-gold);
+  margin: 0 auto;
+}
+
+/* ── Buttons ── */
+.ep-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: var(--ep-radius);
+  transition: all var(--ep-dur-fast) var(--ep-ease);
+  cursor: none;
+}
+
+.ep-btn--primary {
+  background: var(--ep-gold);
+  color: var(--ep-black);
+  border: 1px solid var(--ep-gold);
+}
+
+.ep-btn--primary:hover {
+  background: var(--ep-gold-light);
+  border-color: var(--ep-gold-light);
+  transform: translateY(-2px);
+  box-shadow: var(--ep-shadow-gold);
+}
+
+.ep-btn--outline {
+  background: transparent;
+  color: var(--ep-white);
+  border: 1px solid rgba(248, 246, 240, 0.4);
+}
+
+.ep-btn--outline:hover {
+  border-color: var(--ep-gold);
+  color: var(--ep-gold);
+  transform: translateY(-2px);
+}
+
+.ep-btn--ghost {
+  background: transparent;
+  color: var(--ep-gold);
+  border: 1px solid var(--ep-gold);
+}
+
+.ep-btn--ghost:hover {
+  background: var(--ep-gold);
+  color: var(--ep-black);
+}
+
+/* ── Badge ── */
+.ep-badge {
+  display: inline-block;
+  font-size: var(--ep-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--ep-radius-sm);
+  border: 1px solid currentColor;
+}
+
+.ep-badge--gold   { color: var(--ep-gold);   border-color: var(--ep-gold); }
+.ep-badge--silver { color: var(--ep-silver); border-color: var(--ep-silver); }
+.ep-badge--white  { color: var(--ep-white);  border-color: rgba(248,246,240,0.4); }
+
+/* ── Grid utilities ── */
+.ep-grid-2 { display: grid; grid-template-columns: var(--ep-cols-2); gap: var(--ep-gap); }
+.ep-grid-3 { display: grid; grid-template-columns: var(--ep-cols-3); gap: var(--ep-gap); }
+.ep-grid-4 { display: grid; grid-template-columns: var(--ep-cols-4); gap: var(--ep-gap); }
+
+@media (max-width: 900px) {
+  .ep-grid-3, .ep-grid-4 { grid-template-columns: var(--ep-cols-2); }
+}
+
+@media (max-width: 600px) {
+  .ep-grid-2, .ep-grid-3, .ep-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Reveal animation class (pair with ep-gsap.js) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  filter: blur(8px);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ep-black-rich); }
+::-webkit-scrollbar-thumb { background: var(--ep-gold-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ep-gold); }

@@ -1,0 +1,228 @@
+/* ══════════════════════════════════════════════════════════════════
+   EP MEDIA OS — HERO ENGINE
+   Five hero variants: video, image, split, text-only, gateway.
+   Pair with ep-gsap.js for blur-in animation.
+
+   Usage: add class to .ep-hero to select variant:
+     .ep-hero--video     → full-bleed autoplay video background
+     .ep-hero--image     → full-bleed image background
+     .ep-hero--split     → left content / right image
+     .ep-hero--text      → typographic, centered, no media
+     .ep-hero--gateway   → interactive object gateway (see gateway/)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Base Hero ── */
+.ep-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--ep-black);
+}
+
+/* ── Overlay (always present) ── */
+.ep-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--ep-z-base);
+  background: linear-gradient(
+    to bottom,
+    rgba(5,5,5,0.30) 0%,
+    rgba(5,5,5,0.60) 60%,
+    rgba(5,5,5,0.95) 100%
+  );
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ── Content ── */
+.ep-hero-content {
+  position: relative;
+  z-index: var(--ep-z-lift);
+  text-align: center;
+  padding: clamp(120px, 16vw, 200px) var(--ep-gutter) clamp(80px, 10vw, 140px);
+  max-width: 960px;
+  will-change: transform;
+}
+
+.ep-hero-eyebrow {
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ep-gold);
+  margin-bottom: 20px;
+  opacity: 0;
+}
+
+.ep-hero-title {
+  font-family: var(--ep-font-display);
+  font-size: var(--ep-text-hero);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ep-white);
+  margin-bottom: 28px;
+  opacity: 0;
+}
+
+.ep-hero-title em {
+  font-style: italic;
+  color: var(--ep-gold);
+}
+
+.ep-hero-sub {
+  font-family: var(--ep-font-editorial);
+  font-size: var(--ep-text-xl);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(248, 246, 240, 0.75);
+  max-width: 640px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  opacity: 0;
+}
+
+.ep-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+}
+
+/* ── Scroll indicator ── */
+.ep-hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--ep-z-lift);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: ep-scroll-bounce 2s ease-in-out infinite 2s;
+}
+
+.ep-hero-scroll span {
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 240, 0.5);
+}
+
+.ep-hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--ep-gold), transparent);
+  animation: ep-scroll-grow 2s ease-in-out infinite 2s;
+}
+
+@keyframes ep-scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50%       { transform: translateX(-50%) translateY(8px); opacity: 1; }
+}
+@keyframes ep-scroll-grow {
+  0%, 100% { transform: scaleY(1); opacity: 0.5; }
+  50%       { transform: scaleY(1.3); opacity: 1; }
+}
+
+/* ════ VARIANT: VIDEO ════ */
+.ep-hero--video .ep-hero-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  will-change: transform;
+  transform: scale(1.04);
+  /* parallax: cursor.js will adjust this */
+}
+
+/* ════ VARIANT: IMAGE ════ */
+.ep-hero--image .ep-hero-img-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+  will-change: transform;
+  transform: scale(1.04);
+}
+
+/* ════ VARIANT: SPLIT ════ */
+.ep-hero--split {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.ep-hero--split .ep-hero-content {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(100px,12vw,160px) var(--ep-gutter) clamp(60px,8vw,100px);
+}
+
+.ep-hero--split .ep-hero-actions { justify-content: flex-start; }
+
+.ep-hero--split .ep-hero-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.ep-hero--split .ep-hero-media img,
+.ep-hero--split .ep-hero-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .ep-hero--split {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .ep-hero--split .ep-hero-media {
+    height: 50vh;
+    order: -1;
+  }
+}
+
+/* ════ VARIANT: TEXT ONLY ════ */
+.ep-hero--text {
+  min-height: 60svh;
+  background: var(--ep-black-rich);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.ep-hero--text .ep-hero-content {
+  padding-top: clamp(140px, 18vw, 220px);
+}
+
+/* ════ VARIANT: GATEWAY ════ */
+/* See /gateway/ folder for JS + specific CSS per gateway type */
+.ep-hero--gateway {
+  min-height: 100svh;
+  background: var(--ep-black);
+}
+
+.ep-hero--gateway canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* CLAUDE.md rule: Three.js canvas always pointer-events none */
+  z-index: 0;
+}

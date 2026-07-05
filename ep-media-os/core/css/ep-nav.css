@@ -1,0 +1,240 @@
+/* ══════════════════════════════════════════════════════════════════
+   EP MEDIA OS — NAVIGATION ENGINE
+   Works with ep-core.js initNav() + initMobileMenu().
+   Override brand colors via CSS variables in [project]-theme.css.
+
+   HTML pattern:
+   <nav class="ep-nav" id="main-nav" data-ep-nav>
+     <a class="ep-nav-logo" href="/">
+       <img src="/assets/logo.svg" alt="Logo" width="36" height="36">
+       <span class="ep-nav-logo-name">Brand Name</span>
+     </a>
+     <ul class="ep-nav-links">
+       <li><a href="/">Home</a></li>
+       <li><a href="/about">About</a></li>
+       <li><a href="/contact" class="ep-nav-cta">Contact</a></li>
+     </ul>
+     <button class="ep-hamburger" data-ep-hamburger aria-label="Menu" aria-expanded="false" aria-controls="ep-mobile-menu">
+       <span></span><span></span><span></span>
+     </button>
+   </nav>
+   <div class="ep-mobile-overlay" data-ep-overlay></div>
+   <nav class="ep-mobile-menu" id="ep-mobile-menu" data-ep-menu aria-hidden="true">
+     <button class="mobile-close ep-hamburger active" data-popup-close aria-label="Close">
+       <span></span><span></span><span></span>
+     </button>
+     <ul>
+       <li><a href="/">Home</a></li>
+       <li><a href="/about">About</a></li>
+     </ul>
+   </nav>
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Desktop Nav ── */
+.ep-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--ep-z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px var(--ep-gutter);
+  transition: background var(--ep-dur-base) var(--ep-ease),
+              padding var(--ep-dur-base) var(--ep-ease),
+              backdrop-filter var(--ep-dur-base) var(--ep-ease);
+}
+
+.ep-nav.scrolled {
+  background: rgba(5, 5, 5, 0.88);
+  backdrop-filter: blur(16px) saturate(1.2);
+  padding: 16px var(--ep-gutter);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+/* ── Logo ── */
+.ep-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.ep-nav-logo img {
+  width: 36px;
+  height: 36px;
+  transition: transform var(--ep-dur-fast) var(--ep-ease-spring);
+}
+
+.ep-nav-logo:hover img { transform: scale(1.08); }
+
+.ep-nav-logo-name {
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ep-white);
+}
+
+/* ── Nav links ── */
+.ep-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.ep-nav-links a {
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 240, 0.72);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--ep-dur-fast) var(--ep-ease);
+}
+
+.ep-nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ep-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ep-dur-fast) var(--ep-ease);
+}
+
+.ep-nav-links a:hover,
+.ep-nav-links a.active {
+  color: var(--ep-white);
+}
+
+.ep-nav-links a:hover::after,
+.ep-nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+/* ── Nav CTA button ── */
+.ep-nav-links .ep-nav-cta {
+  background: var(--ep-gold);
+  color: var(--ep-black);
+  padding: 10px 20px;
+  border-radius: var(--ep-radius);
+  font-weight: 700;
+  transition: background var(--ep-dur-fast) var(--ep-ease), transform var(--ep-dur-fast) var(--ep-ease);
+}
+
+.ep-nav-links .ep-nav-cta::after { display: none; }
+
+.ep-nav-links .ep-nav-cta:hover {
+  background: var(--ep-gold-light);
+  transform: translateY(-1px);
+  color: var(--ep-black);
+}
+
+/* ── Hamburger ── */
+.ep-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: none;
+  z-index: calc(var(--ep-z-nav) + 1);
+}
+
+.ep-hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--ep-white);
+  transition: transform var(--ep-dur-fast) var(--ep-ease),
+              opacity var(--ep-dur-fast) var(--ep-ease);
+  transform-origin: center;
+}
+
+.ep-hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.ep-hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.ep-hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile overlay ── */
+.ep-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.6);
+  z-index: calc(var(--ep-z-nav) - 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--ep-dur-base) var(--ep-ease);
+  backdrop-filter: blur(4px);
+}
+
+.ep-mobile-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Mobile menu ── */
+.ep-mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(360px, 85vw);
+  height: 100dvh;
+  background: var(--ep-black-rich);
+  border-left: 1px solid var(--ep-glass-border);
+  z-index: var(--ep-z-nav);
+  padding: 80px 40px 48px;
+  transform: translateX(100%);
+  transition: transform var(--ep-dur-slow) var(--ep-ease-power3);
+  overflow-y: auto;
+}
+
+.ep-mobile-menu.open {
+  transform: translateX(0);
+}
+
+.ep-mobile-menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 40px;
+}
+
+.ep-mobile-menu a {
+  display: block;
+  font-family: var(--ep-font-body);
+  font-size: var(--ep-text-lg);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: rgba(248, 246, 240, 0.8);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  transition: color var(--ep-dur-fast) var(--ep-ease), padding-left var(--ep-dur-fast) var(--ep-ease);
+}
+
+.ep-mobile-menu a:hover {
+  color: var(--ep-gold);
+  padding-left: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ep-nav-links { display: none; }
+  .ep-hamburger { display: flex; }
+}
+
+@media (min-width: 769px) {
+  .ep-mobile-menu,
+  .ep-mobile-overlay,
+  .ep-hamburger { display: none !important; }
+}
