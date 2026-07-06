@@ -19,6 +19,7 @@
 | Elite Prodigy Sports Group | Sports Organization (Internal) | [Elite-Prodigy-sports-group-website](https://github.com/EliteProdigy1/Elite-Prodigy-sports-group-website) | Deployed / Active Build | ✅ Live (eliteprodigysportsgroup.netlify.app) | ✅ Complete | Internal flagship sports/media site. Active build. | Continue Phase 8 |
 | EP Media | Digital Agency / AI-assisted web, video, and brand systems | [Elite-Prodigy-sports-group-website](https://github.com/EliteProdigy1/Elite-Prodigy-sports-group-website) | In Build | ✅ Live (ep-media.html) | ✅ Complete | Parent agency behind EPSG, Cinematic Listings, and all client websites. Section live on epsg.html. | Build ep-media.html agency landing page and connect service packages |
 | EP Media / Cinematic Listings | Media / Real Estate Video (Internal) | (inside EP main repo) | In Build | ✅ Partial | 🔄 In progress | Offer room / listing video service. Inline with EP site. | Build out dedicated offer page |
+| EP Command Center | Internal Operating Dashboard | [EP-Command-Center](https://github.com/EliteProdigy1/EP-Command-Center) | Deployed | ✅ Live (epcommandcenter.netlify.app) | ✅ Complete | Command Center 2.0 — gate-less cinematic ops console (Mission Control, Call Mode, Pipeline, Potential Clients, AI Team). ⚠️ Password protection NOT yet enabled — public URL holds pipeline data. | Enable Netlify access control before wider use |
 
 ---
 
