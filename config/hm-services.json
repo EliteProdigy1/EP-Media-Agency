@@ -58,9 +58,7 @@
   },
   "purchase": {
     "enabled": true,
-    "fullPrice": 1000,
     "depositAmount": 500,
-    "balanceAmount": 500,
     "monthlyPlan": 100,
     "purchaseUrl": "",
     "intakeUrl": "",
