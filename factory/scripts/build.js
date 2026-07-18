@@ -286,10 +286,13 @@ ${inner}
       purchaseStatus = 'active';
     } else {
       // No dead/fake button and no public "coming soon" sales copy — route to a
-      // real, working action (phone, else the contact form). The internal
-      // "purchase link pending" note lives only in BUILD-REPORT.
-      actions = config.phone
-        ? `<a href="${telHref}" class="ep-btn ep-btn--primary">Call to Get Started</a>`
+      // real, working action. This CTA is the AGENCY sales line (buying the
+      // website), so it prefers purchase.contactPhone; falls back to the client
+      // phone, then the contact form. The internal "purchase link pending" note
+      // lives only in BUILD-REPORT.
+      const buyPhone = (p.contactPhone || config.phone || '').trim();
+      actions = buyPhone
+        ? `<a href="${telLink(buyPhone)}" class="ep-btn ep-btn--primary">Call to Get Started</a>`
         : `<a href="#contact" class="ep-btn ep-btn--primary">Contact Us to Begin</a>`;
       purchaseStatus = 'enabled-no-url (public purchase button hidden — pending launch)';
     }

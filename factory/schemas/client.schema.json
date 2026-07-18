@@ -101,7 +101,8 @@
         "balanceAmount": { "type": "number", "minimum": 0 },
         "monthlyPlan": { "type": "number", "minimum": 0 },
         "purchaseUrl": { "type": "string" },
-        "intakeUrl": { "type": "string" }
+        "intakeUrl": { "type": "string" },
+        "contactPhone": { "type": "string", "description": "Phone the 'buy this website' CTA dials when there's no purchaseUrl yet. This is the AGENCY/seller line (leads about buying the site), not the client's business number. Defaults to the client phone if omitted." }
       }
     },
     "contact": {

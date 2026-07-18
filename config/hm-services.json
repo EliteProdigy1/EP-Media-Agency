@@ -1,5 +1,5 @@
 {
-  "_primaryContact": "Josh Hendrick (H&M owner) — internal only. NOTE: this is an EP Media showcase/demo build, so all public Call/Text/Contact CTAs route to EP Media (251-223-0812), NOT the client line.",
+  "_primaryContact": "Josh Hendrick (H&M owner) — internal only. Public site CTAs (hero, about, contact form, JSON-LD) use the client line 251-240-8386. ONLY the 'Make This Website Yours' purchase CTA routes to EP Media via purchase.contactPhone (251-223-0812), since that's a lead about buying the website.",
   "_brandMapping": "Client palette: Primary #050505 (black bg), Secondary #F2F2F2 (weathered silver text — factory default ink #F8F6F0 is used), Accent #B88A32 (construction gold). Mapped to factory roles: brand-primary=gold accent, brand-secondary/surface=black defaults (kept), brand-accent=lighter gold for gradient/focus.",
   "businessName": "H&M Services",
   "slug": "hm-services",
@@ -9,7 +9,7 @@
   "tagline": "Built. Maintained. Removed. Improved.",
   "location": "Fairhope, Alabama",
   "serviceAreas": ["Fairhope, Alabama", "Baldwin County, Alabama"],
-  "phone": "251-223-0812",
+  "phone": "251-240-8386",
   "email": "",
   "pillars": [
     { "label": "Build", "blurb": "Excavation, concrete, masonry, fences, and structures." },
@@ -37,7 +37,7 @@
   "whyUs": [
     { "title": "Local to Baldwin County", "text": "Based in Fairhope and serving the surrounding Gulf Coast communities." },
     { "title": "One Call, Many Services", "text": "From earthwork to finishing, a wide range of property services under one roof." },
-    { "title": "Direct Phone Access", "text": "Reach the team directly at 251-223-0812." },
+    { "title": "Direct Phone Access", "text": "Reach the team directly at 251-240-8386." },
     { "title": "Residential & Commercial", "text": "Property work for homeowners and businesses alike." }
   ],
   "socialLinks": { "facebook": "", "instagram": "", "linkedin": "" },
@@ -63,7 +63,8 @@
     "balanceAmount": 500,
     "monthlyPlan": 100,
     "purchaseUrl": "",
-    "intakeUrl": ""
+    "intakeUrl": "",
+    "contactPhone": "251-223-0812"
   },
   "contact": {
     "formName": "hm-services-contact",
