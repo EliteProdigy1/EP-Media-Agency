@@ -17,11 +17,11 @@ never ships a dead payment button.
 
 ## Workflow — 6 steps
 
-1. **Scaffold the client.** `npm run ep:new -- <slug>` creates
-   `config/<slug>.json` (from the example) and `assets/<slug>/`, then prints
-   the exact five data groups to collect. (Or copy `config/client.example.json`
-   by hand.) Fill it with the client's real facts; leave optional fields blank
-   to hide their sections.
+1. **Create the client.** Run `npm run ep:new` for the **interactive wizard** —
+   it walks a non-technical user through business facts, services (auto-grouped
+   into categories), optional photo import, and writes `config/<slug>.json` for
+   you (then offers to build). Prefer a blank file? `npm run ep:new -- <slug>
+   --quick`. Verified facts only — leave fields blank rather than guessing.
 2. **Add the media.** Put the logo and photos in `assets/<slug>/`. Name the
    hero `hero.jpg`/`hero.png` (or set `media.heroImage`); name the logo with
    "logo" in it.
@@ -39,12 +39,25 @@ never ships a dead payment button.
 
 | Command | Does |
 |---|---|
-| `npm run ep:new -- <slug>` | Scaffold a new client (config + assets folder), print required data |
+| `npm run ep:new` | Interactive client wizard (facts → services → media → config → build) |
+| `npm run ep:new -- <slug> --quick` | Blank scaffold from the example |
+| `npm run ep:import -- <slug> <dir>` | Import + auto-rename a folder of client photos |
 | `npm run ep:validate -- <slug>` | Schema + business-rule check |
 | `npm run ep:media -- <slug>` | Optimize/organize media, write manifest |
 | `npm run ep:build -- <slug>` | Full generate (the main command) |
 | `npm run ep:preflight -- <slug>` | Structural QA on the built HTML |
 | `npm run ep:preview -- <slug>` | Local static preview server |
+| `npm run ep:projects` | Write the Command Center projects registry |
+| `npm run ep:dashboard` | Serve the managed-projects dashboard |
+
+## Command Center dashboard
+
+`npm run ep:dashboard` regenerates `factory/reports/projects.json` (the data
+contract) and serves `factory/dashboard/` — a cinematic managed-projects view
+showing each site's status, Lighthouse, deployment, analytics, and maintenance.
+It's self-contained and portable, ready to embed in / link from the Elite
+Prodigy Command Center. Nothing is faked: analytics and live-deploy state read
+as "not connected" / "preview" until real integrations are wired in.
 
 ## Media optimization (optional)
 

@@ -1,0 +1,117 @@
+{
+  "generatedAt": "2026-07-18T09:06:46.405Z",
+  "source": "EP Website Factory",
+  "count": 2,
+  "summary": {
+    "total": 2,
+    "launchReady": 1,
+    "inReview": 1,
+    "needsWork": 0
+  },
+  "projects": [
+    {
+      "slug": "hm-services",
+      "businessName": "H&M Services",
+      "industry": "Property Services / Outdoor Construction",
+      "location": "Fairhope, Alabama",
+      "phone": "251-240-8386",
+      "template": "premium-service",
+      "demo": false,
+      "status": "Client review",
+      "built": true,
+      "reviewReady": true,
+      "launchReady": false,
+      "counts": {
+        "services": 15,
+        "pillars": 4,
+        "pendingVerification": 5
+      },
+      "blockers": {
+        "review": [],
+        "launch": [
+          "Purchase URL present (purchase enabled) (purchase.enabled but no purchaseUrl — active purchase button hidden)",
+          "Intake URL present (purchase enabled) (no intakeUrl — post-purchase intake CTA hidden)",
+          "Contact notification destination documented (confirm the Netlify form email notification before public launch)"
+        ]
+      },
+      "deployment": {
+        "environment": "preview",
+        "url": "https://hm-services.netlify.app/",
+        "live": false,
+        "note": "Preview only — connect the repo to Netlify to deploy.",
+        "lastBuilt": "2026-07-18T09:06:45.687Z"
+      },
+      "analytics": {
+        "connected": false,
+        "provider": null,
+        "note": "Add config.analytics.ga4_id to enable analytics."
+      },
+      "maintenance": {
+        "plan": "$100/mo",
+        "formName": "hm-services-contact",
+        "notificationDocumented": false
+      },
+      "lighthouse": {
+        "performance": 82,
+        "accessibility": 100,
+        "bestPractices": 96,
+        "seo": 100,
+        "runAt": "2026-07-18"
+      },
+      "contact": {
+        "formName": "hm-services-contact",
+        "email": ""
+      }
+    },
+    {
+      "slug": "sample-home-services",
+      "businessName": "Sample Home Services Co. (DEMO)",
+      "industry": "home services",
+      "location": "Gulf Shores, AL",
+      "phone": "251.555.0100",
+      "template": "premium-service",
+      "demo": true,
+      "status": "Launch-ready",
+      "built": true,
+      "reviewReady": true,
+      "launchReady": true,
+      "counts": {
+        "services": 4,
+        "pillars": 0,
+        "pendingVerification": 0
+      },
+      "blockers": {
+        "review": [],
+        "launch": []
+      },
+      "deployment": {
+        "environment": "preview",
+        "url": "https://sample-home-services.netlify.app/",
+        "live": false,
+        "note": "Preview only — connect the repo to Netlify to deploy.",
+        "lastBuilt": "2026-07-18T09:06:46.323Z"
+      },
+      "analytics": {
+        "connected": false,
+        "provider": null,
+        "note": "Add config.analytics.ga4_id to enable analytics."
+      },
+      "maintenance": {
+        "plan": "$100/mo",
+        "formName": "sample-home-services-contact",
+        "notificationDocumented": true
+      },
+      "lighthouse": {
+        "performance": 89,
+        "accessibility": 100,
+        "bestPractices": 96,
+        "seo": 100,
+        "runAt": "2026-07-18"
+      },
+      "contact": {
+        "formName": "sample-home-services-contact",
+        "email": "hello@samplehomeservices.demo"
+      }
+    }
+  ]
+}

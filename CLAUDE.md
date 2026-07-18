@@ -44,13 +44,27 @@ dist/           generated sites (git-ignored build output)
 ## Commands
 
 ```
-npm run ep:new       -- <slug>   # scaffold config/<slug>.json + assets/<slug>/
+npm run ep:new                   # interactive client wizard (facts → services → media → config → build)
+npm run ep:new       -- <slug> --quick   # blank scaffold from client.example.json
 npm run ep:validate  -- <slug>   # schema + business-rule check
 npm run ep:media     -- <slug>   # optimize/organize media → manifest
+npm run ep:import    -- <slug> <dir>   # import + auto-rename client photos into assets/<slug>/
 npm run ep:build     -- <slug>   # full generate (validate→media→render→preflight→report)
 npm run ep:preflight -- <slug>   # structural QA on dist/<slug>/index.html
 npm run ep:preview   -- <slug>   # serve dist/<slug> at localhost:8080
+npm run ep:projects              # write factory/reports/projects.json (Command Center data contract)
+npm run ep:dashboard             # regenerate registry + serve the managed-projects dashboard
 ```
+
+## Command Center integration
+
+`ep:projects` scans every `config/*.json` + build output and emits
+`factory/reports/projects.json` — the honest data contract the Elite Prodigy
+Command Center consumes so each generated site appears as a managed project
+(status, deployment, analytics, maintenance). `factory/dashboard/` is a
+self-contained cinematic dashboard that renders it (Horizon-X-inspired layout,
+EP tokens). Live analytics/deploy state are never faked — they read
+`connected:false` / `environment:preview` until real integrations exist.
 
 `ep:build` exits non-zero when there are launch blockers. Read
 `dist/<slug>/BUILD-REPORT.md` after every build — it lists facts used, hidden

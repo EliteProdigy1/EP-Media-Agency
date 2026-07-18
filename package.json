@@ -14,7 +14,11 @@
     "ep:media": "node factory/scripts/media.js",
     "ep:build": "node factory/scripts/build.js",
     "ep:preflight": "node factory/scripts/preflight.js",
-    "ep:preview": "node factory/scripts/preview.js"
+    "ep:preview": "node factory/scripts/preview.js",
+    "ep:import": "node factory/scripts/media-import.js",
+    "ep:categorize": "node factory/scripts/categorize.js",
+    "ep:projects": "node factory/scripts/projects.js",
+    "ep:dashboard": "node factory/scripts/dashboard.js"
   },
   "optionalDependencies": {
     "sharp": "^0.33.5"
