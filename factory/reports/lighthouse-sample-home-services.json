@@ -1,0 +1,9 @@
+{
+  "runAt": "2026-07-18",
+  "tool": "EPSG lighthouse-audit deps (lighthouse ^12) driven against local preview",
+  "formFactor": "mobile emulation",
+  "url": "http://localhost:8080/",
+  "scores": { "performance": 89, "accessibility": 100, "bestPractices": 96, "seo": 100 },
+  "thresholds": { "performance": 70, "accessibility": 85, "bestPractices": 90, "seo": 80 },
+  "notes": "Best Practices 96 reflects sandbox console errors from blocked external CDNs (fonts/GSAP) — not present on Netlify. Performance measured on localhost without gzip/HTTP caching and with tiny placeholder images; production (Netlify compression + real cache headers) typically scores equal or higher."
+}

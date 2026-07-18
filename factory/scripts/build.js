@@ -25,6 +25,12 @@ function fill(str, tokens) {
   return str.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => (tokens[k] !== undefined ? tokens[k] : ''));
 }
 function money(n) { return `$${Number(n).toLocaleString('en-US')}`; }
+function imgTag(rec, { eager } = {}) {
+  const srcset = rec.srcset ? ` srcset="${escAttr(rec.srcset)}" sizes="${escAttr(rec.sizes)}"` : '';
+  const dims = (rec.width && rec.height) ? ` width="${rec.width}" height="${rec.height}"` : '';
+  const load = eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
+  return `<img src="${escAttr(rec.out)}"${srcset}${dims} alt="${escAttr(rec.alt)}"${load}>`;
+}
 
 async function build(slug) {
   const report = { warnings: [], notes: [], hiddenSections: [], factsUsed: [], missing: [] };
@@ -95,7 +101,7 @@ async function build(slug) {
 
   // ── Hero ──
   const heroMedia = media.hero
-    ? `<img src="${escAttr(media.hero.out)}" alt="${escAttr(media.hero.alt)}" loading="eager" fetchpriority="high" width="1600" height="900">`
+    ? imgTag(media.hero, { eager: true })
     : `<div style="width:100%;height:100%;background:linear-gradient(160deg,var(--brand-surface),var(--brand-secondary));"></div>`;
   if (!media.hero) report.notes.push('No hero image — gradient fallback used.');
 
@@ -177,7 +183,7 @@ async function build(slug) {
   let gallerySection = '';
   if (hasGallery) {
     const items = media.gallery.map((g) => `
-          <figure class="ep-gallery-item reveal"><img src="${escAttr(g.out)}" alt="${escAttr(g.alt)}" loading="lazy"></figure>`).join('');
+          <figure class="ep-gallery-item reveal">${imgTag(g)}</figure>`).join('');
     gallerySection = `    <section id="gallery" class="ep-section" aria-labelledby="gallery-title">
       <div class="ep-container">
         <div class="ep-section-head reveal">
@@ -374,9 +380,29 @@ function renderNetlifyToml() {
 function writeBuildReport(outRoot, slug, config, ctx) {
   const { report, media, formName, purchaseStatus, hasPurchaseUrl, pf, readiness } = ctx;
   const files = fs.readdirSync(outRoot).filter((f) => f !== 'BUILD-REPORT.md');
-  const mediaLines = media.results.map((r) =>
-    `- ${r.role}: \`${r.source}\` → \`${r.out}\` — ${r.optimized ? `${humanSize(r.originalSize)} → ${humanSize(r.optimizedSize)} (${r.savedPct}% smaller)` : `copied (${humanSize(r.optimizedSize)}, not optimized)`}`).join('\n') || '- none';
+  const mediaLines = media.results.map((r) => {
+    const variants = (r.variants && r.variants.length > 1) ? ` · ${r.variants.length} responsive widths (${r.variants.map((v) => v.width).join('/')})` : '';
+    return `- ${r.role}: \`${r.source}\` → \`${r.out}\` — ${r.optimized ? `${humanSize(r.originalSize)} → ${humanSize(r.optimizedSize)} (${r.savedPct}% smaller)${variants}` : `copied (${humanSize(r.optimizedSize)}, preserved as-is)`}`;
+  }).join('\n') || '- none';
   const altLines = media.altFlags.length ? media.altFlags.map((a) => `- ⚠️ ${a}`).join('\n') : '- none flagged';
+
+  // Optional committed Lighthouse sidecar (factory/reports/lighthouse-<slug>.json)
+  let lighthouseMd;
+  const lhPath = path.join(FACTORY, 'reports', `lighthouse-${slug}.json`);
+  if (fs.existsSync(lhPath)) {
+    try {
+      const lh = JSON.parse(fs.readFileSync(lhPath, 'utf8'));
+      const s = lh.scores || {};
+      const t = lh.thresholds || {};
+      const mark = (v, min) => (min !== undefined ? (v >= min ? '✅' : '⛔') : '');
+      lighthouseMd = `- **Actually run** ${lh.runAt ? `on ${lh.runAt}` : ''} — ${lh.tool || 'Lighthouse'} (${lh.formFactor || 'mobile'}).
+- Performance: **${s.performance}** ${mark(s.performance, t.performance)} · Accessibility: **${s.accessibility}** ${mark(s.accessibility, t.accessibility)} · Best Practices: **${s.bestPractices}** ${mark(s.bestPractices, t.bestPractices)} · SEO: **${s.seo}** ${mark(s.seo, t.seo)}
+${lh.notes ? `- Note: ${lh.notes}` : ''}
+- Re-run: \`npm run ep:preview -- ${slug}\` then drive the EPSG lighthouse-audit deps against \`http://localhost:8080/\` (see README).`;
+    } catch { lighthouseMd = '- ⚠️ lighthouse sidecar present but unreadable.'; }
+  } else {
+    lighthouseMd = `- ⏳ Not run automatically. Run against a preview and record results in \`factory/reports/lighthouse-${slug}.json\`. Do not report Lighthouse as passing until it has actually run.`;
+  }
 
   const md = `# Build Report — ${config.businessName}
 
@@ -399,7 +425,7 @@ ${report.hiddenSections.length ? report.hiddenSections.map((s) => `- ${s}`).join
 
 ## Media
 **Selected hero:** ${media.hero ? `\`${media.hero.out}\` — ${media.hero.selectionReason}` : 'none (gradient fallback)'}
-**Optimization:** ${media.manifest.sharp ? 'WebP via sharp' : 'sharp not installed — originals copied through'}
+**Optimization:** ${media.manifest.sharp ? 'responsive WebP variants via sharp (srcset + width/height emitted)' : 'sharp not installed — originals copied through (run `npm install sharp` to enable WebP + srcset)'}
 
 ${mediaLines}
 
@@ -418,11 +444,7 @@ ${purchaseStatus.includes('no-url') ? '- ⛔ Purchase enabled but no `purchaseUr
 ${pf.checks.map((c) => `- ${c.pass ? '✅' : (c.level === 'blocker' ? '⛔' : '⚠️')} ${c.name}${c.detail ? ` — ${c.detail}` : ''}`).join('\n')}
 
 ## Lighthouse
-- ⏳ Not run automatically. Run the EPSG Lighthouse tool against a local or deployed preview:
-  \`\`\`
-  cd ../Elite-Prodigy-sports-group/tools/lighthouse-audit && npm install && node run-audit.js --site <key>
-  \`\`\`
-  (Do not report Lighthouse as passing until it has actually run against this site.)
+${lighthouseMd}
 
 ## Launch blockers
 ${pf.blockers.length ? pf.blockers.map((b) => `- ⛔ ${b}`).join('\n') : '- none'}

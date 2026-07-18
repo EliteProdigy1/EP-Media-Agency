@@ -44,6 +44,7 @@ dist/           generated sites (git-ignored build output)
 ## Commands
 
 ```
+npm run ep:new       -- <slug>   # scaffold config/<slug>.json + assets/<slug>/
 npm run ep:validate  -- <slug>   # schema + business-rule check
 npm run ep:media     -- <slug>   # optimize/organize media → manifest
 npm run ep:build     -- <slug>   # full generate (validate→media→render→preflight→report)

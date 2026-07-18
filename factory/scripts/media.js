@@ -42,27 +42,46 @@ function listImages(dir) {
 
 function isLogo(file) { return /logo/i.test(file); }
 
-async function optimizeOrCopy(srcPath, outDir, baseName, { isLogoFile }) {
+// Responsive width targets per role (native width is always added as the max).
+const WIDTHS = { hero: [768, 1200], gallery: [400, 600] };
+const SIZES_ATTR = { hero: '100vw', gallery: '(max-width: 700px) 100vw, 33vw' };
+
+async function optimizeOrCopy(srcPath, outDir, baseName, { role }) {
   const ext = path.extname(srcPath).toLowerCase();
   const originalSize = fs.statSync(srcPath).size;
 
-  // Logos: copy without destructive alteration.
-  if (isLogoFile || !sharp) {
+  // Logos: copy without destructive alteration (no resize, no re-encode).
+  if (role === 'logo' || !sharp) {
     const outName = baseName + ext;
     fs.copyFileSync(srcPath, path.join(outDir, outName));
-    return { out: outName, originalSize, optimizedSize: originalSize, optimized: false };
+    let dim = {};
+    if (sharp) { try { const m = await sharp(srcPath).metadata(); dim = { width: m.width, height: m.height }; } catch { /* ignore */ } }
+    return { out: `assets/${outName}`, srcset: '', sizes: '', originalSize, optimizedSize: originalSize, optimized: false, variants: [], ...dim };
   }
 
-  // WebP optimization when sharp is available and source isn't already webp.
+  // Responsive WebP variants when sharp is available.
   try {
-    const outName = baseName + '.webp';
-    await sharp(srcPath).webp({ quality: 82 }).toFile(path.join(outDir, outName));
-    const optimizedSize = fs.statSync(path.join(outDir, outName)).size;
-    return { out: outName, originalSize, optimizedSize, optimized: true };
+    const meta = await sharp(srcPath).metadata();
+    const nativeW = meta.width || 1600;
+    const nativeH = meta.height || Math.round(nativeW * 9 / 16);
+    const targets = [...new Set((WIDTHS[role] || []).filter((w) => w < nativeW).concat(nativeW))].sort((a, b) => a - b);
+    const variants = [];
+    for (const w of targets) {
+      const outName = `${baseName}-${w}.webp`;
+      await sharp(srcPath).resize({ width: w, withoutEnlargement: true }).webp({ quality: 82 }).toFile(path.join(outDir, outName));
+      variants.push({ width: w, out: `assets/${outName}`, size: fs.statSync(path.join(outDir, outName)).size });
+    }
+    const primary = variants[variants.length - 1];              // native-width variant
+    const srcset = variants.map((v) => `${v.out} ${v.width}w`).join(', ');
+    return {
+      out: primary.out, srcset, sizes: SIZES_ATTR[role] || '100vw',
+      width: nativeW, height: nativeH,
+      originalSize, optimizedSize: primary.size, optimized: true, variants,
+    };
   } catch (e) {
     const outName = baseName + ext;
     fs.copyFileSync(srcPath, path.join(outDir, outName));
-    return { out: outName, originalSize, optimizedSize: originalSize, optimized: false, error: e.message };
+    return { out: `assets/${outName}`, srcset: '', sizes: '', originalSize, optimizedSize: originalSize, optimized: false, variants: [], error: e.message };
   }
 }
 
@@ -104,11 +123,10 @@ async function processMedia(slug, config) {
   const clientCtx = config.businessName ? `${config.businessName}` : slug;
 
   async function handle(file, role, index) {
-    const isLogoFile = role === 'logo';
     const base = role === 'hero' ? 'hero'
       : role === 'logo' ? 'logo'
       : `gallery-${String(index + 1).padStart(2, '0')}`;
-    const r = await optimizeOrCopy(path.join(srcDir, file), outDir, base, { isLogoFile });
+    const r = await optimizeOrCopy(path.join(srcDir, file), outDir, base, { role });
 
     // Alt text — derived, never asserted as fact.
     let alt;
@@ -118,20 +136,22 @@ async function processMedia(slug, config) {
     else { alt = `${clientCtx} — ${titleFromFilename(file)}`; needsReview = true; }
     if (needsReview) altFlags.push(`${r.out}: "${alt}" (derived from filename/context — confirm it describes the image)`);
 
-    // Size guardrails
-    const sizeToCheck = r.optimizedSize;
+    // Size guardrails — check the ORIGINAL source weight for the hero (that's
+    // what the client uploaded), plus the shipped weight of each output.
     if (role === 'hero') {
-      if (sizeToCheck > HERO_BLOCK_BYTES) warnings.push(`BLOCKER: hero image ${r.out} is ${humanSize(sizeToCheck)} (> ${humanSize(HERO_BLOCK_BYTES)}) — too heavy to ship`);
-      else if (sizeToCheck > HERO_WARN_BYTES) warnings.push(`hero image ${r.out} is ${humanSize(sizeToCheck)} — consider compressing below ${humanSize(HERO_WARN_BYTES)}`);
-    } else if (role === 'gallery' && sizeToCheck > GALLERY_WARN_BYTES) {
-      warnings.push(`gallery image ${r.out} is ${humanSize(sizeToCheck)} — consider compressing`);
+      if (r.originalSize > HERO_BLOCK_BYTES) warnings.push(`BLOCKER: hero source ${file} is ${humanSize(r.originalSize)} (> ${humanSize(HERO_BLOCK_BYTES)}) — too heavy; recompress before shipping`);
+      else if (r.originalSize > HERO_WARN_BYTES) warnings.push(`hero source ${file} is ${humanSize(r.originalSize)} — larger than ${humanSize(HERO_WARN_BYTES)}; consider a lighter original`);
+      if (r.optimizedSize > HERO_BLOCK_BYTES) warnings.push(`BLOCKER: shipped hero ${r.out} is ${humanSize(r.optimizedSize)} — too heavy to ship`);
+    } else if (role === 'gallery' && r.optimizedSize > GALLERY_WARN_BYTES) {
+      warnings.push(`gallery image ${r.out} is ${humanSize(r.optimizedSize)} — consider compressing`);
     }
 
     const rec = {
-      source: file, out: `assets/${r.out}`, role,
+      source: file, out: r.out, srcset: r.srcset, sizes: r.sizes, role,
+      width: r.width, height: r.height,
       originalSize: r.originalSize, optimizedSize: r.optimizedSize,
       savedPct: r.originalSize ? Math.round((1 - r.optimizedSize / r.originalSize) * 100) : 0,
-      optimized: r.optimized, alt, altNeedsReview: needsReview,
+      optimized: r.optimized, variants: r.variants || [], alt, altNeedsReview: needsReview,
     };
     results.push(rec);
     return rec;

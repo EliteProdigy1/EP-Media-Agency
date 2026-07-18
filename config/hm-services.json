@@ -1,0 +1,46 @@
+{
+  "_TODO": "SCAFFOLD ONLY — not ready to build. No verified H&M facts exist yet; nothing here is invented. Fill every empty field with real, client-supplied facts, add media to assets/hm-services/, then run ep:validate. Delete this _TODO when complete. Do NOT add reviews, ratings, certifications, service areas, statistics, or contact details that the client has not confirmed.",
+  "businessName": "",
+  "slug": "hm-services",
+  "industry": "",
+  "template": "premium-service",
+  "description": "",
+  "tagline": "",
+  "location": "",
+  "serviceAreas": [],
+  "phone": "",
+  "email": "",
+  "services": [],
+  "socialLinks": {
+    "facebook": "",
+    "instagram": "",
+    "linkedin": ""
+  },
+  "brand": {
+    "logo": "",
+    "styleNotes": "TODO: add the client's brand colors (hex) if they have them; otherwise EP gold/black defaults apply."
+  },
+  "media": {
+    "folder": "hm-services",
+    "heroImage": "",
+    "galleryImages": []
+  },
+  "purchase": {
+    "enabled": true,
+    "fullPrice": 1000,
+    "depositAmount": 500,
+    "balanceAmount": 500,
+    "monthlyPlan": 100,
+    "purchaseUrl": "",
+    "intakeUrl": ""
+  },
+  "contact": {
+    "formName": "hm-services-contact",
+    "notificationDestinationDocumented": false
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "canonicalUrl": "https://hm-services.netlify.app/"
+  }
+}

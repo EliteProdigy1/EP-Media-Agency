@@ -5,8 +5,11 @@
   "description": "EP Website Factory — config + assets + one command → a premium EPSG-styled client website, ready for GitHub + Netlify.",
   "author": "Elite Prodigy Media",
   "license": "UNLICENSED",
-  "engines": { "node": ">=18.0.0" },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
+    "ep:new": "node factory/scripts/new.js",
     "ep:validate": "node factory/scripts/validate.js",
     "ep:media": "node factory/scripts/media.js",
     "ep:build": "node factory/scripts/build.js",
@@ -14,6 +17,6 @@
     "ep:preview": "node factory/scripts/preview.js"
   },
   "optionalDependencies": {
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.5"
   }
 }

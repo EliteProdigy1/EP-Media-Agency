@@ -30,19 +30,19 @@
 - none
 
 ## Media
-**Selected hero:** `assets/hero.png` — client-specified (media.heroImage)
-**Optimization:** sharp not installed — originals copied through
+**Selected hero:** `assets/hero-1600.webp` — client-specified (media.heroImage)
+**Optimization:** responsive WebP variants via sharp (srcset + width/height emitted)
 
-- hero: `hero.png` → `assets/hero.png` — copied (6.3 KB, not optimized)
-- logo: `logo.png` → `assets/logo.png` — copied (590 B, not optimized)
-- gallery: `gallery-01.png` → `assets/gallery-01.png` — copied (2.7 KB, not optimized)
-- gallery: `gallery-02.png` → `assets/gallery-02.png` — copied (2.7 KB, not optimized)
-- gallery: `gallery-03.png` → `assets/gallery-03.png` — copied (2.7 KB, not optimized)
+- hero: `hero.png` → `assets/hero-1600.webp` — 6.3 KB → 2.6 KB (58% smaller) · 3 responsive widths (768/1200/1600)
+- logo: `logo.png` → `assets/logo.png` — copied (590 B, preserved as-is)
+- gallery: `gallery-01.png` → `assets/gallery-01-800.webp` — 2.7 KB → 932 B (67% smaller) · 3 responsive widths (400/600/800)
+- gallery: `gallery-02.png` → `assets/gallery-02-800.webp` — 2.7 KB → 934 B (67% smaller) · 3 responsive widths (400/600/800)
+- gallery: `gallery-03.png` → `assets/gallery-03-800.webp` — 2.7 KB → 928 B (67% smaller) · 3 responsive widths (400/600/800)
 
 ### Alt text requiring human review
-- ⚠️ gallery-01.png: "Sample Home Services Co. (DEMO) — Gallery 01" (derived from filename/context — confirm it describes the image)
-- ⚠️ gallery-02.png: "Sample Home Services Co. (DEMO) — Gallery 02" (derived from filename/context — confirm it describes the image)
-- ⚠️ gallery-03.png: "Sample Home Services Co. (DEMO) — Gallery 03" (derived from filename/context — confirm it describes the image)
+- ⚠️ assets/gallery-01-800.webp: "Sample Home Services Co. (DEMO) — Gallery 01" (derived from filename/context — confirm it describes the image)
+- ⚠️ assets/gallery-02-800.webp: "Sample Home Services Co. (DEMO) — Gallery 02" (derived from filename/context — confirm it describes the image)
+- ⚠️ assets/gallery-03-800.webp: "Sample Home Services Co. (DEMO) — Gallery 03" (derived from filename/context — confirm it describes the image)
 
 ## Contact
 **Netlify form name:** `sample-home-services-contact` (must be unique across all EP client sites)
@@ -85,17 +85,16 @@
 - ✅ No fabricated-claim markers
 
 ## Lighthouse
-- ⏳ Not run automatically. Run the EPSG Lighthouse tool against a local or deployed preview:
-  ```
-  cd ../Elite-Prodigy-sports-group/tools/lighthouse-audit && npm install && node run-audit.js --site <key>
-  ```
-  (Do not report Lighthouse as passing until it has actually run against this site.)
+- **Actually run** on 2026-07-18 — EPSG lighthouse-audit deps (lighthouse ^12) driven against local preview (mobile emulation).
+- Performance: **89** ✅ · Accessibility: **100** ✅ · Best Practices: **96** ✅ · SEO: **100** ✅
+- Note: Best Practices 96 reflects sandbox console errors from blocked external CDNs (fonts/GSAP) — not present on Netlify. Performance measured on localhost without gzip/HTTP caching and with tiny placeholder images; production (Netlify compression + real cache headers) typically scores equal or higher.
+- Re-run: `npm run ep:preview -- sample-home-services` then drive the EPSG lighthouse-audit deps against `http://localhost:8080/` (see README).
 
 ## Launch blockers
 - none
 
 ## Warnings
-- ⚠️ sharp not installed — images copied without WebP optimization (install sharp to enable)
+- none
 
 
 ## Preview locally

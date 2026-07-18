@@ -17,9 +17,11 @@ never ships a dead payment button.
 
 ## Workflow — 6 steps
 
-1. **Create the config.** Copy `config/client.example.json` to
-   `config/<slug>.json` and fill it with the client's real facts. Leave
-   optional fields blank to hide their sections.
+1. **Scaffold the client.** `npm run ep:new -- <slug>` creates
+   `config/<slug>.json` (from the example) and `assets/<slug>/`, then prints
+   the exact five data groups to collect. (Or copy `config/client.example.json`
+   by hand.) Fill it with the client's real facts; leave optional fields blank
+   to hide their sections.
 2. **Add the media.** Put the logo and photos in `assets/<slug>/`. Name the
    hero `hero.jpg`/`hero.png` (or set `media.heroImage`); name the logo with
    "logo" in it.
@@ -37,6 +39,7 @@ never ships a dead payment button.
 
 | Command | Does |
 |---|---|
+| `npm run ep:new -- <slug>` | Scaffold a new client (config + assets folder), print required data |
 | `npm run ep:validate -- <slug>` | Schema + business-rule check |
 | `npm run ep:media -- <slug>` | Optimize/organize media, write manifest |
 | `npm run ep:build -- <slug>` | Full generate (the main command) |
