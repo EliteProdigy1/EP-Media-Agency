@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{SEO_TITLE}}</title>
+  <meta name="description" content="{{SEO_DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+{{CANONICAL_TAG}}
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{SEO_TITLE}}">
+  <meta property="og:description" content="{{SEO_DESCRIPTION}}">
+{{OG_URL_TAG}}
+{{OG_IMAGE_TAG}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="{{THEME_COLOR}}">
+{{FAVICON_TAG}}
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <!-- GSAP (scroll animation) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- EP Core styles -->
+  <link rel="stylesheet" href="core/ep-tokens.css">
+  <link rel="stylesheet" href="core/ep-components.css">
+  <link rel="stylesheet" href="core/ep-forms.css">
+  <link rel="stylesheet" href="core/a11y.css">
+
+  <!-- Client brand overrides (only redefines --brand-*) -->
+  <style>{{BRAND_STYLE}}</style>
+
+  <!-- JSON-LD LocalBusiness (verified config data only) -->
+{{JSON_LD}}
+</head>
+<body>
+  <a class="ep-skip-link" href="#main">Skip to content</a>
+
+  <!-- ── NAVIGATION ── -->
+  <header>
+    <nav class="ep-nav" id="main-nav" data-ep-nav aria-label="Primary">
+      <a class="ep-nav-logo" href="#hero">{{LOGO_MARKUP}}<span>{{BUSINESS_NAME}}</span></a>
+      <ul class="ep-nav-links">
+        {{NAV_LINKS}}
+      </ul>
+      <button class="ep-hamburger" id="hamburger" data-ep-hamburger aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="ep-mobile-overlay" data-ep-overlay></div>
+    <nav class="ep-mobile-menu" id="mobile-menu" data-ep-menu aria-hidden="true" aria-label="Mobile">
+      <button class="ep-hamburger active mobile-close" aria-label="Close menu"><span></span><span></span><span></span></button>
+      {{MOBILE_LINKS}}
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ── HERO ── -->
+    <section id="hero" class="ep-hero" aria-label="Introduction">
+      <div class="ep-hero-media">{{HERO_MEDIA}}</div>
+      <div class="ep-hero-overlay"></div>
+      <div class="ep-container">
+        <div class="ep-hero-content">
+          <p class="ep-eyebrow" data-gsap="blur-in" data-delay="0">{{HERO_EYEBROW}}</p>
+          <h1 class="ep-display" data-gsap="blur-in" data-delay="0.15">{{HERO_TITLE}}</h1>
+          <p class="ep-lead" data-gsap="blur-in" data-delay="0.3">{{HERO_SUB}}</p>
+          <div class="ep-hero-actions" data-gsap="blur-in" data-delay="0.45">{{HERO_ACTIONS}}</div>
+        </div>
+      </div>
+    </section>
+
+{{SERVICES_SECTION}}
+
+{{ABOUT_SECTION}}
+
+{{PROOF_SECTION}}
+
+{{GALLERY_SECTION}}
+
+{{PURCHASE_SECTION}}
+
+{{CONTACT_SECTION}}
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="ep-footer">
+    <div class="ep-container">
+      <div class="ep-footer-grid">
+        <div>
+          <div class="ep-footer-brand">{{BUSINESS_NAME}}</div>
+          <p class="ep-body" style="margin-top:8px;max-width:38ch;">{{FOOTER_TAGLINE}}</p>
+        </div>
+        <nav class="ep-footer-links" aria-label="Footer">
+          {{FOOTER_LINKS}}
+        </nav>
+        <div class="ep-social">{{FOOTER_SOCIAL}}</div>
+      </div>
+      <div class="ep-footer-legal">
+        <p>&copy; {{YEAR}} {{BUSINESS_NAME}}. All rights reserved. · {{LOCATION}}</p>
+        <p style="margin-top:6px;">Website by <a href="https://eliteprodigymedia.com" style="color:var(--brand-primary);">Elite Prodigy Media</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EP Core runtime -->
+  <script src="core/ep-core.js" defer></script>
+  <script src="core/gsap-animations.js" defer></script>
+</body>
+</html>

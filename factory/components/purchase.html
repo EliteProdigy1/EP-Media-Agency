@@ -1,0 +1,26 @@
+<!-- ══ EP FACTORY COMPONENT — PURCHASE ══
+     Rendered by build.js. Tokens:
+       {{PURCHASE_HEADLINE}} {{PURCHASE_SUB}} {{PRICE_ROWS}}
+       {{MONTHLY_ROW}} {{PURCHASE_ACTIONS}} {{PURCHASE_STEPS}}
+     If purchaseUrl is missing, build.js renders {{PURCHASE_ACTIONS}}
+     as an inert "Purchase link coming soon" note — never a dead button. -->
+<section id="purchase" class="ep-section ep-section--surface" aria-labelledby="purchase-title">
+  <div class="ep-container">
+    <div class="ep-purchase reveal">
+      <p class="ep-eyebrow">Own This Website</p>
+      <h2 id="purchase-title" class="ep-headline">{{PURCHASE_HEADLINE}}</h2>
+      <p class="ep-lead" style="margin:16px auto 0;">{{PURCHASE_SUB}}</p>
+
+      <div class="ep-price-row">
+        {{PRICE_ROWS}}
+      </div>
+      {{MONTHLY_ROW}}
+
+      <div class="ep-purchase-actions">
+        {{PURCHASE_ACTIONS}}
+      </div>
+
+      <p class="ep-purchase-note">{{PURCHASE_STEPS}}</p>
+    </div>
+  </div>
+</section>

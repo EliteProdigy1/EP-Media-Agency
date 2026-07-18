@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://eliteprodigymedia.com/schemas/client.schema.json",
+  "title": "EP Website Factory — Client Configuration",
+  "description": "Contract for config/<slug>.json. Only verified, client-supplied facts belong here. Never invent ratings, reviews, licenses, guarantees, staff, addresses, service areas, or statistics.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "businessName",
+    "slug",
+    "industry",
+    "template",
+    "description",
+    "location",
+    "phone",
+    "email"
+  ],
+  "properties": {
+    "businessName": { "type": "string", "minLength": 2 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "kebab-case; must match the config filename and dist folder" },
+    "industry": { "type": "string", "minLength": 2 },
+    "template": { "type": "string", "enum": ["premium-service"] },
+    "description": { "type": "string", "minLength": 20, "description": "Factual business description supplied by the client." },
+    "tagline": { "type": "string" },
+    "location": { "type": "string", "minLength": 2 },
+    "serviceAreas": { "type": "array", "items": { "type": "string" } },
+    "phone": { "type": "string", "minLength": 7 },
+    "email": { "type": "string", "format": "email" },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "socialLinks": {
+      "type": "object",
+      "properties": {
+        "facebook": { "type": "string" },
+        "instagram": { "type": "string" },
+        "linkedin": { "type": "string" }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "properties": {
+        "logo": { "type": "string" },
+        "primaryColor": { "type": "string", "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" },
+        "secondaryColor": { "type": "string", "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" },
+        "accentColor": { "type": "string", "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" },
+        "styleNotes": { "type": "string" }
+      }
+    },
+    "media": {
+      "type": "object",
+      "properties": {
+        "folder": { "type": "string" },
+        "heroImage": { "type": "string" },
+        "galleryImages": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "purchase": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "fullPrice": { "type": "number", "minimum": 0 },
+        "depositAmount": { "type": "number", "minimum": 0 },
+        "balanceAmount": { "type": "number", "minimum": 0 },
+        "monthlyPlan": { "type": "number", "minimum": 0 },
+        "purchaseUrl": { "type": "string" },
+        "intakeUrl": { "type": "string" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "formName": { "type": "string", "description": "Unique Netlify form name. Auto-derived as <slug>-contact if omitted." },
+        "notificationDestinationDocumented": { "type": "boolean" }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "canonicalUrl": { "type": "string" }
+      }
+    }
+  }
+}

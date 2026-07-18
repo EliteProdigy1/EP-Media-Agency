@@ -1,0 +1,57 @@
+<!-- ══ EP FACTORY COMPONENT — CONTACT ══
+     Rendered by build.js. Tokens:
+       {{CONTACT_HEADLINE}} {{CONTACT_SUB}} {{FORM_NAME}}
+       {{CONTACT_DETAILS}} {{SERVICE_OPTIONS}}
+     Netlify Forms: static form-name + honeypot + labelled fields.
+     On submit, Netlify's own confirmation page is used unless a
+     custom success page is configured (documented in BUILD-REPORT). -->
+<section id="contact" class="ep-section" aria-labelledby="contact-title">
+  <div class="ep-container" style="max-width:820px;">
+    <div class="ep-section-head reveal">
+      <p class="ep-eyebrow">Get In Touch</p>
+      <h2 id="contact-title" class="ep-headline">{{CONTACT_HEADLINE}}</h2>
+      <p class="ep-lead">{{CONTACT_SUB}}</p>
+    </div>
+
+    <form name="{{FORM_NAME}}" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+          class="ep-form-card reveal" aria-describedby="contact-title">
+      <input type="hidden" name="form-name" value="{{FORM_NAME}}">
+      <p class="ep-hp" hidden>
+        <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
+
+      <div class="ep-form-grid">
+        <div class="ep-form-field">
+          <label class="ep-form-label" for="cf-name">Name <span aria-hidden="true">*</span></label>
+          <input id="cf-name" class="ep-form-input" type="text" name="name" required autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="ep-form-field">
+          <label class="ep-form-label" for="cf-phone">Phone <span aria-hidden="true">*</span></label>
+          <input id="cf-phone" class="ep-form-input" type="tel" name="phone" required autocomplete="tel" placeholder="(000) 000-0000">
+        </div>
+        <div class="ep-form-field">
+          <label class="ep-form-label" for="cf-email">Email</label>
+          <input id="cf-email" class="ep-form-input" type="email" name="email" autocomplete="email" placeholder="you@email.com">
+        </div>
+        <div class="ep-form-field">
+          <label class="ep-form-label" for="cf-service">Service Needed</label>
+          <select id="cf-service" class="ep-form-select" name="service">
+            <option value="">— Select —</option>
+            {{SERVICE_OPTIONS}}
+          </select>
+        </div>
+        <div class="ep-form-field ep-form-field--full">
+          <label class="ep-form-label" for="cf-message">How can we help?</label>
+          <textarea id="cf-message" class="ep-form-textarea" name="message" rows="4" placeholder="Tell us about your project…"></textarea>
+        </div>
+        <div class="ep-form-field--full">
+          <button type="submit" class="ep-btn ep-btn--primary" style="width:100%;">Send Message</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="ep-contact-details reveal">
+      {{CONTACT_DETAILS}}
+    </div>
+  </div>
+</section>

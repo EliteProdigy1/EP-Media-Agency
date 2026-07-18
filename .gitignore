@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Build output — real client sites are generated on demand and shipped to their
+# own repos, not committed here. The fictional proof build is kept as an example.
+dist/*
+!dist/sample-home-services/
+
+# OS / editor
+.DS_Store
+*.log

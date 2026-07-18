@@ -1,0 +1,54 @@
+{
+  "_comment": "FICTIONAL TEST CLIENT — not a real business. Used only to prove the EP Website Factory end to end. Do not deploy.",
+  "businessName": "Sample Home Services Co. (DEMO)",
+  "slug": "sample-home-services",
+  "industry": "home services",
+  "template": "premium-service",
+  "description": "Sample Home Services Co. is a fictional demonstration business used to test the EP Website Factory. It represents a typical local home-services company offering exterior cleaning and yard care to homeowners.",
+  "tagline": "A Cleaner, Sharper Home",
+  "location": "Gulf Shores, AL",
+  "serviceAreas": ["Gulf Shores", "Orange Beach", "Foley", "Baldwin County"],
+  "phone": "251.555.0100",
+  "email": "hello@samplehomeservices.demo",
+  "services": [
+    { "name": "Pressure Washing", "description": "Exterior surface cleaning for driveways, siding, patios and walkways." },
+    { "name": "Window Cleaning", "description": "Interior and exterior window cleaning for homes and small businesses." },
+    { "name": "Lawn Care", "description": "Routine mowing, edging and seasonal yard cleanup." },
+    { "name": "Gutter Cleaning", "description": "Clearing and flushing gutters to keep water moving away from the home." }
+  ],
+  "socialLinks": {
+    "facebook": "https://facebook.com/samplehomeservicesdemo",
+    "instagram": "https://instagram.com/samplehomeservicesdemo",
+    "linkedin": ""
+  },
+  "brand": {
+    "logo": "logo.png",
+    "primaryColor": "#C9A84C",
+    "secondaryColor": "#050505",
+    "accentColor": "#E8D49A",
+    "styleNotes": "Dark, premium, gold accents — EPSG default look."
+  },
+  "media": {
+    "folder": "sample-home-services",
+    "heroImage": "hero.png",
+    "galleryImages": []
+  },
+  "purchase": {
+    "enabled": true,
+    "fullPrice": 1000,
+    "depositAmount": 500,
+    "balanceAmount": 500,
+    "monthlyPlan": 100,
+    "purchaseUrl": "https://checkout.eliteprodigymedia.com/demo/sample-home-services",
+    "intakeUrl": "https://intake.eliteprodigymedia.com/demo/sample-home-services"
+  },
+  "contact": {
+    "formName": "sample-home-services-contact",
+    "notificationDestinationDocumented": true
+  },
+  "seo": {
+    "title": "Sample Home Services Co. (DEMO) — Gulf Shores Home Services",
+    "description": "Fictional demo site built by the EP Website Factory: pressure washing, window cleaning, lawn care and gutter cleaning in Gulf Shores, AL.",
+    "canonicalUrl": "https://sample-home-services.netlify.app/"
+  }
+}

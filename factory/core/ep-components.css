@@ -1,0 +1,238 @@
+/* ══════════════════════════════════════════════════════
+   EP FACTORY — COMPONENT LAYER
+   Premium dark component system for generated client sites.
+   Built ON the canonical EPSG tokens (ep-tokens.css) — this
+   file adds no new color/type/motion primitives, it only
+   composes the EPSG design language into reusable blocks
+   (nav, hero, sections, cards, gallery, purchase, contact,
+   footer, mobile menu).
+
+   Client brand overrides are injected at build time as a
+   small <style> block that redefines --brand-* only. Never
+   edit the tokens here.
+   ══════════════════════════════════════════════════════ */
+
+/* ── Brand override defaults (client build overrides these) ── */
+:root {
+  --brand-primary:   var(--ep-gold);
+  --brand-secondary: var(--ep-black);
+  --brand-accent:    var(--ep-gold-light);
+  --brand-surface:   var(--ep-black-rich);
+  --brand-ink:       var(--ep-white);
+}
+
+/* ── Reset / base ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--brand-secondary);
+  color: var(--brand-ink);
+  font-family: var(--ep-font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Layout primitives ── */
+.ep-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+.ep-section { padding: var(--ep-section-pad) 0; position: relative; }
+.ep-section--tight { padding: clamp(56px, 7vw, 96px) 0; }
+.ep-section--surface { background: var(--brand-surface); }
+
+/* ── Typography ── */
+.ep-eyebrow {
+  font-family: var(--ep-font-body);
+  font-size: clamp(0.6rem, 1.1vw, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+.ep-display {
+  font-family: var(--ep-font-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 8vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.ep-headline {
+  font-family: var(--ep-font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3.5rem);
+  line-height: 1.05;
+}
+.ep-headline em, .ep-display em { font-style: italic; color: var(--brand-primary); }
+.ep-lead {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  color: rgba(248, 246, 240, 0.72);
+  max-width: 62ch;
+}
+.ep-body { color: rgba(248, 246, 240, 0.6); }
+
+/* ── Buttons (from EPSG design skill) ── */
+.ep-btn {
+  display: inline-block;
+  padding: 16px 40px;
+  font-family: var(--ep-font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: transform var(--ep-dur-fast) var(--ep-ease),
+              background-position var(--ep-dur-base) var(--ep-ease),
+              border-color var(--ep-dur-fast) var(--ep-ease),
+              color var(--ep-dur-fast) var(--ep-ease);
+}
+.ep-btn--primary {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent), var(--brand-primary));
+  background-size: 200% 200%;
+  color: var(--brand-secondary);
+}
+.ep-btn--primary:hover { background-position: 100% 100%; transform: translateY(-2px); }
+.ep-btn--outline {
+  padding: 15px 39px;
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 60%, transparent);
+  color: var(--brand-primary);
+  background: transparent;
+}
+.ep-btn--outline:hover { border-color: var(--brand-primary); color: var(--brand-accent); }
+
+/* ── Navigation ── */
+.ep-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: var(--ep-z-nav);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px clamp(20px, 5vw, 48px);
+  transition: background var(--ep-dur-base) var(--ep-ease), padding var(--ep-dur-base) var(--ep-ease);
+}
+.ep-nav.scrolled {
+  background: var(--ep-glass-bg);
+  backdrop-filter: var(--ep-glass-blur);
+  -webkit-backdrop-filter: var(--ep-glass-blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px clamp(20px, 5vw, 48px);
+}
+.ep-nav-logo { display: flex; align-items: center; gap: 12px; font-family: var(--ep-font-display); font-weight: 700; font-size: 1.05rem; }
+.ep-nav-logo img { height: 34px; width: auto; }
+.ep-nav-links { display: flex; align-items: center; gap: clamp(18px, 2.5vw, 34px); list-style: none; }
+.ep-nav-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(248, 246, 240, 0.7); transition: color var(--ep-dur-fast) var(--ep-ease); }
+.ep-nav-links a:hover { color: var(--brand-primary); }
+.ep-nav-cta { color: var(--brand-primary) !important; }
+
+/* Hamburger */
+.ep-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: calc(var(--ep-z-nav) + 2); }
+.ep-hamburger span { display: block; width: 24px; height: 2px; background: var(--brand-ink); transition: transform var(--ep-dur-fast) var(--ep-ease), opacity var(--ep-dur-fast) var(--ep-ease); }
+.ep-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ep-hamburger.active span:nth-child(2) { opacity: 0; }
+.ep-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu */
+.ep-mobile-overlay { position: fixed; inset: 0; background: rgba(5, 5, 5, 0.6); opacity: 0; visibility: hidden; transition: opacity var(--ep-dur-base) var(--ep-ease), visibility var(--ep-dur-base); z-index: calc(var(--ep-z-nav) + 1); }
+.ep-mobile-overlay.visible { opacity: 1; visibility: visible; }
+.ep-mobile-menu {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(82vw, 340px);
+  background: linear-gradient(160deg, var(--brand-surface), var(--brand-secondary));
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateX(100%);
+  transition: transform var(--ep-dur-base) var(--ep-ease);
+  z-index: calc(var(--ep-z-nav) + 1);
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 88px 32px 32px;
+}
+.ep-mobile-menu.open { transform: translateX(0); }
+.ep-mobile-menu a { font-family: var(--ep-font-display); font-size: 1.4rem; color: rgba(248, 246, 240, 0.85); padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.ep-mobile-menu a:hover { color: var(--brand-primary); }
+.ep-mobile-menu .mobile-close { position: absolute; top: 24px; right: 24px; }
+
+/* ── Hero ── */
+.ep-hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+.ep-hero-media { position: absolute; inset: 0; z-index: 0; }
+.ep-hero-media img, .ep-hero-media video { width: 100%; height: 100%; object-fit: cover; }
+.ep-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.35) 40%, rgba(5,5,5,0.85) 100%); }
+.ep-hero-content { position: relative; z-index: 2; max-width: 900px; }
+.ep-hero-content .ep-eyebrow { margin-bottom: 20px; }
+.ep-hero-content .ep-display { margin-bottom: 22px; }
+.ep-hero-content .ep-lead { margin-bottom: 36px; }
+.ep-hero-actions { display: flex; flex-wrap: wrap; gap: 16px; }
+
+/* ── Service cards ── */
+.ep-grid { display: grid; gap: clamp(16px, 2.5vw, 28px); }
+.ep-grid--3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.ep-grid--2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.ep-card {
+  background: var(--brand-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--ep-radius-lg);
+  padding: clamp(28px, 3.5vw, 40px);
+  transition: border-color var(--ep-dur-base) var(--ep-ease), transform var(--ep-dur-base) var(--ep-ease);
+}
+.ep-card:hover { border-color: color-mix(in srgb, var(--brand-primary) 40%, transparent); transform: translateY(-4px); }
+.ep-card-title { font-family: var(--ep-font-display); font-weight: 700; font-size: 1.3rem; margin-bottom: 12px; }
+.ep-card-title .num { display: block; font-family: var(--ep-font-body); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; color: var(--brand-primary); margin-bottom: 10px; }
+
+/* ── Section header ── */
+.ep-section-head { text-align: center; max-width: 720px; margin: 0 auto clamp(40px, 5vw, 64px); }
+.ep-section-head .ep-eyebrow { margin-bottom: 16px; display: inline-block; }
+.ep-section-head .ep-lead { margin: 16px auto 0; }
+
+/* ── Proof / trust (no fabricated stats — pulled from config only) ── */
+.ep-proof { display: flex; flex-wrap: wrap; gap: clamp(20px, 4vw, 56px); justify-content: center; text-align: center; }
+.ep-proof-item { min-width: 140px; }
+.ep-proof-item strong { display: block; font-family: var(--ep-font-display); font-weight: 900; font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--brand-primary); }
+.ep-proof-item span { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(248, 246, 240, 0.55); }
+.ep-trust-row { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
+.ep-trust-row span { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; color: rgba(248, 246, 240, 0.65); }
+
+/* ── About ── */
+.ep-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 5vw, 64px); align-items: center; }
+
+/* ── Gallery ── */
+.ep-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.ep-gallery-item { position: relative; border-radius: var(--ep-radius-lg); overflow: hidden; aspect-ratio: 4 / 3; }
+.ep-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--ep-dur-slow) var(--ep-ease); }
+.ep-gallery-item:hover img { transform: scale(1.05); }
+
+/* ── Purchase section ── */
+.ep-purchase { background: linear-gradient(160deg, var(--brand-surface), var(--brand-secondary)); border: 1px solid var(--ep-glass-border); border-radius: var(--ep-radius-xl); padding: clamp(32px, 5vw, 56px); max-width: 760px; margin: 0 auto; text-align: center; }
+.ep-price-row { display: flex; flex-wrap: wrap; gap: clamp(18px, 4vw, 44px); justify-content: center; margin: 28px 0; }
+.ep-price { text-align: center; }
+.ep-price strong { display: block; font-family: var(--ep-font-display); font-weight: 900; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--brand-primary); }
+.ep-price span { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(248, 246, 240, 0.55); }
+.ep-purchase-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px; }
+.ep-purchase-note { font-size: 0.85rem; color: rgba(248, 246, 240, 0.55); margin-top: 20px; }
+
+/* ── Footer ── */
+.ep-footer { background: var(--brand-secondary); border-top: 1px solid rgba(255, 255, 255, 0.07); padding: clamp(48px, 6vw, 80px) 0 40px; }
+.ep-footer-grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; align-items: flex-start; }
+.ep-footer-brand { font-family: var(--ep-font-display); font-weight: 700; font-size: 1.3rem; }
+.ep-footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+.ep-footer-links a { font-size: 0.82rem; color: rgba(248, 246, 240, 0.6); }
+.ep-footer-links a:hover { color: var(--brand-primary); }
+.ep-footer-legal { margin-top: 40px; font-size: 0.74rem; color: rgba(248, 246, 240, 0.35); }
+.ep-footer-social { display: flex; gap: 16px; }
+
+/* ── Social inline ── */
+.ep-social { display: flex; gap: 16px; }
+.ep-social a { font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(248, 246, 240, 0.6); }
+.ep-social a:hover { color: var(--brand-primary); }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .ep-nav-links { display: none; }
+  .ep-hamburger { display: flex; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .ep-gallery-item:hover img { transform: none; }
+}

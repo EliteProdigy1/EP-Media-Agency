@@ -1,0 +1,120 @@
+{
+  "slug": "sample-home-services",
+  "sourceFolder": "sample-home-services",
+  "sharp": false,
+  "hero": {
+    "source": "hero.png",
+    "out": "assets/hero.png",
+    "role": "hero",
+    "originalSize": 6400,
+    "optimizedSize": 6400,
+    "savedPct": 0,
+    "optimized": false,
+    "alt": "Sample Home Services Co. (DEMO) — A Cleaner, Sharper Home",
+    "altNeedsReview": false,
+    "selectionReason": "client-specified (media.heroImage)"
+  },
+  "logo": {
+    "source": "logo.png",
+    "out": "assets/logo.png",
+    "role": "logo",
+    "originalSize": 590,
+    "optimizedSize": 590,
+    "savedPct": 0,
+    "optimized": false,
+    "alt": "Sample Home Services Co. (DEMO) logo",
+    "altNeedsReview": false
+  },
+  "gallery": [
+    {
+      "source": "gallery-01.png",
+      "out": "assets/gallery-01.png",
+      "role": "gallery",
+      "originalSize": 2790,
+      "optimizedSize": 2790,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) — Gallery 01",
+      "altNeedsReview": true
+    },
+    {
+      "source": "gallery-02.png",
+      "out": "assets/gallery-02.png",
+      "role": "gallery",
+      "originalSize": 2790,
+      "optimizedSize": 2790,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) — Gallery 02",
+      "altNeedsReview": true
+    },
+    {
+      "source": "gallery-03.png",
+      "out": "assets/gallery-03.png",
+      "role": "gallery",
+      "originalSize": 2789,
+      "optimizedSize": 2789,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) — Gallery 03",
+      "altNeedsReview": true
+    }
+  ],
+  "images": [
+    {
+      "source": "hero.png",
+      "out": "assets/hero.png",
+      "role": "hero",
+      "originalSize": 6400,
+      "optimizedSize": 6400,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) — A Cleaner, Sharper Home",
+      "altNeedsReview": false
+    },
+    {
+      "source": "logo.png",
+      "out": "assets/logo.png",
+      "role": "logo",
+      "originalSize": 590,
+      "optimizedSize": 590,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) logo",
+      "altNeedsReview": false
+    },
+    {
+      "source": "gallery-01.png",
+      "out": "assets/gallery-01.png",
+      "role": "gallery",
+      "originalSize": 2790,
+      "optimizedSize": 2790,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) — Gallery 01",
+      "altNeedsReview": true
+    },
+    {
+      "source": "gallery-02.png",
+      "out": "assets/gallery-02.png",
+      "role": "gallery",
+      "originalSize": 2790,
+      "optimizedSize": 2790,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) — Gallery 02",
+      "altNeedsReview": true
+    },
+    {
+      "source": "gallery-03.png",
+      "out": "assets/gallery-03.png",
+      "role": "gallery",
+      "originalSize": 2789,
+      "optimizedSize": 2789,
+      "savedPct": 0,
+      "optimized": false,
+      "alt": "Sample Home Services Co. (DEMO) — Gallery 03",
+      "altNeedsReview": true
+    }
+  ]
+}

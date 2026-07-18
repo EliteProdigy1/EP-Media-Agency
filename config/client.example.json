@@ -1,0 +1,52 @@
+{
+  "_comment": "EP Website Factory — client config template. Copy to config/<slug>.json and fill with VERIFIED facts only. Never invent ratings, reviews, licenses, guarantees, staff, addresses, service areas, or statistics. Leave optional fields blank to hide their sections cleanly.",
+  "businessName": "Business Name",
+  "slug": "business-slug",
+  "industry": "landscaping",
+  "template": "premium-service",
+  "description": "A factual 1–3 sentence description of the business, supplied by the client. What they do, who they serve.",
+  "tagline": "Short tagline (optional)",
+  "location": "City, State",
+  "serviceAreas": ["Neighboring City", "County"],
+  "phone": "251.000.0000",
+  "email": "owner@business.com",
+  "services": [
+    { "name": "Service One", "description": "What this service includes." },
+    { "name": "Service Two", "description": "What this service includes." }
+  ],
+  "socialLinks": {
+    "facebook": "",
+    "instagram": "",
+    "linkedin": ""
+  },
+  "brand": {
+    "logo": "logo.png",
+    "primaryColor": "#C9A84C",
+    "secondaryColor": "#050505",
+    "accentColor": "#E8D49A",
+    "styleNotes": "Optional notes on the client's preferred look."
+  },
+  "media": {
+    "folder": "business-slug",
+    "heroImage": "hero.jpg",
+    "galleryImages": []
+  },
+  "purchase": {
+    "enabled": true,
+    "fullPrice": 1000,
+    "depositAmount": 500,
+    "balanceAmount": 500,
+    "monthlyPlan": 100,
+    "purchaseUrl": "",
+    "intakeUrl": ""
+  },
+  "contact": {
+    "formName": "business-slug-contact",
+    "notificationDestinationDocumented": false
+  },
+  "seo": {
+    "title": "Business Name — Tagline",
+    "description": "Up to 155-character SEO description.",
+    "canonicalUrl": "https://business-slug.netlify.app/"
+  }
+}
