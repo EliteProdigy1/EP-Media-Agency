@@ -1,0 +1,289 @@
+/* ============================================================
+   css/forms.css — Elite Prodigy Sports Group
+   Shared styles for ep-select.html and nominate.html
+   Dark luxury aesthetic. Gold / Black. Playfair + Montserrat.
+   ============================================================ */
+
+/* ── Page wrapper ── */
+.ep-form-main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px 24px 80px;
+}
+
+/* ── Back link ── */
+.ep-form-back {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 240, 0.45);
+  text-decoration: none;
+  margin-bottom: 40px;
+  transition: color 0.2s ease;
+}
+
+.ep-form-back:hover {
+  color: #C9A84C;
+}
+
+/* ── Hero ── */
+.ep-form-hero {
+  margin-bottom: 40px;
+}
+
+.ep-form-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin: 0 0 14px;
+}
+
+.ep-form-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #F8F6F0;
+  margin: 0 0 14px;
+}
+
+.ep-form-title em {
+  font-style: italic;
+  color: #C9A84C;
+}
+
+.ep-form-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(248, 246, 240, 0.55);
+  margin: 0;
+}
+
+/* ── Form card ── */
+.ep-form-card {
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 36px;
+}
+
+/* ── Grid ── */
+.ep-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── Field ── */
+.ep-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ep-form-field-full {
+  grid-column: 1 / -1;
+}
+
+/* ── Label ── */
+.ep-form-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 240, 0.5);
+}
+
+.ep-form-req {
+  color: #C9A84C;
+  margin-left: 2px;
+}
+
+/* ── Inputs, selects, textareas ── */
+.ep-form-input,
+.ep-form-select,
+.ep-form-textarea {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: #F8F6F0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ep-form-input::placeholder,
+.ep-form-textarea::placeholder {
+  color: rgba(248, 246, 240, 0.25);
+}
+
+.ep-form-input:focus,
+.ep-form-select:focus,
+.ep-form-textarea:focus {
+  border-color: #C9A84C;
+}
+
+/* ── Textarea ── */
+.ep-form-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* ── Select ── */
+.ep-form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.ep-form-select option {
+  background: #141414;
+  color: #F8F6F0;
+}
+
+/* ── Consent ── */
+.ep-form-consent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.ep-form-consent input[type="checkbox"] {
+  accent-color: #C9A84C;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.ep-form-consent-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(248, 246, 240, 0.55);
+}
+
+/* ── Submit button ── */
+.ep-form-submit {
+  width: 100%;
+  background: #C9A84C;
+  color: #050505;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 8px;
+}
+
+.ep-form-submit:hover {
+  background: #d9bc6a;
+}
+
+.ep-form-submit:active {
+  background: #b8933c;
+}
+
+/* ── Confirmation ── */
+.ep-form-confirm {
+  display: none;
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.ep-form-confirm-icon {
+  font-size: 2.4rem;
+  color: #C9A84C;
+  display: block;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.ep-form-confirm-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  color: #F8F6F0;
+  margin: 0 0 12px;
+}
+
+.ep-form-confirm-title em {
+  font-style: italic;
+  color: #C9A84C;
+}
+
+.ep-form-confirm-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(248, 246, 240, 0.55);
+  max-width: 460px;
+  margin: 0 auto 28px;
+}
+
+.ep-form-confirm-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.35);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.ep-form-confirm-link:hover {
+  border-color: #C9A84C;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .ep-form-main {
+    padding: 100px 20px 60px;
+  }
+
+  .ep-form-card {
+    padding: 24px 20px;
+  }
+
+  .ep-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-form-field-full {
+    grid-column: 1;
+  }
+}

@@ -1,0 +1,69 @@
+/* ══════════════════════════════════════════════════════
+   EP FACTORY — ACCESSIBILITY BASELINE
+   Injected on every generated site. Enforces the WCAG AA
+   basics the factory guarantees: skip link, sr-only, visible
+   focus, reduced-motion, target sizing.
+   ══════════════════════════════════════════════════════ */
+
+/* ── Skip to content ── */
+.ep-skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100000;
+  background: var(--brand-primary, #C9A84C);
+  color: var(--brand-secondary, #050505);
+  padding: 12px 20px;
+  font-family: var(--ep-font-body, sans-serif);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+  transition: top 0.2s ease;
+}
+.ep-skip-link:focus { top: 12px; }
+
+/* ── Screen-reader only ── */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.sr-only-focusable:focus,
+.sr-only-focusable:focus-within {
+  position: static !important;
+  width: auto; height: auto;
+  margin: 0; overflow: visible; clip: auto; white-space: normal;
+}
+
+/* ── Visible focus (keyboard) ──
+   Mouse users don't see the ring; keyboard users always do. */
+:focus-visible {
+  outline: 3px solid var(--brand-accent, #E8D49A);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+/* Fallback for browsers without :focus-visible */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--brand-accent, #E8D49A);
+  outline-offset: 2px;
+}
+a:focus:not(:focus-visible), button:focus:not(:focus-visible),
+input:focus:not(:focus-visible), select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) { outline: none; }
+
+/* ── Minimum touch target (44px) ── */
+.ep-nav a, .ep-btn, .ep-footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* ── Respect reduced motion globally (belt-and-suspenders) ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -5,6 +5,7 @@ node_modules/
 # own repos, not committed here. The fictional proof build is kept as an example.
 dist/*
 !dist/sample-home-services/
+!dist/hm-services/
 
 # OS / editor
 .DS_Store

@@ -1,0 +1,82 @@
+/* ══════════════════════════════════════════════════════
+   EP TOKENS — Elite Prodigy Design System
+   Single source of truth for all design decisions.
+   Import this on every EP page before any other CSS.
+   See MASTER_SPECIFICATION.md §17 for rationale.
+   ══════════════════════════════════════════════════════ */
+
+:root {
+
+  /* ── EP Colors: Sports Group + Media + Business ── */
+  --ep-gold:          #C9A84C;
+  --ep-gold-light:    #E8D49A;
+  --ep-gold-dark:     #8B6914;
+  --ep-gold-bright:   #F0C060;
+  --ep-black:         #050505;
+  --ep-black-rich:    #0a0a0a;
+  --ep-black-mid:     #141414;
+  --ep-white:         #F8F6F0;
+
+  /* ── EP Colors: Youth + Wellness accent ── */
+  --ep-green:         #00cc55;
+  --ep-green-dark:    #003d18;
+  --ep-green-mid:     #00993f;
+
+  /* ── EP Colors: Neutrals ── */
+  --ep-silver:        #B8B8B8;
+  --ep-silver-dark:   #888;
+  --ep-gunmetal:      #1C1C1E;
+  --ep-warm:          #FAF4E8;
+
+  /* ── Typography: Font families ── */
+  --ep-font-display:   'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --ep-font-editorial: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --ep-font-body:      'Montserrat', system-ui, -apple-system, sans-serif;
+
+  /* ── Spacing ──
+     CLAUDE.md rule: 140px desktop, 80px mobile.
+     All sections use this variable. Never hardcode section padding. */
+  --ep-section-pad: clamp(80px, 10vw, 140px);
+
+  /* ── Motion ── */
+  --ep-ease:        cubic-bezier(.25, .46, .45, .94);
+  --ep-ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --ep-ease-in-out: cubic-bezier(.45, 0, .55, 1);
+  --ep-ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+
+  /* ── Duration scale ── */
+  --ep-dur-micro:  0.18s;
+  --ep-dur-fast:   0.32s;
+  --ep-dur-base:   0.55s;
+  --ep-dur-slow:   0.85s;
+  --ep-dur-reveal: 1.20s;
+
+  /* ── Border radius ── */
+  --ep-radius-sm:  2px;
+  --ep-radius:     4px;
+  --ep-radius-lg:  8px;
+  --ep-radius-xl:  16px;
+
+  /* ── Z-index scale ── */
+  --ep-z-base:     1;
+  --ep-z-lift:     10;
+  --ep-z-overlay:  100;
+  --ep-z-nav:      1000;
+  --ep-z-modal:    5000;
+  --ep-z-cursor:   99999;
+
+  /* ── Shadows ── */
+  --ep-shadow-card:  0 8px 44px rgba(0, 0, 0, 0.70);
+  --ep-shadow-panel: 0 12px 80px rgba(0, 0, 0, 0.92);
+  --ep-shadow-gold:  0 0 28px rgba(201, 168, 76, 0.18);
+
+  /* ── Glass surfaces (dark overlay panels) ── */
+  --ep-glass-bg:     rgba(4, 3, 2, 0.72);
+  --ep-glass-border: rgba(201, 168, 76, 0.28);
+  --ep-glass-blur:   blur(18px) saturate(1.3);
+
+  /* ── Cinematic Listings specific (do not use elsewhere) ── */
+  --cl-xfade:       0.025;   /* Non-darkening dissolve window */
+  --cl-drive-total: 26000;   /* Wheel accumulator total */
+  --cl-lerp:        0.05;    /* RAF lerp factor */
+}

@@ -74,6 +74,13 @@ a { color: inherit; text-decoration: none; }
 }
 .ep-body { color: rgba(248, 246, 240, 0.6); }
 
+/* ── Inline text links: distinguishable by more than color (WCAG) ── */
+.ep-body a, .ep-lead a, .ep-footer-legal a, .ep-purchase-note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
 /* ── Buttons (from EPSG design skill) ── */
 .ep-btn {
   display: inline-block;
@@ -177,6 +184,24 @@ a { color: inherit; text-decoration: none; }
 .ep-card:hover { border-color: color-mix(in srgb, var(--brand-primary) 40%, transparent); transform: translateY(-4px); }
 .ep-card-title { font-family: var(--ep-font-display); font-weight: 700; font-size: 1.3rem; margin-bottom: 12px; }
 .ep-card-title .num { display: block; font-family: var(--ep-font-body); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; color: var(--brand-primary); margin-bottom: 10px; }
+
+/* ── Pillars band (Build / Maintain / Remove / Improve) ── */
+.ep-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--ep-radius-lg); overflow: hidden; }
+.ep-pillar { background: var(--brand-surface); padding: clamp(24px, 3vw, 40px) clamp(20px, 2.5vw, 32px); text-align: center; }
+.ep-pillar-label { font-family: var(--ep-font-display); font-weight: 900; font-size: clamp(1.1rem, 2vw, 1.5rem); letter-spacing: 0.02em; color: var(--brand-primary); }
+.ep-pillar-blurb { font-size: 0.82rem; color: rgba(248,246,240,0.6); margin-top: 8px; }
+
+/* ── Grouped services ── */
+.ep-svc-group { margin-top: clamp(32px, 4vw, 52px); }
+.ep-svc-group:first-child { margin-top: 0; }
+.ep-svc-group-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+.ep-svc-group-head h3 { font-family: var(--ep-font-display); font-weight: 700; font-size: clamp(1.1rem, 2vw, 1.4rem); white-space: nowrap; }
+.ep-svc-group-head .rule { flex: 1; height: 1px; background: linear-gradient(90deg, color-mix(in srgb, var(--brand-primary) 45%, transparent), transparent); }
+
+/* ── Why us ── */
+.ep-why { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(16px, 2.5vw, 28px); }
+.ep-why-item { border-left: 2px solid var(--brand-primary); padding: 6px 0 6px 20px; }
+.ep-why-item h3 { font-family: var(--ep-font-display); font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
 
 /* ── Section header ── */
 .ep-section-head { text-align: center; max-width: 720px; margin: 0 auto clamp(40px, 5vw, 64px); }

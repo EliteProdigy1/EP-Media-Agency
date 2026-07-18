@@ -80,6 +80,9 @@ function validateAgainstSchema(data, schema, prefix = '') {
   const typeOf = (v) => Array.isArray(v) ? 'array' : v === null ? 'null' : typeof v;
 
   function checkNode(value, node, label) {
+    // Empty strings mean "not provided" — required-ness is enforced separately
+    // via the `required` array, so skip format/pattern checks on blanks.
+    if (value === '') return;
     if (node.type) {
       const t = typeOf(value);
       const want = node.type === 'number' ? ['number'] : [node.type];

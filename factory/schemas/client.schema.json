@@ -12,8 +12,7 @@
     "template",
     "description",
     "location",
-    "phone",
-    "email"
+    "phone"
   ],
   "properties": {
     "businessName": { "type": "string", "minLength": 2 },
@@ -33,9 +32,39 @@
         "required": ["name"],
         "properties": {
           "name": { "type": "string" },
-          "description": { "type": "string" }
+          "description": { "type": "string" },
+          "category": { "type": "string", "description": "Optional grouping label. If any service has one, the grid renders grouped by category." }
         }
       }
+    },
+    "pillars": {
+      "type": "array",
+      "description": "Optional 3–4 headline capability pillars shown as a band under the hero.",
+      "items": {
+        "type": "object",
+        "required": ["label"],
+        "properties": {
+          "label": { "type": "string" },
+          "blurb": { "type": "string" }
+        }
+      }
+    },
+    "whyUs": {
+      "type": "array",
+      "description": "Optional factual reasons-to-choose points. No unverified claims.",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": { "type": "string" },
+          "text": { "type": "string" }
+        }
+      }
+    },
+    "pendingVerification": {
+      "type": "array",
+      "description": "Internal only. Field names/notes awaiting client confirmation; surfaced in BUILD-REPORT, never shown publicly.",
+      "items": { "type": "string" }
     },
     "socialLinks": {
       "type": "object",

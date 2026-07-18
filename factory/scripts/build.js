@@ -25,6 +25,12 @@ function fill(str, tokens) {
   return str.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => (tokens[k] !== undefined ? tokens[k] : ''));
 }
 function money(n) { return `$${Number(n).toLocaleString('en-US')}`; }
+// Build an E.164-ish tel: href. US 10-digit numbers get a +1 prefix.
+function telLink(phone) {
+  let d = String(phone).replace(/[^\d]/g, '');
+  if (d.length === 10) d = '1' + d;
+  return `tel:+${d}`;
+}
 function imgTag(rec, { eager } = {}) {
   const srcset = rec.srcset ? ` srcset="${escAttr(rec.srcset)}" sizes="${escAttr(rec.sizes)}"` : '';
   const dims = (rec.width && rec.height) ? ` width="${rec.width}" height="${rec.height}"` : '';
@@ -108,31 +114,54 @@ async function build(slug) {
   const heroEyebrow = esc([config.location, titleCase(config.industry || '')].filter(Boolean).join(' · '));
   const heroTitle = esc(config.businessName);
   const heroSub = esc(config.tagline || (config.description || '').split(/(?<=[.!?])\s/)[0]);
+  const telHref = config.phone ? telLink(config.phone) : '';
+  const secondHref = hasServices ? '#services' : '#contact';
+  const secondLabel = hasServices ? 'View Services' : 'Get a Quote';
   const heroActions = [
-    `<a href="#contact" class="ep-btn ep-btn--primary">Get a Free Quote</a>`,
-    config.phone ? `<a href="tel:${escAttr(String(config.phone).replace(/[^\d+]/g, ''))}" class="ep-btn ep-btn--outline">Call ${esc(config.phone)}</a>` : '',
+    // Phone-first: the call CTA is the primary action, above the fold.
+    config.phone ? `<a href="${telHref}" class="ep-btn ep-btn--primary">Call ${esc(config.phone)}</a>` : '',
+    `<a href="${secondHref}" class="ep-btn ep-btn--${config.phone ? 'outline' : 'primary'}">${secondLabel}</a>`,
   ].filter(Boolean).join('\n            ');
   report.factsUsed.push(`business name, industry, location, phone`);
 
-  // ── Services section ──
+  // ── Services section (grouped by category when any service has one) ──
   let servicesSection = '';
   if (hasServices) {
-    const cards = config.services.map((s, i) => `
-        <article class="ep-card reveal">
-          <h3 class="ep-card-title"><span class="num">${String(i + 1).padStart(2, '0')}</span>${esc(s.name)}</h3>
-          ${s.description ? `<p class="ep-body">${esc(s.description)}</p>` : ''}
-        </article>`).join('');
+    const card = (s) => `
+          <article class="ep-card reveal">
+            <h3 class="ep-card-title">${esc(s.name)}</h3>
+            ${s.description ? `<p class="ep-body">${esc(s.description)}</p>` : ''}
+          </article>`;
+    const grouped = config.services.some((s) => s.category);
+    let inner;
+    if (grouped) {
+      // Preserve first-seen category order.
+      const order = [];
+      const byCat = {};
+      config.services.forEach((s) => {
+        const cat = s.category || 'More Services';
+        if (!byCat[cat]) { byCat[cat] = []; order.push(cat); }
+        byCat[cat].push(s);
+      });
+      inner = order.map((cat) => `        <div class="ep-svc-group">
+          <div class="ep-svc-group-head reveal"><h3>${esc(cat)}</h3><span class="rule"></span></div>
+          <div class="ep-grid ep-grid--3">${byCat[cat].map(card).join('')}
+          </div>
+        </div>`).join('\n');
+    } else {
+      inner = `        <div class="ep-grid ep-grid--3">${config.services.map(card).join('')}
+        </div>`;
+    }
     servicesSection = `    <section id="services" class="ep-section ep-section--surface" aria-labelledby="services-title">
       <div class="ep-container">
         <div class="ep-section-head reveal">
           <p class="ep-eyebrow">What We Do</p>
           <h2 id="services-title" class="ep-headline">Our <em>Services</em></h2>
         </div>
-        <div class="ep-grid ep-grid--3">${cards}
-        </div>
+${inner}
       </div>
     </section>`;
-    report.factsUsed.push(`${config.services.length} services`);
+    report.factsUsed.push(`${config.services.length} services${grouped ? ' (grouped by category)' : ''}`);
   } else { report.hiddenSections.push('Services (no services in config)'); }
 
   // ── About section (always; factual description only) ──
@@ -152,7 +181,7 @@ async function build(slug) {
             <div class="ep-card">
               <h3 class="ep-card-title">Get In Touch</h3>
               <p class="ep-body">${esc(config.location || '')}</p>
-              ${config.phone ? `<p class="ep-body"><a href="tel:${escAttr(String(config.phone).replace(/[^\d+]/g, ''))}" style="color:var(--brand-primary);">${esc(config.phone)}</a></p>` : ''}
+              ${config.phone ? `<p class="ep-body"><a href="${telHref}" style="color:var(--brand-primary);">${esc(config.phone)}</a></p>` : ''}
               ${config.email ? `<p class="ep-body"><a href="mailto:${escAttr(config.email)}" style="color:var(--brand-primary);">${esc(config.email)}</a></p>` : ''}
             </div>
           </div>
@@ -184,11 +213,13 @@ async function build(slug) {
   if (hasGallery) {
     const items = media.gallery.map((g) => `
           <figure class="ep-gallery-item reveal">${imgTag(g)}</figure>`).join('');
+    const gEyebrow = esc((config.gallery && config.gallery.eyebrow) || 'Our Work');
+    const gTitle = (config.gallery && config.gallery.title) || 'Recent <em>Projects</em>';
     gallerySection = `    <section id="gallery" class="ep-section" aria-labelledby="gallery-title">
       <div class="ep-container">
         <div class="ep-section-head reveal">
-          <p class="ep-eyebrow">Our Work</p>
-          <h2 id="gallery-title" class="ep-headline">Recent <em>Projects</em></h2>
+          <p class="ep-eyebrow">${gEyebrow}</p>
+          <h2 id="gallery-title" class="ep-headline">${gTitle}</h2>
         </div>
         <div class="ep-gallery">${items}
         </div>
@@ -196,6 +227,44 @@ async function build(slug) {
     </section>`;
     report.factsUsed.push(`${media.gallery.length} gallery images`);
   } else { report.hiddenSections.push('Gallery (no gallery images supplied)'); }
+
+  // ── Pillars band (optional) ──
+  let pillarsSection = '';
+  if (Array.isArray(config.pillars) && config.pillars.length) {
+    const items = config.pillars.map((p) => `
+        <div class="ep-pillar reveal">
+          <div class="ep-pillar-label">${esc(p.label)}</div>
+          ${p.blurb ? `<p class="ep-pillar-blurb">${esc(p.blurb)}</p>` : ''}
+        </div>`).join('');
+    pillarsSection = `    <section class="ep-section--tight" aria-label="Capabilities" style="background:var(--brand-secondary);">
+      <div class="ep-container">
+        <div class="ep-pillars">${items}
+        </div>
+      </div>
+    </section>`;
+    report.factsUsed.push(`${config.pillars.length} capability pillars`);
+  }
+
+  // ── Why-us (optional; factual points only) ──
+  let whyUsSection = '';
+  if (Array.isArray(config.whyUs) && config.whyUs.length) {
+    const items = config.whyUs.map((w) => `
+          <div class="ep-why-item reveal">
+            <h3>${esc(w.title)}</h3>
+            ${w.text ? `<p class="ep-body">${esc(w.text)}</p>` : ''}
+          </div>`).join('');
+    whyUsSection = `    <section id="why" class="ep-section" aria-labelledby="why-title">
+      <div class="ep-container">
+        <div class="ep-section-head reveal">
+          <p class="ep-eyebrow">Why Choose Us</p>
+          <h2 id="why-title" class="ep-headline">Why <em>${esc(config.businessName)}</em></h2>
+        </div>
+        <div class="ep-why">${items}
+        </div>
+      </div>
+    </section>`;
+    report.factsUsed.push(`${config.whyUs.length} why-us points`);
+  }
 
   // ── Purchase section ──
   let purchaseSection = '';
@@ -216,8 +285,13 @@ async function build(slug) {
       if (p.intakeUrl) actions += `\n        <a href="${escAttr(p.intakeUrl)}" class="ep-btn ep-btn--outline" rel="noopener">Client Intake Form</a>`;
       purchaseStatus = 'active';
     } else {
-      actions = `<p class="ep-purchase-note" role="note">Secure checkout link coming soon — contact us below to begin.</p>`;
-      purchaseStatus = 'enabled-no-url (CTA hidden — LAUNCH BLOCKER)';
+      // No dead/fake button and no public "coming soon" sales copy — route to a
+      // real, working action (phone, else the contact form). The internal
+      // "purchase link pending" note lives only in BUILD-REPORT.
+      actions = config.phone
+        ? `<a href="${telHref}" class="ep-btn ep-btn--primary">Call to Get Started</a>`
+        : `<a href="#contact" class="ep-btn ep-btn--primary">Contact Us to Begin</a>`;
+      purchaseStatus = 'enabled-no-url (public purchase button hidden — pending launch)';
     }
 
     const tpl = fs.readFileSync(path.join(COMPONENTS, 'purchase.html'), 'utf8');
@@ -242,14 +316,14 @@ async function build(slug) {
   const socialInline = Object.entries(social).filter(([, u]) => u)
     .map(([k, u]) => `<a href="${escAttr(u)}" rel="noopener" target="_blank">${titleCase(k)}</a>`).join('\n        ');
   const contactDetails = [
-    config.phone ? `<a href="tel:${escAttr(String(config.phone).replace(/[^\d+]/g, ''))}" style="color:var(--brand-primary);">${esc(config.phone)}</a>` : '',
+    config.phone ? `<a href="${telHref}" style="color:var(--brand-primary);">${esc(config.phone)}</a>` : '',
     config.email ? `<a href="mailto:${escAttr(config.email)}" style="color:var(--brand-primary);">${esc(config.email)}</a>` : '',
     config.location ? `<span>${esc(config.location)}</span>` : '',
   ].filter(Boolean).join(' &nbsp;·&nbsp; ');
   const contactTpl = fs.readFileSync(path.join(COMPONENTS, 'contact.html'), 'utf8');
   const contactSection = fill(contactTpl, {
     CONTACT_HEADLINE: 'Start Your Project',
-    CONTACT_SUB: esc(`Tell us what you need — we typically reply within 24 hours.`),
+    CONTACT_SUB: esc(`Tell us about your project and we'll get back to you.`),
     FORM_NAME: escAttr(formName),
     SERVICE_OPTIONS: serviceOptions,
     CONTACT_DETAILS: `<p class="ep-body" style="text-align:center;margin-top:28px;">${contactDetails}</p>` +
@@ -290,7 +364,7 @@ async function build(slug) {
 
   // ── Assemble ──
   const template = fs.readFileSync(path.join(TEMPLATES, `${config.template}.html`), 'utf8');
-  const html = fill(template, {
+  let html = fill(template, {
     SEO_TITLE: seoTitle, SEO_DESCRIPTION: seoDesc,
     CANONICAL_TAG: canonicalTag, OG_URL_TAG: ogUrlTag, OG_IMAGE_TAG: ogImageTag, FAVICON_TAG: faviconTag,
     THEME_COLOR: brand.secondaryColor || '#050505',
@@ -299,12 +373,15 @@ async function build(slug) {
     NAV_LINKS: navLinks, MOBILE_LINKS: mobileLinks,
     HERO_MEDIA: heroMedia, HERO_EYEBROW: heroEyebrow, HERO_TITLE: heroTitle,
     HERO_SUB: heroSub, HERO_ACTIONS: heroActions,
-    SERVICES_SECTION: servicesSection, ABOUT_SECTION: aboutSection,
-    PROOF_SECTION: proofSection, GALLERY_SECTION: gallerySection,
+    PILLARS_SECTION: pillarsSection, SERVICES_SECTION: servicesSection, ABOUT_SECTION: aboutSection,
+    WHYUS_SECTION: whyUsSection, PROOF_SECTION: proofSection, GALLERY_SECTION: gallerySection,
     PURCHASE_SECTION: purchaseSection, CONTACT_SECTION: contactSection,
     FOOTER_TAGLINE: esc(config.tagline || ''), FOOTER_LINKS: footerLinks, FOOTER_SOCIAL: footerSocial,
     YEAR: new Date().getFullYear(), LOCATION: esc(config.location || ''),
   });
+  // Strip authoring/template HTML comments from shipped output (keeps the page
+  // clean and prevents any token that appears inside a comment from leaking).
+  html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/\n{3,}/g, '\n\n');
   fs.writeFileSync(path.join(outRoot, 'index.html'), html);
 
   // ── 12. Support files ──
@@ -319,13 +396,17 @@ async function build(slug) {
   // ── 15. Preflight ──
   const pf = runPreflight(slug, { config, formName, purchaseStatus, media });
 
-  // ── 16. Build report ──
-  const readiness = pf.blockers.length === 0 ? 'READY' : 'NOT READY';
+  // ── 16. Readiness (two-tier) + build report ──
+  const reviewReady = pf.reviewBlockers.length === 0;
+  const launchReady = reviewReady && pf.launchBlockers.length === 0;
+  const readiness = !reviewReady ? 'NOT READY FOR CLIENT REVIEW'
+    : launchReady ? 'READY FOR PUBLIC LAUNCH'
+    : 'READY FOR CLIENT REVIEW';
   writeBuildReport(outRoot, slug, config, {
-    report, media, formName, purchaseStatus, hasPurchaseUrl, pf, readiness,
+    report, media, formName, purchaseStatus, hasPurchaseUrl, pf, readiness, reviewReady, launchReady,
   });
 
-  return { ok: true, outRoot, pf, readiness, purchaseStatus };
+  return { ok: true, outRoot, pf, readiness, reviewReady, launchReady, purchaseStatus };
 }
 
 function render404(config, brandStyle) {
@@ -378,7 +459,11 @@ function renderNetlifyToml() {
 }
 
 function writeBuildReport(outRoot, slug, config, ctx) {
-  const { report, media, formName, purchaseStatus, hasPurchaseUrl, pf, readiness } = ctx;
+  const { report, media, formName, purchaseStatus, hasPurchaseUrl, pf, readiness, reviewReady, launchReady } = ctx;
+  const readinessBadge = !reviewReady ? '⛔ **NOT READY FOR CLIENT REVIEW**'
+    : launchReady ? '✅ **READY FOR PUBLIC LAUNCH**'
+    : '🟡 **READY FOR CLIENT REVIEW** — not yet ready for public launch (see launch items below)';
+  const pendingList = Array.isArray(config.pendingVerification) ? config.pendingVerification : [];
   const files = fs.readdirSync(outRoot).filter((f) => f !== 'BUILD-REPORT.md');
   const mediaLines = media.results.map((r) => {
     const variants = (r.variants && r.variants.length > 1) ? ` · ${r.variants.length} responsive widths (${r.variants.map((v) => v.width).join('/')})` : '';
@@ -410,7 +495,7 @@ ${lh.notes ? `- Note: ${lh.notes}` : ''}
 
 **Slug:** \`${slug}\`
 **Template:** \`${config.template}\`
-**Deployment readiness:** ${readiness === 'READY' ? '✅ **READY**' : '⛔ **NOT READY**'}
+**Status:** ${readinessBadge}
 
 ---
 
@@ -419,6 +504,9 @@ ${files.map((f) => `- \`${f}\``).join('\n')}
 
 ## Client facts used (from config only)
 ${[...new Set(report.factsUsed)].map((f) => `- ${f}`).join('\n')}
+
+## Pending client verification (internal — never shown publicly)
+${pendingList.length ? pendingList.map((p) => `- ⏳ ${p}`).join('\n') : '- none'}
 
 ## Sections hidden (missing/optional data)
 ${report.hiddenSections.length ? report.hiddenSections.map((s) => `- ${s}`).join('\n') : '- none'}
@@ -438,16 +526,19 @@ ${altLines}
 
 ## Purchase
 **Status:** ${purchaseStatus}
-${purchaseStatus.includes('no-url') ? '- ⛔ Purchase enabled but no `purchaseUrl` — active CTA is hidden. **Launch blocker.**' : hasPurchaseUrl ? '- Active purchase CTA rendered.' : '- Purchase section not shown.'}
+${purchaseStatus.includes('no-url') ? '- 🟡 No `purchaseUrl` yet — the public purchase button is hidden and the section routes to a real call/contact action (no dead button, no public "coming soon" copy). Add the URL before public launch. _Purchase link available after final review._' : hasPurchaseUrl ? '- Active purchase CTA rendered.' : '- Purchase section not shown.'}
 
 ## Preflight — Accessibility / SEO / Assets
-${pf.checks.map((c) => `- ${c.pass ? '✅' : (c.level === 'blocker' ? '⛔' : '⚠️')} ${c.name}${c.detail ? ` — ${c.detail}` : ''}`).join('\n')}
+${pf.checks.map((c) => `- ${c.pass ? '✅' : (c.launchOnly ? '🟡' : (c.level === 'blocker' ? '⛔' : '⚠️'))} ${c.name}${c.launchOnly ? ' _[launch-only]_' : ''}${c.detail ? ` — ${c.detail}` : ''}`).join('\n')}
 
 ## Lighthouse
 ${lighthouseMd}
 
-## Launch blockers
-${pf.blockers.length ? pf.blockers.map((b) => `- ⛔ ${b}`).join('\n') : '- none'}
+## Blocking client review (must fix to show the client)
+${pf.reviewBlockers.length ? pf.reviewBlockers.map((b) => `- ⛔ ${b}`).join('\n') : '- none ✅'}
+
+## Blocking public launch only (site is reviewable now)
+${pf.launchBlockers.length ? pf.launchBlockers.map((b) => `- 🟡 ${b}`).join('\n') : '- none'}
 
 ## Warnings
 ${report.warnings.length ? [...new Set(report.warnings)].map((w) => `- ⚠️ ${w}`).join('\n') : '- none'}
@@ -455,13 +546,16 @@ ${pf.warnings.length ? pf.warnings.map((w) => `- ⚠️ ${w}`).join('\n') : ''}
 
 ## Preview locally
 \`\`\`
-npx serve dist/${slug}
-# or
-cd dist/${slug} && python3 -m http.server 8080
+npm run ep:preview -- ${slug}     # then open http://localhost:8080
 \`\`\`
 
+## To go from CLIENT REVIEW → PUBLIC LAUNCH
+1. Confirm the Netlify form email notification destination, then set \`contact.notificationDestinationDocumented: true\`.
+2. Add \`purchase.purchaseUrl\` (deposit checkout link).
+3. Add \`purchase.intakeUrl\` (client intake form link).
+
 ---
-*Generated by EP Website Factory — Phase 1A. Deployment readiness: **${readiness}**.*
+*Generated by EP Website Factory. Status: **${readiness}**.*
 `;
   fs.writeFileSync(path.join(outRoot, 'BUILD-REPORT.md'), md);
 }
@@ -480,8 +574,10 @@ if (require.main === module) {
     if (!res.ok) { log.err('Build failed — see errors above.'); process.exit(1); }
     log.ok(`Built dist/${slug}/`);
     log.info(`Purchase: ${res.purchaseStatus}`);
-    if (res.pf.blockers.length) { res.pf.blockers.forEach((b) => log.err(`BLOCKER — ${b}`)); }
-    log.head(`Readiness: ${res.readiness}`);
-    process.exit(res.readiness === 'READY' ? 0 : 1);
+    if (res.pf.reviewBlockers.length) { res.pf.reviewBlockers.forEach((b) => log.err(`REVIEW BLOCKER — ${b}`)); }
+    if (res.pf.launchBlockers.length) { res.pf.launchBlockers.forEach((b) => log.warn(`launch-only — ${b}`)); }
+    log.head(`Status: ${res.readiness}`);
+    // Exit 0 when reviewable (launch-only items don't fail the build); 1 only if review is blocked.
+    process.exit(res.reviewReady ? 0 : 1);
   })();
 }

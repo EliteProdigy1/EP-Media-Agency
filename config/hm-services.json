@@ -1,28 +1,59 @@
 {
-  "_TODO": "SCAFFOLD ONLY — not ready to build. No verified H&M facts exist yet; nothing here is invented. Fill every empty field with real, client-supplied facts, add media to assets/hm-services/, then run ep:validate. Delete this _TODO when complete. Do NOT add reviews, ratings, certifications, service areas, statistics, or contact details that the client has not confirmed.",
-  "businessName": "",
+  "_primaryContact": "Josh Hendrick (owner) — internal only, not shown publicly",
+  "_brandMapping": "Client palette: Primary #050505 (black bg), Secondary #F2F2F2 (weathered silver text — factory default ink #F8F6F0 is used), Accent #B88A32 (construction gold). Mapped to factory roles: brand-primary=gold accent, brand-secondary/surface=black defaults (kept), brand-accent=lighter gold for gradient/focus.",
+  "businessName": "H&M Services",
   "slug": "hm-services",
-  "industry": "",
+  "industry": "Property Services / Outdoor Construction",
   "template": "premium-service",
-  "description": "",
-  "tagline": "",
-  "location": "",
-  "serviceAreas": [],
-  "phone": "",
+  "description": "H&M Services provides property maintenance, outdoor construction, land clearing, removal, and improvement services for residential and commercial property owners in Fairhope and surrounding areas.",
+  "tagline": "Built. Maintained. Removed. Improved.",
+  "location": "Fairhope, Alabama",
+  "serviceAreas": ["Fairhope, Alabama", "Baldwin County, Alabama"],
+  "phone": "251-240-8386",
   "email": "",
-  "services": [],
-  "socialLinks": {
-    "facebook": "",
-    "instagram": "",
-    "linkedin": ""
-  },
+  "pillars": [
+    { "label": "Build", "blurb": "Excavation, concrete, masonry, fences, and structures." },
+    { "label": "Maintain", "blurb": "Lawn care, drainage, irrigation, and property upkeep." },
+    { "label": "Remove", "blurb": "Land clearing, demolition, tree and stump removal." },
+    { "label": "Improve", "blurb": "Grading, hauling, painting, and property upgrades." }
+  ],
+  "services": [
+    { "name": "Excavation & Grading", "description": "Site preparation, dirt work, grading, and property improvement.", "category": "Site & Earthwork" },
+    { "name": "Land Clearing", "description": "Clearing overgrowth, brush, debris, and unwanted property material.", "category": "Site & Earthwork" },
+    { "name": "Drainage Work", "description": "Property drainage improvements and water-management solutions.", "category": "Site & Earthwork" },
+    { "name": "Demolition & Removal", "description": "Removal of unwanted structures, debris, and property obstructions.", "category": "Demolition & Removal" },
+    { "name": "Tree & Stump Removal", "description": "Tree cleanup, stump removal, and related property clearing.", "category": "Demolition & Removal" },
+    { "name": "Concrete & Flatwork", "description": "Concrete-related property improvements and outdoor flatwork.", "category": "Concrete, Masonry & Structures" },
+    { "name": "Masonry & Brick Work", "description": "Brick, block, and masonry improvement services.", "category": "Concrete, Masonry & Structures" },
+    { "name": "Fence Installation", "description": "Fence construction, replacement, and property-boundary improvements.", "category": "Concrete, Masonry & Structures" },
+    { "name": "Sheds & Small Structures", "description": "Shed, outbuilding, and small property-structure work.", "category": "Concrete, Masonry & Structures" },
+    { "name": "Outdoor Fireplaces", "description": "Outdoor fireplace and hardscape feature construction.", "category": "Concrete, Masonry & Structures" },
+    { "name": "Lawn & Property Maintenance", "description": "General outdoor maintenance to keep residential and commercial properties clean and functional.", "category": "Maintenance & Finishing" },
+    { "name": "Irrigation Services", "description": "Irrigation installation, repair, and related outdoor water systems.", "category": "Maintenance & Finishing" },
+    { "name": "Painting", "description": "Exterior and property-improvement painting services.", "category": "Maintenance & Finishing" },
+    { "name": "Dirt, Gravel & Material Hauling", "description": "Delivery, removal, and hauling of dirt, gravel, rock, and materials.", "category": "Hauling & Materials" },
+    { "name": "Dump-Truck Services", "description": "Hauling and material movement for property and construction projects.", "category": "Hauling & Materials" }
+  ],
+  "whyUs": [
+    { "title": "Local to Baldwin County", "text": "Based in Fairhope and serving the surrounding Gulf Coast communities." },
+    { "title": "One Call, Many Services", "text": "From earthwork to finishing, a wide range of property services under one roof." },
+    { "title": "Direct Phone Access", "text": "Reach the team directly at 251-240-8386." },
+    { "title": "Residential & Commercial", "text": "Property work for homeowners and businesses alike." }
+  ],
+  "socialLinks": { "facebook": "", "instagram": "", "linkedin": "" },
   "brand": {
-    "logo": "",
-    "styleNotes": "TODO: add the client's brand colors (hex) if they have them; otherwise EP gold/black defaults apply."
+    "logo": "logo-hm-services.jpg",
+    "primaryColor": "#B88A32",
+    "accentColor": "#D4A94A",
+    "styleNotes": "Rugged premium: black steel, weathered silver, construction gold, heavy equipment. Clean modern layout — not a generic landscaping template."
+  },
+  "gallery": {
+    "eyebrow": "Our Work",
+    "title": "Built. Maintained. <em>Improved.</em>"
   },
   "media": {
     "folder": "hm-services",
-    "heroImage": "",
+    "heroImage": "hero-hm-services.jpg",
     "galleryImages": []
   },
   "purchase": {
@@ -39,8 +70,15 @@
     "notificationDestinationDocumented": false
   },
   "seo": {
-    "title": "",
-    "description": "",
+    "title": "H&M Services | Property Services in Fairhope, Alabama",
+    "description": "H&M Services provides property maintenance, excavation, clearing, removal, hauling, and outdoor improvement services in Fairhope and surrounding Baldwin County communities.",
     "canonicalUrl": "https://hm-services.netlify.app/"
-  }
+  },
+  "pendingVerification": [
+    "All 15 services were inferred from the H&M flyer icons and marketing graphic — confirm the exact list and wording with Josh Hendrick.",
+    "Broader service area beyond Fairhope and Baldwin County — confirm actual coverage before claiming it.",
+    "Project gallery uses branded placeholder tiles — replace with real H&M job-site photos when available.",
+    "Public email address / Netlify form notification destination — not yet provided.",
+    "Purchase deposit link (purchaseUrl) and client intake link (intakeUrl) — not yet provided."
+  ]
 }

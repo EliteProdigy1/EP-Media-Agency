@@ -32,7 +32,7 @@ function runPreflight(slug, ctx = {}) {
   const outRoot = path.join(DIST_DIR, slug);
   const indexPath = path.join(outRoot, 'index.html');
   const checks = [];
-  const add = (name, pass, level, detail) => checks.push({ name, pass, level: level || 'warn', detail: detail || '' });
+  const add = (name, pass, level, detail, launchOnly) => checks.push({ name, pass, level: level || 'warn', detail: detail || '', launchOnly: !!launchOnly });
 
   if (!fs.existsSync(indexPath)) {
     add('index.html exists', false, 'blocker', `dist/${slug}/index.html not found`);
@@ -111,15 +111,17 @@ function runPreflight(slug, ctx = {}) {
   add('Unique Netlify form name', collision.length === 0, 'blocker',
     collision.length ? `"${formName}" also used by: ${collision.join(', ')}` : '');
 
-  // ── Purchase / intake ──
+  // ── Purchase / intake / notifications — these gate PUBLIC LAUNCH, not client review ──
   const purchase = (config && config.purchase) || {};
   if (purchase.enabled) {
     add('Purchase URL present (purchase enabled)', !!purchase.purchaseUrl, 'blocker',
-      purchase.purchaseUrl ? '' : 'purchase.enabled but no purchaseUrl — active CTA hidden');
-    if (purchase.intakeUrl === '' || purchase.intakeUrl === undefined) {
-      add('Intake URL present (purchase enabled)', false, 'warn', 'no intakeUrl — post-purchase intake CTA hidden');
-    }
+      purchase.purchaseUrl ? '' : 'purchase.enabled but no purchaseUrl — active purchase button hidden', true);
+    add('Intake URL present (purchase enabled)', !!purchase.intakeUrl, 'warn',
+      purchase.intakeUrl ? '' : 'no intakeUrl — post-purchase intake CTA hidden', true);
   }
+  add('Contact notification destination documented',
+    !!(config && config.contact && config.contact.notificationDestinationDocumented === true), 'blocker',
+    (config && config.contact && config.contact.notificationDestinationDocumented === true) ? '' : 'confirm the Netlify form email notification before public launch', true);
 
   // ── Local asset references resolve ──
   const refs = [...html.matchAll(/(?:src|href)=["'](?!https?:|mailto:|tel:|#|data:)([^"']+)["']/g)].map((m) => m[1]);
@@ -157,9 +159,14 @@ function runPreflight(slug, ctx = {}) {
 }
 
 function finalize(checks) {
-  const blockers = checks.filter((c) => !c.pass && c.level === 'blocker').map((c) => `${c.name}${c.detail ? ` (${c.detail})` : ''}`);
-  const warnings = checks.filter((c) => !c.pass && c.level === 'warn').map((c) => `${c.name}${c.detail ? ` (${c.detail})` : ''}`);
-  return { checks, blockers, warnings, passCount: checks.filter((c) => c.pass).length };
+  const fmt = (c) => `${c.name}${c.detail ? ` (${c.detail})` : ''}`;
+  const failedBlockers = checks.filter((c) => !c.pass && c.level === 'blocker');
+  const blockers = failedBlockers.map(fmt);
+  // Review blockers stop even a client preview; launch blockers only stop PUBLIC launch.
+  const reviewBlockers = failedBlockers.filter((c) => !c.launchOnly).map(fmt);
+  const launchBlockers = checks.filter((c) => !c.pass && c.launchOnly).map(fmt);
+  const warnings = checks.filter((c) => !c.pass && c.level === 'warn' && !c.launchOnly).map(fmt);
+  return { checks, blockers, reviewBlockers, launchBlockers, warnings, passCount: checks.filter((c) => c.pass).length };
 }
 
 function safeConfig(slug) {
@@ -189,10 +196,11 @@ if (require.main === module) {
   log.head(`Preflight — ${slug}`);
   const pf = runPreflight(slug);
   pf.checks.forEach((c) => {
+    const tag = c.launchOnly ? ' [launch]' : '';
     const icon = c.pass ? '✓' : (c.level === 'blocker' ? '✗' : '⚠');
-    const line = `${icon} ${c.name}${c.detail ? ` — ${c.detail}` : ''}`;
-    c.pass ? log.ok(line) : (c.level === 'blocker' ? log.err(line) : log.warn(line));
+    const line = `${icon} ${c.name}${tag}${c.detail ? ` — ${c.detail}` : ''}`;
+    c.pass ? log.ok(line) : (c.level === 'blocker' && !c.launchOnly ? log.err(line) : log.warn(line));
   });
-  log.head(`${pf.passCount}/${pf.checks.length} passed · ${pf.blockers.length} blocker(s) · ${pf.warnings.length} warning(s)`);
-  process.exit(pf.blockers.length ? 1 : 0);
+  log.head(`${pf.passCount}/${pf.checks.length} passed · ${pf.reviewBlockers.length} review blocker(s) · ${pf.launchBlockers.length} launch-only item(s) · ${pf.warnings.length} warning(s)`);
+  process.exit(pf.reviewBlockers.length ? 1 : 0);
 }

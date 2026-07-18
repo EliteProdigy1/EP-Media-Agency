@@ -7,7 +7,7 @@
   <meta name="description" content="Fictional demo site built by the EP Website Factory: pressure washing, window cleaning, lawn care and gutter cleaning in Gulf Shores, AL.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sample-home-services.netlify.app/">
-  <!-- Open Graph / Social -->
+  
   <meta property="og:type" content="website">
   <meta property="og:title" content="Sample Home Services Co. (DEMO) — Gulf Shores Home Services">
   <meta property="og:description" content="Fictional demo site built by the EP Website Factory: pressure washing, window cleaning, lawn care and gutter cleaning in Gulf Shores, AL.">
@@ -17,25 +17,25 @@
   <meta name="theme-color" content="#050505">
   <link rel="icon" href="assets/logo.png">
 
-  <!-- Fonts -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 
-  <!-- GSAP (scroll animation) -->
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <!-- EP Core styles -->
+  
   <link rel="stylesheet" href="core/ep-tokens.css">
   <link rel="stylesheet" href="core/ep-components.css">
   <link rel="stylesheet" href="core/ep-forms.css">
   <link rel="stylesheet" href="core/a11y.css">
 
-  <!-- Client brand overrides (only redefines --brand-*) -->
+  
   <style>:root{--brand-primary:#C9A84C;--brand-accent:#E8D49A;--brand-secondary:#050505;--brand-surface:#050505;}</style>
 
-  <!-- JSON-LD LocalBusiness (verified config data only) -->
+  
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,7 +65,7 @@
 <body>
   <a class="ep-skip-link" href="#main">Skip to content</a>
 
-  <!-- ── NAVIGATION ── -->
+  
   <header>
     <nav class="ep-nav" id="main-nav" data-ep-nav aria-label="Primary">
       <a class="ep-nav-logo" href="#hero"><img src="assets/logo.png" alt="Sample Home Services Co. (DEMO) logo" height="34"><span>Sample Home Services Co. (DEMO)</span></a>
@@ -92,7 +92,7 @@
   </header>
 
   <main id="main">
-    <!-- ── HERO ── -->
+    
     <section id="hero" class="ep-hero" aria-label="Introduction">
       <div class="ep-hero-media"><img src="assets/hero-1600.webp" srcset="assets/hero-768.webp 768w, assets/hero-1200.webp 1200w, assets/hero-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="Sample Home Services Co. (DEMO) — A Cleaner, Sharper Home" loading="eager" fetchpriority="high"></div>
       <div class="ep-hero-overlay"></div>
@@ -101,8 +101,8 @@
           <p class="ep-eyebrow" data-gsap="blur-in" data-delay="0">Gulf Shores, AL · Home Services</p>
           <h1 class="ep-display" data-gsap="blur-in" data-delay="0.15">Sample Home Services Co. (DEMO)</h1>
           <p class="ep-lead" data-gsap="blur-in" data-delay="0.3">A Cleaner, Sharper Home</p>
-          <div class="ep-hero-actions" data-gsap="blur-in" data-delay="0.45"><a href="#contact" class="ep-btn ep-btn--primary">Get a Free Quote</a>
-            <a href="tel:2515550100" class="ep-btn ep-btn--outline">Call 251.555.0100</a></div>
+          <div class="ep-hero-actions" data-gsap="blur-in" data-delay="0.45"><a href="tel:+12515550100" class="ep-btn ep-btn--primary">Call 251.555.0100</a>
+            <a href="#services" class="ep-btn ep-btn--outline">View Services</a></div>
         </div>
       </div>
     </section>
@@ -114,22 +114,22 @@
           <h2 id="services-title" class="ep-headline">Our <em>Services</em></h2>
         </div>
         <div class="ep-grid ep-grid--3">
-        <article class="ep-card reveal">
-          <h3 class="ep-card-title"><span class="num">01</span>Pressure Washing</h3>
-          <p class="ep-body">Exterior surface cleaning for driveways, siding, patios and walkways.</p>
-        </article>
-        <article class="ep-card reveal">
-          <h3 class="ep-card-title"><span class="num">02</span>Window Cleaning</h3>
-          <p class="ep-body">Interior and exterior window cleaning for homes and small businesses.</p>
-        </article>
-        <article class="ep-card reveal">
-          <h3 class="ep-card-title"><span class="num">03</span>Lawn Care</h3>
-          <p class="ep-body">Routine mowing, edging and seasonal yard cleanup.</p>
-        </article>
-        <article class="ep-card reveal">
-          <h3 class="ep-card-title"><span class="num">04</span>Gutter Cleaning</h3>
-          <p class="ep-body">Clearing and flushing gutters to keep water moving away from the home.</p>
-        </article>
+          <article class="ep-card reveal">
+            <h3 class="ep-card-title">Pressure Washing</h3>
+            <p class="ep-body">Exterior surface cleaning for driveways, siding, patios and walkways.</p>
+          </article>
+          <article class="ep-card reveal">
+            <h3 class="ep-card-title">Window Cleaning</h3>
+            <p class="ep-body">Interior and exterior window cleaning for homes and small businesses.</p>
+          </article>
+          <article class="ep-card reveal">
+            <h3 class="ep-card-title">Lawn Care</h3>
+            <p class="ep-body">Routine mowing, edging and seasonal yard cleanup.</p>
+          </article>
+          <article class="ep-card reveal">
+            <h3 class="ep-card-title">Gutter Cleaning</h3>
+            <p class="ep-body">Clearing and flushing gutters to keep water moving away from the home.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -147,7 +147,7 @@
             <div class="ep-card">
               <h3 class="ep-card-title">Get In Touch</h3>
               <p class="ep-body">Gulf Shores, AL</p>
-              <p class="ep-body"><a href="tel:2515550100" style="color:var(--brand-primary);">251.555.0100</a></p>
+              <p class="ep-body"><a href="tel:+12515550100" style="color:var(--brand-primary);">251.555.0100</a></p>
               <p class="ep-body"><a href="mailto:hello@samplehomeservices.demo" style="color:var(--brand-primary);">hello@samplehomeservices.demo</a></p>
             </div>
           </div>
@@ -184,16 +184,6 @@
       </div>
     </section>
 
-<!-- ══ EP FACTORY COMPONENT — PURCHASE ══
-     Rendered by build.js. Tokens:
-       Make This Website Yours A premium, mobile-ready home services website — built, optimized, and ready to launch. <div class="ep-price"><strong>$1,000</strong><span>Full Price</span></div>
-        <div class="ep-price"><strong>$500</strong><span>Deposit To Begin</span></div>
-        <div class="ep-price"><strong>$500</strong><span>On Completion</span></div>
-       <p class="ep-purchase-note">Optional monthly support &amp; updates plan: <strong style="color:var(--brand-primary);">$100/mo</strong></p> <a href="https://checkout.eliteprodigymedia.com/demo/sample-home-services" class="ep-btn ep-btn--primary" rel="noopener">Pay Deposit &amp; Begin</a>
-        <a href="https://intake.eliteprodigymedia.com/demo/sample-home-services" class="ep-btn ep-btn--outline" rel="noopener">Client Intake Form</a> Next steps: pay the deposit to reserve your build slot, complete the short intake form, and your site launches within days.
-     If purchaseUrl is missing, build.js renders <a href="https://checkout.eliteprodigymedia.com/demo/sample-home-services" class="ep-btn ep-btn--primary" rel="noopener">Pay Deposit &amp; Begin</a>
-        <a href="https://intake.eliteprodigymedia.com/demo/sample-home-services" class="ep-btn ep-btn--outline" rel="noopener">Client Intake Form</a>
-     as an inert "Purchase link coming soon" note — never a dead button. -->
 <section id="purchase" class="ep-section ep-section--surface" aria-labelledby="purchase-title">
   <div class="ep-container">
     <div class="ep-purchase reveal">
@@ -218,24 +208,12 @@
   </div>
 </section>
 
-
-<!-- ══ EP FACTORY COMPONENT — CONTACT ══
-     Rendered by build.js. Tokens:
-       Start Your Project Tell us what you need — we typically reply within 24 hours. sample-home-services-contact
-       <p class="ep-body" style="text-align:center;margin-top:28px;"><a href="tel:2515550100" style="color:var(--brand-primary);">251.555.0100</a> &nbsp;·&nbsp; <a href="mailto:hello@samplehomeservices.demo" style="color:var(--brand-primary);">hello@samplehomeservices.demo</a> &nbsp;·&nbsp; <span>Gulf Shores, AL</span></p><div class="ep-social" style="justify-content:center;margin-top:16px;"><a href="https://facebook.com/samplehomeservicesdemo" rel="noopener" target="_blank">Facebook</a>
-        <a href="https://instagram.com/samplehomeservicesdemo" rel="noopener" target="_blank">Instagram</a></div> <option>Pressure Washing</option>
-            <option>Window Cleaning</option>
-            <option>Lawn Care</option>
-            <option>Gutter Cleaning</option>
-     Netlify Forms: static form-name + honeypot + labelled fields.
-     On submit, Netlify's own confirmation page is used unless a
-     custom success page is configured (documented in BUILD-REPORT). -->
 <section id="contact" class="ep-section" aria-labelledby="contact-title">
   <div class="ep-container" style="max-width:820px;">
     <div class="ep-section-head reveal">
       <p class="ep-eyebrow">Get In Touch</p>
       <h2 id="contact-title" class="ep-headline">Start Your Project</h2>
-      <p class="ep-lead">Tell us what you need — we typically reply within 24 hours.</p>
+      <p class="ep-lead">Tell us about your project and we&#39;ll get back to you.</p>
     </div>
 
     <form name="sample-home-services-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
@@ -279,7 +257,7 @@
     </form>
 
     <div class="ep-contact-details reveal">
-      <p class="ep-body" style="text-align:center;margin-top:28px;"><a href="tel:2515550100" style="color:var(--brand-primary);">251.555.0100</a> &nbsp;·&nbsp; <a href="mailto:hello@samplehomeservices.demo" style="color:var(--brand-primary);">hello@samplehomeservices.demo</a> &nbsp;·&nbsp; <span>Gulf Shores, AL</span></p><div class="ep-social" style="justify-content:center;margin-top:16px;"><a href="https://facebook.com/samplehomeservicesdemo" rel="noopener" target="_blank">Facebook</a>
+      <p class="ep-body" style="text-align:center;margin-top:28px;"><a href="tel:+12515550100" style="color:var(--brand-primary);">251.555.0100</a> &nbsp;·&nbsp; <a href="mailto:hello@samplehomeservices.demo" style="color:var(--brand-primary);">hello@samplehomeservices.demo</a> &nbsp;·&nbsp; <span>Gulf Shores, AL</span></p><div class="ep-social" style="justify-content:center;margin-top:16px;"><a href="https://facebook.com/samplehomeservicesdemo" rel="noopener" target="_blank">Facebook</a>
         <a href="https://instagram.com/samplehomeservicesdemo" rel="noopener" target="_blank">Instagram</a></div>
     </div>
   </div>
@@ -287,7 +265,7 @@
 
   </main>
 
-  <!-- ── FOOTER ── -->
+  
   <footer class="ep-footer">
     <div class="ep-container">
       <div class="ep-footer-grid">
@@ -312,7 +290,7 @@
     </div>
   </footer>
 
-  <!-- EP Core runtime -->
+  
   <script src="core/ep-core.js" defer></script>
   <script src="core/gsap-animations.js" defer></script>
 </body>
