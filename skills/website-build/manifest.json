@@ -1,0 +1,25 @@
+{
+  "id": "website-build",
+  "name": "Premium Service Website Build",
+  "version": "1.1.0",
+  "category": "Website Production",
+  "status": "Ready",
+  "authorizedAgents": ["colt", "quinn"],
+  "requiredTools": ["EP Website Factory", "GitHub"],
+  "optionalTools": ["Sharp", "Lighthouse", "Netlify"],
+  "connectors": [
+    { "name": "GitHub", "status": "CONNECTED" },
+    { "name": "Netlify", "status": "MANUAL" },
+    { "name": "Sharp", "status": "AVAILABLE" },
+    { "name": "Lighthouse", "status": "AVAILABLE" }
+  ],
+  "inputs": ["Verified business facts (config/<slug>.json)", "Logo", "Services", "Brand colors", "Hero + gallery assets"],
+  "outputs": ["Production website (dist/<slug>)", "JSON-LD LocalBusiness schema", "Contact form (Netlify)", "robots.txt + sitemap.xml", "BUILD-REPORT.md"],
+  "approvalRules": "Required before public deployment (approve-for-launch). Client-review approval before showing the client.",
+  "compatibility": { "claude": "AVAILABLE", "chatgpt": "UNSUPPORTED", "viktor": "UNKNOWN" },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": ["factory/scripts/build.js", "factory/templates/premium-service.html", "factory/scripts/validate.js", "factory/scripts/preflight.js"],
+  "lastVerified": "2026-07-20",
+  "workflows": ["Build Website", "New Client"],
+  "relatedKnowledge": ["Premium Service (Contractor / Home Services)", "Industrial / Rugged", "Dark Luxury (EP cinematic)"]
+}

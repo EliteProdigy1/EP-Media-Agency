@@ -1,0 +1,24 @@
+{
+  "id": "media-generation",
+  "name": "Media Generation — Hero & Gallery",
+  "version": "0.9.0",
+  "category": "Media & Creative",
+  "status": "Ready",
+  "authorizedAgents": ["vera"],
+  "requiredTools": ["Sharp"],
+  "optionalTools": ["Higgsfield", "ChatGPT image"],
+  "connectors": [
+    { "name": "Sharp", "status": "AVAILABLE" },
+    { "name": "Higgsfield", "status": "READY TO CONNECT" },
+    { "name": "ChatGPT image", "status": "READY TO CONNECT" }
+  ],
+  "inputs": ["Client logo", "Brand palette", "Industry"],
+  "outputs": ["Branded hero image", "Branded gallery tiles", "Optimized WebP variants"],
+  "approvalRules": "Human review before publish. Branded placeholders only — never present generated tiles as real client project photos.",
+  "compatibility": { "claude": "AVAILABLE", "chatgpt": "AVAILABLE", "viktor": "UNKNOWN" },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": ["factory/scripts/media.js"],
+  "lastVerified": "2026-07-20",
+  "workflows": ["Build Website", "Generate Assets"],
+  "relatedKnowledge": ["Hero video prompts", "Industrial / Rugged", "Dark Luxury (EP cinematic)"]
+}

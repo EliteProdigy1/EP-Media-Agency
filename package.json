@@ -18,7 +18,9 @@
     "ep:import": "node factory/scripts/media-import.js",
     "ep:categorize": "node factory/scripts/categorize.js",
     "ep:projects": "node factory/scripts/projects.js",
-    "ep:dashboard": "node factory/scripts/dashboard.js"
+    "ep:dashboard": "node factory/scripts/dashboard.js",
+    "ep:skills:validate": "node skills/scripts/skill-index.js --validate",
+    "ep:skills:index": "node skills/scripts/skill-index.js"
   },
   "optionalDependencies": {
     "sharp": "^0.33.5"

@@ -1,0 +1,23 @@
+{
+  "id": "responsive-qa",
+  "name": "Responsive & Accessibility QA",
+  "version": "1.0.0",
+  "category": "Website Production",
+  "status": "Ready",
+  "authorizedAgents": ["quinn", "colt"],
+  "requiredTools": ["EP Website Factory preflight"],
+  "optionalTools": ["Lighthouse", "Playwright"],
+  "connectors": [
+    { "name": "Lighthouse", "status": "AVAILABLE" },
+    { "name": "Playwright", "status": "AVAILABLE" }
+  ],
+  "inputs": ["Built site (dist/<slug>)"],
+  "outputs": ["Preflight report (32 checks)", "Lighthouse scores (P/A/BP/SEO)", "Blocker list (review vs launch)"],
+  "approvalRules": "No approval gate to run; results feed the client-review approval.",
+  "compatibility": { "claude": "AVAILABLE", "chatgpt": "UNSUPPORTED", "viktor": "UNKNOWN" },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": ["factory/scripts/preflight.js", "../Elite-Prodigy-sports-group/tools/lighthouse-audit/run-audit.js"],
+  "lastVerified": "2026-07-20",
+  "workflows": ["Build Website", "Review"],
+  "relatedKnowledge": ["Website review"]
+}
