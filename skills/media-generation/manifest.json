@@ -4,6 +4,8 @@
   "version": "0.9.0",
   "category": "Media & Creative",
   "status": "Ready",
+  "summary": "Branded hero + gallery treatments from the client logo (Sharp/SVG); full AI video/image via Higgsfield.",
+  "limitations": "Branded treatments are ready; full AI video/image via Higgsfield needs credits. No fake project photos.",
   "authorizedAgents": ["vera"],
   "requiredTools": ["Sharp"],
   "optionalTools": ["Higgsfield", "ChatGPT image"],

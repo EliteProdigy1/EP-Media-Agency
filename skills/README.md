@@ -30,10 +30,15 @@ purpose · when to use · when **not** to use · required inputs · workflow ·
 tools/connectors · outputs · approvals · failure handling · examples.
 
 ## manifest.json fields (validated)
-`id · name · version · category · status · authorizedAgents[] ·
-requiredTools[] · optionalTools[] · connectors[{name,status}] · inputs[] ·
-outputs[] · approvalRules · compatibility{claude,chatgpt,viktor} ·
-sourceRepo · sourcePaths[] · lastVerified · workflows[] · relatedKnowledge[]`
+`id · name · version · category · status · summary · limitations ·
+authorizedAgents[] · requiredTools[] · optionalTools[] ·
+connectors[{name,status}] · inputs[] · outputs[] · approvalRules ·
+compatibility{claude,chatgpt,viktor} · sourceRepo · sourcePaths[] ·
+lastVerified · workflows[] · relatedKnowledge[]`
+
+`summary` (one-line purpose) and `limitations` are definitional and live in
+the manifest so the Command Center never hand-copies a skill's description —
+it reads them straight from the generated index.
 
 **Status vocab:** `Ready · Connected · Ready to connect · Planned · Needs credentials`
 **Connector/compatibility vocab:** `CONNECTED · AVAILABLE · READY TO CONNECT · MANUAL · PLANNED · UNSUPPORTED · UNKNOWN`

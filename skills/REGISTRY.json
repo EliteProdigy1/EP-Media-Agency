@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20",
+  "generatedAt": "2026-07-21",
   "source": "EP-Media-Agency/skills",
   "count": 3,
   "skills": [
@@ -9,6 +9,8 @@
       "version": "0.9.0",
       "category": "Media & Creative",
       "status": "Ready",
+      "summary": "Branded hero + gallery treatments from the client logo (Sharp/SVG); full AI video/image via Higgsfield.",
+      "limitations": "Branded treatments are ready; full AI video/image via Higgsfield needs credits. No fake project photos.",
       "authorizedAgents": [
         "vera"
       ],
@@ -72,6 +74,8 @@
       "version": "1.1.0",
       "category": "Website Production",
       "status": "Ready",
+      "summary": "Generate a responsive, EPSG-styled local-service website from a verified client config.",
+      "limitations": "One template (premium-service) today. Needs a verified config + real assets; will not invent facts.",
       "authorizedAgents": [
         "colt",
         "quinn"
@@ -149,6 +153,8 @@
       "version": "1.0.0",
       "category": "Website Production",
       "status": "Ready",
+      "summary": "Preflight + Lighthouse + real-browser checks: mobile menu, a11y, links, forms, reduced-motion.",
+      "limitations": "Structural + Lighthouse + scripted browser checks. Not a substitute for human visual review.",
       "authorizedAgents": [
         "quinn",
         "colt"

@@ -4,6 +4,8 @@
   "version": "1.1.0",
   "category": "Website Production",
   "status": "Ready",
+  "summary": "Generate a responsive, EPSG-styled local-service website from a verified client config.",
+  "limitations": "One template (premium-service) today. Needs a verified config + real assets; will not invent facts.",
   "authorizedAgents": ["colt", "quinn"],
   "requiredTools": ["EP Website Factory", "GitHub"],
   "optionalTools": ["Sharp", "Lighthouse", "Netlify"],

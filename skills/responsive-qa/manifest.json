@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "category": "Website Production",
   "status": "Ready",
+  "summary": "Preflight + Lighthouse + real-browser checks: mobile menu, a11y, links, forms, reduced-motion.",
+  "limitations": "Structural + Lighthouse + scripted browser checks. Not a substitute for human visual review.",
   "authorizedAgents": ["quinn", "colt"],
   "requiredTools": ["EP Website Factory preflight"],
   "optionalTools": ["Lighthouse", "Playwright"],

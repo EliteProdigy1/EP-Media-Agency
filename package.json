@@ -20,7 +20,8 @@
     "ep:projects": "node factory/scripts/projects.js",
     "ep:dashboard": "node factory/scripts/dashboard.js",
     "ep:skills:validate": "node skills/scripts/skill-index.js --validate",
-    "ep:skills:index": "node skills/scripts/skill-index.js"
+    "ep:skills:index": "node skills/scripts/skill-index.js",
+    "ep:skills:audit": "node skills/scripts/skill-audit.js"
   },
   "optionalDependencies": {
     "sharp": "^0.33.5"
