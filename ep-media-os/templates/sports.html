@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BRAND_NAME}} — {{TAGLINE}}</title>
+  <meta name="description" content="{{SEO_DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:title" content="{{BRAND_NAME}} — {{TAGLINE}}">
+  <meta property="og:description" content="{{SEO_DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  <link rel="icon" href="{{LOGO_SVG}}" type="image/svg+xml">
+  <meta name="theme-color" content="{{BRAND_SECONDARY}}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../core/css/ep-variables.css">
+  <link rel="stylesheet" href="../core/css/ep-base.css">
+  <link rel="stylesheet" href="../core/css/ep-nav.css">
+  <link rel="stylesheet" href="../core/css/ep-hero.css">
+  <link rel="stylesheet" href="../core/css/ep-components.css">
+  <link rel="stylesheet" href="../core/css/ep-forms.css">
+  <link rel="stylesheet" href="../core/js/ep-cursor.css">
+
+  <!-- Client theme overrides (brand colors only) -->
+  <link rel="stylesheet" href="/config/{{CLIENT_SLUG}}-theme.css">
+</head>
+<body data-popup-key="{{CLIENT_SLUG}}_seen" data-popup-color="gold">
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar" style="position:fixed;top:0;left:0;right:0;height:2px;background:var(--ep-gold);transform:scaleX(0);transform-origin:left;z-index:9999;"></div>
+
+  <!-- NAV -->
+  <nav class="ep-nav" id="main-nav" data-ep-nav>
+    <a class="ep-nav-logo" href="/">
+      <img src="{{LOGO_SVG}}" alt="{{BRAND_NAME}}" width="36" height="36">
+      <span class="ep-nav-logo-name">{{BRAND_NAME}}</span>
+    </a>
+    <ul class="ep-nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#athletes">Athletes</a></li>
+      <li><a href="#contact" class="ep-nav-cta">Contact</a></li>
+    </ul>
+    <button class="ep-hamburger" data-ep-hamburger aria-label="Menu" aria-expanded="false" aria-controls="ep-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="ep-mobile-overlay" data-ep-overlay></div>
+  <nav class="ep-mobile-menu" id="ep-mobile-menu" data-ep-menu aria-hidden="true">
+    <button class="mobile-close ep-hamburger active" aria-label="Close"><span></span><span></span><span></span></button>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#athletes">Athletes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO — VIDEO -->
+  <section id="hero" class="ep-hero ep-hero--video">
+    <video class="ep-hero-video-bg" autoplay muted loop playsinline preload="metadata" poster="{{HERO_POSTER}}">
+      <source src="{{HERO_VIDEO}}" type="video/mp4">
+    </video>
+    <div class="ep-hero-overlay"></div>
+    <div class="ep-hero-content">
+      <p class="ep-hero-eyebrow" data-gsap="blur-in" data-delay="0">{{HERO_EYEBROW}}</p>
+      <h1 class="ep-hero-title" data-gsap="blur-in" data-delay="0.15">
+        {{HERO_TITLE}}<br><em>{{HERO_TITLE_EM}}</em>
+      </h1>
+      <p class="ep-hero-sub" data-gsap="blur-in" data-delay="0.3">{{HERO_SUBTITLE}}</p>
+      <div class="ep-hero-actions" data-gsap="blur-in" data-delay="0.5">
+        <a href="{{CTA_PRIMARY_HREF}}" class="ep-btn ep-btn--primary">{{CTA_PRIMARY_LABEL}}</a>
+        <a href="{{CTA_SECONDARY_HREF}}" class="ep-btn ep-btn--outline">{{CTA_SECONDARY_LABEL}}</a>
+      </div>
+    </div>
+    <div class="ep-hero-scroll">
+      <span>Scroll</span>
+      <div class="ep-hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="ep-section--sm" style="background:var(--ep-black-mid);">
+    <div class="ep-container">
+      <div class="ep-stats ep-stagger-parent">
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="{{STAT_1_NUM}}" data-suffix="{{STAT_1_SUFFIX}}">0</span>
+          <span class="ep-stat-label">{{STAT_1_LABEL}}</span>
+        </div>
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="{{STAT_2_NUM}}" data-suffix="{{STAT_2_SUFFIX}}">0</span>
+          <span class="ep-stat-label">{{STAT_2_LABEL}}</span>
+        </div>
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="{{STAT_3_NUM}}" data-suffix="{{STAT_3_SUFFIX}}">0</span>
+          <span class="ep-stat-label">{{STAT_3_LABEL}}</span>
+        </div>
+        <div class="ep-stat-item">
+          <span class="ep-stat-number" data-counter="{{STAT_4_NUM}}" data-suffix="{{STAT_4_SUFFIX}}">0</span>
+          <span class="ep-stat-label">{{STAT_4_LABEL}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / STORY -->
+  <section id="about" class="ep-section">
+    <div class="ep-container" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;">
+      <div>
+        <p class="ep-eyebrow reveal">Our Story</p>
+        <h2 class="ep-title reveal" style="margin:16px 0 24px;">
+          Built on<br><em>Excellence</em>
+        </h2>
+        <div class="ep-rule reveal" style="margin:0 0 28px;"></div>
+        <p class="ep-body reveal">{{ABOUT_PARAGRAPH_1}}</p>
+        <p class="ep-body reveal" style="margin-top:16px;">{{ABOUT_PARAGRAPH_2}}</p>
+        <a href="{{ABOUT_CTA_HREF}}" class="ep-btn ep-btn--ghost reveal" style="margin-top:32px;">{{ABOUT_CTA_LABEL}}</a>
+      </div>
+      <div class="reveal" style="aspect-ratio:4/5;overflow:hidden;border-radius:var(--ep-radius-lg);">
+        <img src="{{ABOUT_IMAGE}}" alt="{{BRAND_NAME}}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" class="ep-parallax" data-parallax-speed="0.1">
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS / SERVICES -->
+  <section id="programs" class="ep-section" style="background:var(--ep-black-mid);">
+    <div class="ep-container">
+      <div style="text-align:center;margin-bottom:clamp(48px,6vw,80px);">
+        <p class="ep-eyebrow reveal">What We Offer</p>
+        <h2 class="ep-title reveal" style="margin-top:16px;">Programs &amp; <em>Development</em></h2>
+      </div>
+      <div class="ep-features ep-stagger-parent">
+        <!-- Repeat .ep-feature blocks per program -->
+        <div class="ep-feature">
+          <div class="ep-feature-icon">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="22" cy="22" r="18"/><path d="M22 10v12l8 4"/>
+            </svg>
+          </div>
+          <h3 class="ep-feature-title">{{PROGRAM_1_TITLE}}</h3>
+          <p>{{PROGRAM_1_DESC}}</p>
+        </div>
+        <div class="ep-feature">
+          <div class="ep-feature-icon">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 4L4 14v10c0 10 8 18 18 20 10-2 18-10 18-20V14L22 4z"/>
+            </svg>
+          </div>
+          <h3 class="ep-feature-title">{{PROGRAM_2_TITLE}}</h3>
+          <p>{{PROGRAM_2_DESC}}</p>
+        </div>
+        <div class="ep-feature">
+          <div class="ep-feature-icon">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 4l4 12h12l-10 8 4 12-10-8-10 8 4-12L6 16h12z"/>
+            </svg>
+          </div>
+          <h3 class="ep-feature-title">{{PROGRAM_3_TITLE}}</h3>
+          <p>{{PROGRAM_3_DESC}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATHLETES / DIRECTORY CTA -->
+  <section id="athletes" class="ep-section">
+    <div class="ep-container" style="text-align:center;max-width:800px;">
+      <p class="ep-eyebrow reveal">Our Athletes</p>
+      <h2 class="ep-title reveal" style="margin:16px 0 24px;">
+        Evaluated. Verified.<br><em>Developed.</em>
+      </h2>
+      <p class="ep-body reveal">{{ATHLETES_SECTION_COPY}}</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px;" class="reveal">
+        <a href="/athletes" class="ep-btn ep-btn--primary">View Athletes</a>
+        <a href="/onboarding" class="ep-btn ep-btn--outline">Create Profile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="ep-section" style="background:var(--ep-black-mid);">
+    <div class="ep-container">
+      <div style="text-align:center;margin-bottom:clamp(40px,5vw,64px);">
+        <p class="ep-eyebrow reveal">What Families Say</p>
+        <h2 class="ep-title reveal" style="margin-top:16px;">Built on <em>Trust</em></h2>
+      </div>
+      <div class="ep-testimonials ep-stagger-parent">
+        <div class="ep-testimonial">
+          <p class="ep-testimonial-quote">{{TESTIMONIAL_1_QUOTE}}</p>
+          <div class="ep-testimonial-author">
+            <div>
+              <p class="ep-testimonial-name">{{TESTIMONIAL_1_NAME}}</p>
+              <p class="ep-testimonial-role">{{TESTIMONIAL_1_ROLE}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="ep-testimonial">
+          <p class="ep-testimonial-quote">{{TESTIMONIAL_2_QUOTE}}</p>
+          <div class="ep-testimonial-author">
+            <div>
+              <p class="ep-testimonial-name">{{TESTIMONIAL_2_NAME}}</p>
+              <p class="ep-testimonial-role">{{TESTIMONIAL_2_ROLE}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="ep-testimonial">
+          <p class="ep-testimonial-quote">{{TESTIMONIAL_3_QUOTE}}</p>
+          <div class="ep-testimonial-author">
+            <div>
+              <p class="ep-testimonial-name">{{TESTIMONIAL_3_NAME}}</p>
+              <p class="ep-testimonial-role">{{TESTIMONIAL_3_ROLE}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact" class="ep-cta-section">
+    <p class="ep-eyebrow">Get In Touch</p>
+    <h2 class="ep-title" style="margin:16px 0 20px;">Ready to <em>Begin?</em></h2>
+    <p class="ep-body">{{CONTACT_COPY}}</p>
+    <a href="/contact" class="ep-btn ep-btn--primary">Contact Us</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ep-footer">
+    <div class="ep-footer-brand">
+      <img src="{{LOGO_SVG}}" alt="{{BRAND_NAME}}">
+      <span class="ep-footer-brand-name">{{BRAND_NAME}}</span>
+    </div>
+    <nav class="ep-footer-links">
+      <a href="/">Home</a>
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="/athletes">Athletes</a>
+      <a href="mailto:{{CLIENT_EMAIL}}">Contact</a>
+    </nav>
+    <div class="ep-footer-legal">
+      <p>&copy; {{YEAR}} {{BRAND_NAME}}. All rights reserved.</p>
+      <p>{{CLIENT_CITY}}</p>
+    </div>
+  </footer>
+
+  <!-- EMAIL POPUP (optional — remove if not needed) -->
+  <div id="ep-popup" style="display:none;position:fixed;inset:0;background:rgba(5,5,5,0.88);z-index:var(--ep-z-modal);align-items:center;justify-content:center;">
+    <div style="background:var(--ep-black-mid);border:1px solid var(--ep-glass-border);border-radius:var(--ep-radius-lg);padding:48px 40px;max-width:460px;width:90%;text-align:center;position:relative;">
+      <button data-popup-close style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--ep-silver);font-size:1.2rem;cursor:pointer;" aria-label="Close">✕</button>
+      <p class="ep-eyebrow" style="margin-bottom:12px;">Stay Connected</p>
+      <h3 style="font-family:var(--ep-font-display);font-size:var(--ep-text-2xl);color:var(--ep-white);margin-bottom:8px;">Join the <em style="color:var(--ep-gold);">Movement</em></h3>
+      <p style="font-size:var(--ep-text-sm);color:rgba(248,246,240,0.6);margin-bottom:28px;">Get updates on events, athlete spotlights, and EP news.</p>
+      <form id="ep-popup-form" name="{{POPUP_FORM_NAME}}" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:12px;">
+        <input type="hidden" name="form-name" value="{{POPUP_FORM_NAME}}">
+        <p style="display:none"><label>Skip: <input name="bot-field"></label></p>
+        <input type="text" name="name" placeholder="Your Name" class="ep-form-input" required>
+        <input type="email" name="email" placeholder="Email Address" class="ep-form-input" required>
+        <button type="submit" class="ep-btn ep-btn--primary">JOIN</button>
+        <button type="button" data-popup-close style="background:none;border:none;color:var(--ep-silver-dark);font-size:var(--ep-text-xs);cursor:pointer;margin-top:4px;">No thanks</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../core/js/ep-core.js"></script>
+  <script src="../core/js/ep-gsap.js"></script>
+  <script src="../core/js/ep-cursor.js"></script>
+  <script src="../core/js/ep-forms.js" defer></script>
+
+</body>
+</html>

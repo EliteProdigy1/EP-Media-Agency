@@ -1,0 +1,49 @@
+/* ══════════════════════════════════════════════════════════════════
+   EP CURSOR ENGINE — Styles
+   Include alongside ep-cursor.js on any page using the custom cursor.
+   ══════════════════════════════════════════════════════════════════ */
+
+@media (pointer: fine) {
+  html, * { cursor: none !important; }
+}
+
+.ep-cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #C9A84C, #a8893e);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+  will-change: left, top;
+}
+
+.ep-cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(201, 168, 76, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.2s ease;
+  will-change: left, top;
+}
+
+.ep-cursor-label {
+  position: fixed;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 240, 0.9);
+  pointer-events: none;
+  z-index: 99997;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}

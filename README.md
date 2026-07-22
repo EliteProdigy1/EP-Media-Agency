@@ -1,4 +1,35 @@
-# EP Website Factory
+# EP Media Agency
+
+Internal operations hub for Elite Prodigy Media — the agency behind EPSG and all client websites — **and** the home of the EP Website Factory + skill packages.
+
+Contact: eliteprodigyway@gmail.com · 251.223.0812
+
+## What lives here
+
+| Folder / File | Purpose |
+|---|---|
+| `CLIENT-REGISTRY.md` | Master client roster, site status, revenue tracker |
+| `REPOSITORY-AUDIT.md` | Repo-by-repo audit of the EliteProdigy1 GitHub org |
+| `clients/` | Per-client working folders (profiles, content, assets-needed, deployment notes) |
+| `templates/client-template/` | Blank client folder template — copy for each new client |
+| `ep-media-os/` | EP Media OS: reusable CSS/JS core, site templates, SOPs, AI workflows, design system docs |
+| `factory/` | **EP Website Factory** — config + assets → premium static client site (`dist/<slug>/`) |
+| `config/`, `dist/` | Factory client configs and generated site output (e.g. `dist/hm-services/`) |
+| `skills/` | Source-of-truth **skill packages** + generated `REGISTRY.json` the Command Center consumes |
+
+## What does NOT live here
+
+- **Public media pages** (`/ep-media`, `/cinematic-listings`, `/submit-listing`) stay on the
+  EPSG site repo — they are live URLs with registered Netlify Forms.
+- **Client websites** — one repo per client (Clay-Retreat, Azalea-Turf-and-Lawn,
+  Warren-Landscape, Metal-and-Mud, 22-Builds, Head-Locd, Gulf-Coast-Karate).
+
+Moved here from the Elite-Prodigy-sports-group repo on 2026-07-05 to keep agency
+operations separate from the public sports site.
+
+---
+
+## EP Website Factory
 
 Turn a small JSON file and a folder of photos into a premium, cinematic client
 website in the Elite Prodigy Sports Group design language — validated,
@@ -9,33 +40,10 @@ config/<slug>.json  +  assets/<slug>/  +  one command  →  dist/<slug>/
 ```
 
 **Design authority:** Elite Prodigy Sports Group. Canonical tokens, JS, and
-GSAP patterns are copied into `factory/core/` (see
-`factory/core/SOURCE-MAP.md`). This factory never invents business facts and
-never ships a dead payment button.
+GSAP patterns are copied into `factory/core/` (see `factory/core/SOURCE-MAP.md`).
+This factory never invents business facts and never ships a dead payment button.
 
----
-
-## Workflow — 6 steps
-
-1. **Create the client.** Run `npm run ep:new` for the **interactive wizard** —
-   it walks a non-technical user through business facts, services (auto-grouped
-   into categories), optional photo import, and writes `config/<slug>.json` for
-   you (then offers to build). Prefer a blank file? `npm run ep:new -- <slug>
-   --quick`. Verified facts only — leave fields blank rather than guessing.
-2. **Add the media.** Put the logo and photos in `assets/<slug>/`. Name the
-   hero `hero.jpg`/`hero.png` (or set `media.heroImage`); name the logo with
-   "logo" in it.
-3. **Validate.** `npm run ep:validate -- <slug>` — fix any errors it reports.
-4. **Build.** `npm run ep:build -- <slug>` — validates, optimizes media,
-   renders the site, runs preflight, and writes `dist/<slug>/BUILD-REPORT.md`.
-5. **Review.** `npm run ep:preview -- <slug>` then open
-   `http://localhost:8080`. Read `BUILD-REPORT.md` — resolve every launch
-   blocker until it says **READY**. Optionally run Lighthouse (below).
-6. **Ship.** Push `dist/<slug>/` to the client's repo and connect Netlify. The
-   generated `netlify.toml`, `robots.txt`, `sitemap.xml`, and `404.html` are
-   included.
-
-## Commands
+### Commands
 
 | Command | Does |
 |---|---|
@@ -50,52 +58,7 @@ never ships a dead payment button.
 | `npm run ep:projects` | Write the Command Center projects registry |
 | `npm run ep:dashboard` | Serve the managed-projects dashboard |
 
-## Command Center dashboard
-
-`npm run ep:dashboard` regenerates `factory/reports/projects.json` (the data
-contract) and serves `factory/dashboard/` — a cinematic managed-projects view
-showing each site's status, Lighthouse, deployment, analytics, and maintenance.
-It's self-contained and portable, ready to embed in / link from the Elite
-Prodigy Command Center. Nothing is faked: analytics and live-deploy state read
-as "not connected" / "preview" until real integrations are wired in.
-
-## Media optimization (optional)
-
-Images are copied through by default. To enable automatic WebP optimization,
-install the optional dependency once:
-
-```
-npm install sharp
-```
-
-The factory detects it and optimizes on the next `ep:build`. Without it, the
-build still works and the report notes that originals were copied.
-
-## Lighthouse (run it, don't assume it)
-
-Preflight is structural only. For real performance/accessibility scores, run
-the EPSG Lighthouse tool against a preview or the deployed URL:
-
-```
-cd ../Elite-Prodigy-sports-group/tools/lighthouse-audit
-npm install
-node run-audit.js --site <key>
-```
-
-Never report Lighthouse as passing unless it actually ran.
-
-## Proof build
-
-A fictional test client ships with the factory:
-
-```
-npm run ep:build -- sample-home-services
-npm run ep:preview -- sample-home-services
-```
-
-`sample-home-services` is **demo data** — not a real business. Do not deploy it.
-
-## Guarantees
+### Guarantees
 
 - One `<h1>`, semantic landmarks, skip link, visible focus, labeled forms,
   reduced-motion support, alt on every image.
@@ -103,6 +66,19 @@ npm run ep:preview -- sample-home-services
 - Unique Netlify form name per client, honeypot included.
 - Purchase CTA hidden (not faked) when no `purchaseUrl` — flagged as a launch
   blocker in the report.
+
+> **Note:** `dist/hm-services/` is a bespoke, mobile-first one-page production
+> site maintained directly (not regenerated from the generic template). See its
+> `BUILD-REPORT.md`.
+
+## Skill packages
+
+`skills/<slug>/` holds the source-of-truth skill definitions (SKILL.md,
+manifest.json, portable-prompt.md, CHANGELOG.md). `skills/REGISTRY.json` is
+**generated** from the manifests (`npm run ep:skills:index`) and validated
+(`npm run ep:skills:validate`); `npm run ep:skills:audit` runs a non-destructive
+drift audit. The Command Center consumes the generated registry and layers
+operational metadata on top — it never hand-maintains skill definitions.
 
 ---
 
