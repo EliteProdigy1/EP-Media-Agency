@@ -1,8 +1,222 @@
 {
-  "generatedAt": "2026-07-21",
+  "generatedAt": "2026-07-22",
   "source": "EP-Media-Agency/skills",
-  "count": 3,
+  "count": 12,
   "skills": [
+    {
+      "id": "review-automation",
+      "name": "Review Request Automation",
+      "version": "0.1.0",
+      "category": "Client Management",
+      "status": "Planned",
+      "summary": "After a completed job, request a rating and direct satisfied customers to Google Business.",
+      "limitations": "Planned — needs Gmail + Google Business connections.",
+      "authorizedAgents": [
+        "ledger"
+      ],
+      "requiredTools": [
+        "Gmail"
+      ],
+      "optionalTools": [
+        "Google Business"
+      ],
+      "connectors": [
+        {
+          "name": "Gmail",
+          "status": "READY TO CONNECT"
+        },
+        {
+          "name": "Google Business",
+          "status": "PLANNED"
+        }
+      ],
+      "inputs": [
+        "Completed job"
+      ],
+      "outputs": [
+        "Review request",
+        "Google review"
+      ],
+      "approvalRules": "Client opt-in required before any automated messaging.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "AVAILABLE",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/scripts/review-automation.js"
+      ],
+      "lastVerified": "2026-07-21",
+      "workflows": [
+        "Client Growth Loop"
+      ],
+      "relatedKnowledge": [
+        "Maintenance"
+      ],
+      "slug": "review-automation",
+      "skillPath": "skills/review-automation"
+    },
+    {
+      "id": "lead-capture",
+      "name": "Website Lead Capture",
+      "version": "1.0.0",
+      "category": "Client Management",
+      "status": "Connected",
+      "summary": "Capture inbound quote-form submissions from client sites and route them to the inbox.",
+      "limitations": "Netlify Forms only; unified inbox is a later stage.",
+      "authorizedAgents": [
+        "ledger"
+      ],
+      "requiredTools": [
+        "Netlify Forms"
+      ],
+      "optionalTools": [
+        "Gmail"
+      ],
+      "connectors": [
+        {
+          "name": "Netlify Forms",
+          "status": "CONNECTED"
+        },
+        {
+          "name": "Gmail",
+          "status": "CONNECTED"
+        }
+      ],
+      "inputs": [
+        "Website form"
+      ],
+      "outputs": [
+        "Lead notification"
+      ],
+      "approvalRules": "None — inbound capture is passive.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNSUPPORTED",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/components/contact.html",
+        "factory/scripts/build.js"
+      ],
+      "lastVerified": "2026-07-20",
+      "workflows": [
+        "Client Growth Loop"
+      ],
+      "relatedKnowledge": [
+        "Client onboarding"
+      ],
+      "slug": "lead-capture",
+      "skillPath": "skills/lead-capture"
+    },
+    {
+      "id": "deployment",
+      "name": "Deployment",
+      "version": "1.0.0",
+      "category": "Deployment",
+      "status": "Ready",
+      "summary": "Package a build for Netlify Drop, or ship via GitHub→Netlify auto-deploy.",
+      "limitations": "Netlify Drop is manual; per-client auto-deploy is planned.",
+      "authorizedAgents": [
+        "colt"
+      ],
+      "requiredTools": [
+        "Netlify"
+      ],
+      "optionalTools": [
+        "GitHub"
+      ],
+      "connectors": [
+        {
+          "name": "GitHub",
+          "status": "CONNECTED"
+        },
+        {
+          "name": "Netlify",
+          "status": "MANUAL"
+        }
+      ],
+      "inputs": [
+        "dist/<slug>"
+      ],
+      "outputs": [
+        "Preview URL",
+        "Netlify site"
+      ],
+      "approvalRules": "Approve-for-launch required before any public deployment.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNSUPPORTED",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/scripts/preview.js",
+        "README.md"
+      ],
+      "lastVerified": "2026-07-18",
+      "workflows": [
+        "Deploy"
+      ],
+      "relatedKnowledge": [
+        "Deployment"
+      ],
+      "slug": "deployment",
+      "skillPath": "skills/deployment"
+    },
+    {
+      "id": "brand-kit",
+      "name": "Brand Kit & Color Mapping",
+      "version": "1.0.0",
+      "category": "Media & Creative",
+      "status": "Ready",
+      "summary": "Map a client palette onto EP design tokens without forking the token system.",
+      "limitations": "Maps onto EP tokens — will not fork the token system.",
+      "authorizedAgents": [
+        "vera",
+        "colt"
+      ],
+      "requiredTools": [
+        "EP Website Factory"
+      ],
+      "optionalTools": [],
+      "connectors": [
+        {
+          "name": "EP Website Factory",
+          "status": "AVAILABLE"
+        }
+      ],
+      "inputs": [
+        "Primary/accent hex",
+        "Style notes"
+      ],
+      "outputs": [
+        "Brand override CSS",
+        "Theme color"
+      ],
+      "approvalRules": "None — brand overrides are reviewed as part of the build.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNSUPPORTED",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/scripts/build.js",
+        "factory/core/ep-tokens.css"
+      ],
+      "lastVerified": "2026-07-20",
+      "workflows": [
+        "Build Website"
+      ],
+      "relatedKnowledge": [
+        "Dark Luxury (EP cinematic)"
+      ],
+      "slug": "brand-kit",
+      "skillPath": "skills/brand-kit"
+    },
     {
       "id": "media-generation",
       "name": "Media Generation — Hero & Gallery",
@@ -67,6 +281,154 @@
       ],
       "slug": "media-generation",
       "skillPath": "skills/media-generation"
+    },
+    {
+      "id": "cc-registry",
+      "name": "Command Center Registry",
+      "version": "1.0.0",
+      "category": "Operations",
+      "status": "Ready",
+      "summary": "Emit projects.json so every generated site appears as a managed project (status, deploy, analytics, maintenance).",
+      "limitations": "Reads build output; live analytics/deploy state read as preview until wired.",
+      "authorizedAgents": [
+        "colt",
+        "atlas"
+      ],
+      "requiredTools": [
+        "EP Website Factory"
+      ],
+      "optionalTools": [],
+      "connectors": [
+        {
+          "name": "EP Website Factory",
+          "status": "AVAILABLE"
+        }
+      ],
+      "inputs": [
+        "config/*.json",
+        "build output"
+      ],
+      "outputs": [
+        "projects.json",
+        "Dashboard feed"
+      ],
+      "approvalRules": "None — a read-only data contract.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNSUPPORTED",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/scripts/projects.js",
+        "factory/scripts/dashboard.js"
+      ],
+      "lastVerified": "2026-07-20",
+      "workflows": [
+        "Review"
+      ],
+      "relatedKnowledge": [],
+      "slug": "cc-registry",
+      "skillPath": "skills/cc-registry"
+    },
+    {
+      "id": "client-wizard",
+      "name": "Client Wizard / Intake",
+      "version": "1.0.0",
+      "category": "Sales & Client Success",
+      "status": "Ready",
+      "summary": "Interactive intake that turns business facts + photos into a buildable client config.",
+      "limitations": "CLI wizard; not yet in the dashboard UI.",
+      "authorizedAgents": [
+        "atlas",
+        "sol"
+      ],
+      "requiredTools": [
+        "EP Website Factory"
+      ],
+      "optionalTools": [],
+      "connectors": [
+        {
+          "name": "EP Website Factory",
+          "status": "AVAILABLE"
+        }
+      ],
+      "inputs": [
+        "Owner answers",
+        "Photos folder"
+      ],
+      "outputs": [
+        "client.json",
+        "Imported media"
+      ],
+      "approvalRules": "None — the produced config is validated before any build.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNSUPPORTED",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/scripts/new.js",
+        "factory/scripts/media-import.js"
+      ],
+      "lastVerified": "2026-07-18",
+      "workflows": [
+        "New Client"
+      ],
+      "relatedKnowledge": [
+        "Client onboarding"
+      ],
+      "slug": "client-wizard",
+      "skillPath": "skills/client-wizard"
+    },
+    {
+      "id": "prospect-discovery",
+      "name": "Prospect Discovery & Audit",
+      "version": "0.9.0",
+      "category": "Sales & Client Success",
+      "status": "Ready to connect",
+      "summary": "Discover local businesses and audit their sites to score opportunity (no-website first).",
+      "limitations": "Gated behind FIRECRAWL_LIVE; mock pool until enabled.",
+      "authorizedAgents": [
+        "sol"
+      ],
+      "requiredTools": [
+        "Firecrawl"
+      ],
+      "optionalTools": [],
+      "connectors": [
+        {
+          "name": "Firecrawl",
+          "status": "READY TO CONNECT"
+        }
+      ],
+      "inputs": [
+        "Industry",
+        "Location"
+      ],
+      "outputs": [
+        "Scored prospects",
+        "Audit findings"
+      ],
+      "approvalRules": "None — discovery is read-only; outreach is a separate human step.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNKNOWN",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "../EP-Command-Center/services/firecrawl.js",
+        "../EP-Command-Center/js/website-intel.js"
+      ],
+      "lastVerified": "2026-07-19",
+      "workflows": [
+        "New Client"
+      ],
+      "relatedKnowledge": [],
+      "slug": "prospect-discovery",
+      "skillPath": "skills/prospect-discovery"
     },
     {
       "id": "website-build",
@@ -205,6 +567,105 @@
       ],
       "slug": "responsive-qa",
       "skillPath": "skills/responsive-qa"
+    },
+    {
+      "id": "seo-schema",
+      "name": "SEO & Schema",
+      "version": "1.0.0",
+      "category": "Website Production",
+      "status": "Ready",
+      "summary": "Generate title/meta/OG, canonical, JSON-LD LocalBusiness, robots + sitemap from verified data only.",
+      "limitations": "JSON-LD from verified data only.",
+      "authorizedAgents": [
+        "colt"
+      ],
+      "requiredTools": [
+        "EP Website Factory"
+      ],
+      "optionalTools": [],
+      "connectors": [
+        {
+          "name": "EP Website Factory",
+          "status": "AVAILABLE"
+        }
+      ],
+      "inputs": [
+        "Business facts",
+        "Location",
+        "Services"
+      ],
+      "outputs": [
+        "Meta head",
+        "JSON-LD",
+        "robots.txt",
+        "sitemap.xml"
+      ],
+      "approvalRules": "None — output is verifiable against the client config.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNSUPPORTED",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/scripts/build.js"
+      ],
+      "lastVerified": "2026-07-20",
+      "workflows": [
+        "Build Website"
+      ],
+      "relatedKnowledge": [
+        "Website review"
+      ],
+      "slug": "seo-schema",
+      "skillPath": "skills/seo-schema"
+    },
+    {
+      "id": "service-categorize",
+      "name": "Service Auto-Categorization",
+      "version": "1.0.0",
+      "category": "Website Production",
+      "status": "Ready",
+      "summary": "Group a flat service list into logical sections by deterministic keyword scoring (no AI).",
+      "limitations": "Keyword scoring; confirm groupings with the client.",
+      "authorizedAgents": [
+        "atlas",
+        "colt"
+      ],
+      "requiredTools": [
+        "EP Website Factory"
+      ],
+      "optionalTools": [],
+      "connectors": [
+        {
+          "name": "EP Website Factory",
+          "status": "AVAILABLE"
+        }
+      ],
+      "inputs": [
+        "Service names"
+      ],
+      "outputs": [
+        "Grouped services"
+      ],
+      "approvalRules": "None — but confirm the groupings with the client during review.",
+      "compatibility": {
+        "claude": "AVAILABLE",
+        "chatgpt": "UNSUPPORTED",
+        "viktor": "UNKNOWN"
+      },
+      "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+      "sourcePaths": [
+        "factory/scripts/categorize.js"
+      ],
+      "lastVerified": "2026-07-20",
+      "workflows": [
+        "New Client",
+        "Build Website"
+      ],
+      "relatedKnowledge": [],
+      "slug": "service-categorize",
+      "skillPath": "skills/service-categorize"
     }
   ]
 }

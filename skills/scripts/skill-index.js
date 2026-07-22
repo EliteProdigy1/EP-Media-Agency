@@ -68,11 +68,15 @@ function validateManifest(slug, m, seenIds, errors, warnings) {
   ['SKILL.md', 'portable-prompt.md', 'CHANGELOG.md'].forEach((f) => {
     if (!fs.existsSync(path.join(SKILLS_DIR, slug, f))) errors.push(`${slug}/: missing ${f}`);
   });
-  // sourcePaths existence (in-repo must exist; cross-repo → warn only)
+  // sourcePaths existence. In-repo must exist — EXCEPT a Planned skill may
+  // name where its implementation will live before it is built (warn, not
+  // error). Cross-repo paths always warn only.
+  const isPlanned = m.status === 'Planned';
   (m.sourcePaths || []).forEach((sp) => {
     const abs = path.resolve(REPO_ROOT, sp);
     if (!fs.existsSync(abs)) {
       if (sp.startsWith('..')) warnings.push(`${at('sourcePaths')}: cross-repo path not present here: ${sp}`);
+      else if (isPlanned) warnings.push(`${at('sourcePaths')}: planned skill — source not built yet: ${sp}`);
       else errors.push(`${at('sourcePaths')}: path not found: ${sp}`);
     }
   });

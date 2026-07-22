@@ -1,0 +1,52 @@
+{
+  "id": "review-automation",
+  "name": "Review Request Automation",
+  "version": "0.1.0",
+  "category": "Client Management",
+  "status": "Planned",
+  "summary": "After a completed job, request a rating and direct satisfied customers to Google Business.",
+  "limitations": "Planned — needs Gmail + Google Business connections.",
+  "authorizedAgents": [
+    "ledger"
+  ],
+  "requiredTools": [
+    "Gmail"
+  ],
+  "optionalTools": [
+    "Google Business"
+  ],
+  "connectors": [
+    {
+      "name": "Gmail",
+      "status": "READY TO CONNECT"
+    },
+    {
+      "name": "Google Business",
+      "status": "PLANNED"
+    }
+  ],
+  "inputs": [
+    "Completed job"
+  ],
+  "outputs": [
+    "Review request",
+    "Google review"
+  ],
+  "approvalRules": "Client opt-in required before any automated messaging.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "AVAILABLE",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/scripts/review-automation.js"
+  ],
+  "lastVerified": "2026-07-21",
+  "workflows": [
+    "Client Growth Loop"
+  ],
+  "relatedKnowledge": [
+    "Maintenance"
+  ]
+}

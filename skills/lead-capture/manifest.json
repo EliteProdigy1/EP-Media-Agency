@@ -1,0 +1,52 @@
+{
+  "id": "lead-capture",
+  "name": "Website Lead Capture",
+  "version": "1.0.0",
+  "category": "Client Management",
+  "status": "Connected",
+  "summary": "Capture inbound quote-form submissions from client sites and route them to the inbox.",
+  "limitations": "Netlify Forms only; unified inbox is a later stage.",
+  "authorizedAgents": [
+    "ledger"
+  ],
+  "requiredTools": [
+    "Netlify Forms"
+  ],
+  "optionalTools": [
+    "Gmail"
+  ],
+  "connectors": [
+    {
+      "name": "Netlify Forms",
+      "status": "CONNECTED"
+    },
+    {
+      "name": "Gmail",
+      "status": "CONNECTED"
+    }
+  ],
+  "inputs": [
+    "Website form"
+  ],
+  "outputs": [
+    "Lead notification"
+  ],
+  "approvalRules": "None — inbound capture is passive.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNSUPPORTED",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/components/contact.html",
+    "factory/scripts/build.js"
+  ],
+  "lastVerified": "2026-07-20",
+  "workflows": [
+    "Client Growth Loop"
+  ],
+  "relatedKnowledge": [
+    "Client onboarding"
+  ]
+}

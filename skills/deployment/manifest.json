@@ -1,0 +1,53 @@
+{
+  "id": "deployment",
+  "name": "Deployment",
+  "version": "1.0.0",
+  "category": "Deployment",
+  "status": "Ready",
+  "summary": "Package a build for Netlify Drop, or ship via GitHub→Netlify auto-deploy.",
+  "limitations": "Netlify Drop is manual; per-client auto-deploy is planned.",
+  "authorizedAgents": [
+    "colt"
+  ],
+  "requiredTools": [
+    "Netlify"
+  ],
+  "optionalTools": [
+    "GitHub"
+  ],
+  "connectors": [
+    {
+      "name": "GitHub",
+      "status": "CONNECTED"
+    },
+    {
+      "name": "Netlify",
+      "status": "MANUAL"
+    }
+  ],
+  "inputs": [
+    "dist/<slug>"
+  ],
+  "outputs": [
+    "Preview URL",
+    "Netlify site"
+  ],
+  "approvalRules": "Approve-for-launch required before any public deployment.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNSUPPORTED",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/scripts/preview.js",
+    "README.md"
+  ],
+  "lastVerified": "2026-07-18",
+  "workflows": [
+    "Deploy"
+  ],
+  "relatedKnowledge": [
+    "Deployment"
+  ]
+}

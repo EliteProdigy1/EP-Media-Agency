@@ -1,0 +1,46 @@
+{
+  "id": "prospect-discovery",
+  "name": "Prospect Discovery & Audit",
+  "version": "0.9.0",
+  "category": "Sales & Client Success",
+  "status": "Ready to connect",
+  "summary": "Discover local businesses and audit their sites to score opportunity (no-website first).",
+  "limitations": "Gated behind FIRECRAWL_LIVE; mock pool until enabled.",
+  "authorizedAgents": [
+    "sol"
+  ],
+  "requiredTools": [
+    "Firecrawl"
+  ],
+  "optionalTools": [],
+  "connectors": [
+    {
+      "name": "Firecrawl",
+      "status": "READY TO CONNECT"
+    }
+  ],
+  "inputs": [
+    "Industry",
+    "Location"
+  ],
+  "outputs": [
+    "Scored prospects",
+    "Audit findings"
+  ],
+  "approvalRules": "None — discovery is read-only; outreach is a separate human step.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNKNOWN",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "../EP-Command-Center/services/firecrawl.js",
+    "../EP-Command-Center/js/website-intel.js"
+  ],
+  "lastVerified": "2026-07-19",
+  "workflows": [
+    "New Client"
+  ],
+  "relatedKnowledge": []
+}

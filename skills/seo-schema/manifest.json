@@ -1,0 +1,50 @@
+{
+  "id": "seo-schema",
+  "name": "SEO & Schema",
+  "version": "1.0.0",
+  "category": "Website Production",
+  "status": "Ready",
+  "summary": "Generate title/meta/OG, canonical, JSON-LD LocalBusiness, robots + sitemap from verified data only.",
+  "limitations": "JSON-LD from verified data only.",
+  "authorizedAgents": [
+    "colt"
+  ],
+  "requiredTools": [
+    "EP Website Factory"
+  ],
+  "optionalTools": [],
+  "connectors": [
+    {
+      "name": "EP Website Factory",
+      "status": "AVAILABLE"
+    }
+  ],
+  "inputs": [
+    "Business facts",
+    "Location",
+    "Services"
+  ],
+  "outputs": [
+    "Meta head",
+    "JSON-LD",
+    "robots.txt",
+    "sitemap.xml"
+  ],
+  "approvalRules": "None — output is verifiable against the client config.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNSUPPORTED",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/scripts/build.js"
+  ],
+  "lastVerified": "2026-07-20",
+  "workflows": [
+    "Build Website"
+  ],
+  "relatedKnowledge": [
+    "Website review"
+  ]
+}

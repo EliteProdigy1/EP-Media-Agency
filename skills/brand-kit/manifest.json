@@ -1,0 +1,49 @@
+{
+  "id": "brand-kit",
+  "name": "Brand Kit & Color Mapping",
+  "version": "1.0.0",
+  "category": "Media & Creative",
+  "status": "Ready",
+  "summary": "Map a client palette onto EP design tokens without forking the token system.",
+  "limitations": "Maps onto EP tokens — will not fork the token system.",
+  "authorizedAgents": [
+    "vera",
+    "colt"
+  ],
+  "requiredTools": [
+    "EP Website Factory"
+  ],
+  "optionalTools": [],
+  "connectors": [
+    {
+      "name": "EP Website Factory",
+      "status": "AVAILABLE"
+    }
+  ],
+  "inputs": [
+    "Primary/accent hex",
+    "Style notes"
+  ],
+  "outputs": [
+    "Brand override CSS",
+    "Theme color"
+  ],
+  "approvalRules": "None — brand overrides are reviewed as part of the build.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNSUPPORTED",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/scripts/build.js",
+    "factory/core/ep-tokens.css"
+  ],
+  "lastVerified": "2026-07-20",
+  "workflows": [
+    "Build Website"
+  ],
+  "relatedKnowledge": [
+    "Dark Luxury (EP cinematic)"
+  ]
+}

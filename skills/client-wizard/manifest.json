@@ -1,0 +1,49 @@
+{
+  "id": "client-wizard",
+  "name": "Client Wizard / Intake",
+  "version": "1.0.0",
+  "category": "Sales & Client Success",
+  "status": "Ready",
+  "summary": "Interactive intake that turns business facts + photos into a buildable client config.",
+  "limitations": "CLI wizard; not yet in the dashboard UI.",
+  "authorizedAgents": [
+    "atlas",
+    "sol"
+  ],
+  "requiredTools": [
+    "EP Website Factory"
+  ],
+  "optionalTools": [],
+  "connectors": [
+    {
+      "name": "EP Website Factory",
+      "status": "AVAILABLE"
+    }
+  ],
+  "inputs": [
+    "Owner answers",
+    "Photos folder"
+  ],
+  "outputs": [
+    "client.json",
+    "Imported media"
+  ],
+  "approvalRules": "None — the produced config is validated before any build.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNSUPPORTED",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/scripts/new.js",
+    "factory/scripts/media-import.js"
+  ],
+  "lastVerified": "2026-07-18",
+  "workflows": [
+    "New Client"
+  ],
+  "relatedKnowledge": [
+    "Client onboarding"
+  ]
+}

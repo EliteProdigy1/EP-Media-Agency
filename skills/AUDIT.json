@@ -1,93 +1,28 @@
 {
-  "generatedAt": "2026-07-21",
-  "today": "2026-07-21",
+  "generatedAt": "2026-07-22",
+  "today": "2026-07-22",
   "staleDays": 90,
   "source": "EP-Media-Agency/skills",
   "note": "Non-destructive report. Nothing is renamed, moved, deleted, merged, or marked Ready by this tool.",
   "registered": [
+    "review-automation",
+    "lead-capture",
+    "deployment",
+    "brand-kit",
     "media-generation",
+    "cc-registry",
+    "client-wizard",
+    "prospect-discovery",
     "website-build",
-    "responsive-qa"
+    "responsive-qa",
+    "seo-schema",
+    "service-categorize"
   ],
   "consumersScanned": [
     "EP-Command-Center/js/app.js"
   ],
   "summary": {
-    "used-but-unsaved": 9,
-    "registered": 3
+    "registered": 12
   },
-  "findings": [
-    {
-      "category": "used-but-unsaved",
-      "id": "brand-kit",
-      "detail": "Elite Prodigy Command Center uses skill \"brand-kit\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"brand-kit\" into skills/brand-kit/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "seo-schema",
-      "detail": "Elite Prodigy Command Center uses skill \"seo-schema\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"seo-schema\" into skills/seo-schema/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "deployment",
-      "detail": "Elite Prodigy Command Center uses skill \"deployment\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"deployment\" into skills/deployment/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "service-categorize",
-      "detail": "Elite Prodigy Command Center uses skill \"service-categorize\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"service-categorize\" into skills/service-categorize/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "client-wizard",
-      "detail": "Elite Prodigy Command Center uses skill \"client-wizard\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"client-wizard\" into skills/client-wizard/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "cc-registry",
-      "detail": "Elite Prodigy Command Center uses skill \"cc-registry\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"cc-registry\" into skills/cc-registry/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "prospect-discovery",
-      "detail": "Elite Prodigy Command Center uses skill \"prospect-discovery\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"prospect-discovery\" into skills/prospect-discovery/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "lead-capture",
-      "detail": "Elite Prodigy Command Center uses skill \"lead-capture\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"lead-capture\" into skills/lead-capture/ (4-file package) when ready.",
-      "severity": "warn"
-    },
-    {
-      "category": "used-but-unsaved",
-      "id": "review-automation",
-      "detail": "Elite Prodigy Command Center uses skill \"review-automation\" but it is not saved here as a package.",
-      "evidence": "EP-Command-Center/js/app.js",
-      "suggestedIntent": "Port \"review-automation\" into skills/review-automation/ (4-file package) when ready.",
-      "severity": "warn"
-    }
-  ]
+  "findings": []
 }

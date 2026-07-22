@@ -1,0 +1,47 @@
+{
+  "id": "cc-registry",
+  "name": "Command Center Registry",
+  "version": "1.0.0",
+  "category": "Operations",
+  "status": "Ready",
+  "summary": "Emit projects.json so every generated site appears as a managed project (status, deploy, analytics, maintenance).",
+  "limitations": "Reads build output; live analytics/deploy state read as preview until wired.",
+  "authorizedAgents": [
+    "colt",
+    "atlas"
+  ],
+  "requiredTools": [
+    "EP Website Factory"
+  ],
+  "optionalTools": [],
+  "connectors": [
+    {
+      "name": "EP Website Factory",
+      "status": "AVAILABLE"
+    }
+  ],
+  "inputs": [
+    "config/*.json",
+    "build output"
+  ],
+  "outputs": [
+    "projects.json",
+    "Dashboard feed"
+  ],
+  "approvalRules": "None — a read-only data contract.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNSUPPORTED",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/scripts/projects.js",
+    "factory/scripts/dashboard.js"
+  ],
+  "lastVerified": "2026-07-20",
+  "workflows": [
+    "Review"
+  ],
+  "relatedKnowledge": []
+}

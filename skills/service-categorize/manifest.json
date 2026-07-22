@@ -1,0 +1,45 @@
+{
+  "id": "service-categorize",
+  "name": "Service Auto-Categorization",
+  "version": "1.0.0",
+  "category": "Website Production",
+  "status": "Ready",
+  "summary": "Group a flat service list into logical sections by deterministic keyword scoring (no AI).",
+  "limitations": "Keyword scoring; confirm groupings with the client.",
+  "authorizedAgents": [
+    "atlas",
+    "colt"
+  ],
+  "requiredTools": [
+    "EP Website Factory"
+  ],
+  "optionalTools": [],
+  "connectors": [
+    {
+      "name": "EP Website Factory",
+      "status": "AVAILABLE"
+    }
+  ],
+  "inputs": [
+    "Service names"
+  ],
+  "outputs": [
+    "Grouped services"
+  ],
+  "approvalRules": "None — but confirm the groupings with the client during review.",
+  "compatibility": {
+    "claude": "AVAILABLE",
+    "chatgpt": "UNSUPPORTED",
+    "viktor": "UNKNOWN"
+  },
+  "sourceRepo": "EliteProdigy1/EP-Media-Agency",
+  "sourcePaths": [
+    "factory/scripts/categorize.js"
+  ],
+  "lastVerified": "2026-07-20",
+  "workflows": [
+    "New Client",
+    "Build Website"
+  ],
+  "relatedKnowledge": []
+}
