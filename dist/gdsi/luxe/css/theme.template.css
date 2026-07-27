@@ -1,0 +1,33 @@
+/* ══════════════════════════════════════════════════════════════════
+   EP LUXE — CLIENT THEME CONTRACT  (copy → <client>-theme.css)
+   ──────────────────────────────────────────────────────────────────
+   This is the ONLY stylesheet that changes per client. Fill in the
+   brand palette + fonts; luxe.css renders every component from these.
+   Load order in <head>:  luxe.css  →  <client>-theme.css
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+  /* Grounds */
+  --ink:#0e120e;          /* matte charcoal / page base */
+  --ever:#14201a;         /* evergreen surface */
+  --ever-deep:#0c130f;    /* deepest section */
+  --panel:#18241d;        /* hover / raised */
+
+  /* Ink & stone */
+  --ivory:#f2eee2;        /* soft ivory — primary text */
+  --ivory-dim:#cfc9b8;    /* secondary text */
+  --limestone:#c8bda6;    /* warm limestone — accents on dark */
+  --sage:#8f9a86;         /* muted captions */
+
+  /* Metal accent */
+  --brass:#b3924f;
+  --brass-light:#cdac6b;
+  --brass-dim:rgba(179,146,79,.34);
+
+  /* Lines + fonts + motion */
+  --hair:rgba(242,238,226,.12);
+  --serif:'Cormorant Garamond','Playfair Display',Georgia,serif;
+  --sans:'Jost','Montserrat',system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --maxw:1280px;
+  --steps:5;              /* # of process timeline columns */
+}
