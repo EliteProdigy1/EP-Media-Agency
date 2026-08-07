@@ -50,13 +50,35 @@ the browser**.
 If the key is missing or the API is unreachable, the site **falls back to demo
 data** — it never breaks.
 
-### Settling live bets
+### Settling bets against real scores
 
-Demo mode uses the **Simulate Results** button. For production you'd settle bets
-against real final scores — wire a second function to a scores source
-(API-Sports at <https://api-sports.io>, or ESPN's public scoreboard endpoints,
-no key) and replace the `simulateResults()` path in `js/app.js`. Left as the
-next step so v1 ships now.
+Real settlement is built in. A second serverless function
+(`netlify/functions/scores.js`) pulls **final scores from ESPN's public
+scoreboard** — **no API key needed** — and the front end grades each open bet
+against them:
+
+- **Moneyline** — winner by final score (tie → push)
+- **Spread** — margin vs. the line, with correct home/away sign and whole-number
+  pushes
+- **Total** — combined score vs. the line, with pushes
+- **Parlays** — any losing leg loses the bet; a pushed leg drops out and the
+  payout recomputes on the surviving legs
+
+Behavior by mode:
+
+- **LIVE mode** — the **Settle Bets** button grades open bets against real final
+  scores. Games that aren't final yet stay open. Bets also **auto-settle
+  silently on page load**, so a returning player just sees their winnings.
+- **DEMO mode** — the button reads **Simulate Results** and resolves instantly
+  (demo games are in the future and have no real scores).
+
+Grading logic is covered by unit tests for every market and edge case (spread
+push, underdog cover, total push, moneyline tie).
+
+**Team-name matching:** the odds feed and the score feed can name teams slightly
+differently, so matching normalizes hard and falls back to the team nickname.
+ESPN's default scoreboard returns the current slate; pass `?date=YYYYMMDD` to
+`scores` for a specific day if you need to backfill older games.
 
 ## Alabama high-school football — important
 

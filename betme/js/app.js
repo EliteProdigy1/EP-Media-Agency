@@ -19,6 +19,7 @@ const BETME = (() => {
   let games = [];
   let slip = [];            // pending selections not yet placed
   let activeLeague = "ALL";
+  let mode = "DEMO";        // "LIVE" once the odds proxy returns games
 
   /* ── Storage helpers ─────────────────────────────── */
   const get = (k, def) => {
@@ -59,11 +60,12 @@ const BETME = (() => {
     return window.BETME_DEMO_GAMES.slice();
   }
 
-  function setMode(mode) {
+  function setMode(m) {
+    mode = m;
     const el = document.getElementById("data-mode");
     if (!el) return;
-    el.textContent = mode === "LIVE" ? "LIVE ODDS" : "DEMO ODDS";
-    el.className = "betme-mode " + (mode === "LIVE" ? "is-live" : "is-demo");
+    el.textContent = m === "LIVE" ? "LIVE ODDS" : "DEMO ODDS";
+    el.className = "betme-mode " + (m === "LIVE" ? "is-live" : "is-demo");
   }
 
   /* ── Rendering: odds board ───────────────────────── */
@@ -156,7 +158,12 @@ const BETME = (() => {
         dec: parseFloat(btn.dataset.dec),
         label: btn.dataset.label,
         matchup: `${game.away} @ ${game.home}`,
-        leagueLabel: game.leagueLabel,
+        homeTeam: game.home, awayTeam: game.away,
+        league: game.league, leagueLabel: game.leagueLabel,
+        // line needed to grade spread/total later (null for moneyline)
+        line: market === "spread" ? game.markets.spread.line
+            : market === "total"  ? game.markets.total.line
+            : null,
         synthetic: !!game.synthetic
       });
     }
@@ -226,9 +233,128 @@ const BETME = (() => {
     refreshAll();
   }
 
-  /* ── Settlement (demo) ───────────────────────────── */
-  // Resolve each open bet leg by implied probability + variance.
-  // In LIVE mode this would be replaced by real final scores.
+  /* ── Settlement ──────────────────────────────────── */
+
+  // Router: real scores in LIVE mode, simulation in DEMO mode.
+  function settleBets(opts = {}) {
+    if (mode === "LIVE") return settleFromScores(opts);
+    return simulateResults(opts);
+  }
+
+  // ── Real settlement: grade open bets against final scores ──
+  // Name matching between odds and score feeds is fuzzy, so normalize
+  // hard and fall back to team nickname (last word).
+  const norm = (s) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const nick = (s) => norm((s || "").split(" ").pop());
+
+  function findResult(index, leg) {
+    const h = norm(leg.homeTeam), a = norm(leg.awayTeam);
+    // exact both-sides match first
+    let r = index.find(x => x.league === leg.league &&
+      ((norm(x.home) === h && norm(x.away) === a) ||
+       (norm(x.home) === a && norm(x.away) === h)));
+    if (r) return orient(r, leg);
+    // nickname fallback
+    const hn = nick(leg.homeTeam), an = nick(leg.awayTeam);
+    r = index.find(x => x.league === leg.league &&
+      ((nick(x.home) === hn && nick(x.away) === an) ||
+       (nick(x.home) === an && nick(x.away) === hn)));
+    return r ? orient(r, leg) : null;
+  }
+
+  // Return scores oriented to the bet's home/away, regardless of feed order.
+  function orient(r, leg) {
+    const sameHome = norm(r.home) === norm(leg.homeTeam) || nick(r.home) === nick(leg.homeTeam);
+    return {
+      completed: r.completed,
+      homeScore: sameHome ? r.homeScore : r.awayScore,
+      awayScore: sameHome ? r.awayScore : r.homeScore
+    };
+  }
+
+  // Grade one leg → "WON" | "LOST" | "PUSH". Needs a completed result.
+  function gradeLeg(leg, res) {
+    const H = res.homeScore, A = res.awayScore;
+    if (leg.market === "moneyline") {
+      if (H === A) return "PUSH";
+      const homeWon = H > A;
+      return (leg.pick === "home") === homeWon ? "WON" : "LOST";
+    }
+    if (leg.market === "spread") {
+      // leg.line is the HOME spread (e.g. -3.5). Away line is its negation.
+      const margin = leg.pick === "home" ? (H - A) : (A - H);
+      const line   = leg.pick === "home" ? leg.line : -leg.line;
+      const edge = margin + line;             // >0 covers, =0 push, <0 loses
+      return edge > 0 ? "WON" : edge < 0 ? "LOST" : "PUSH";
+    }
+    if (leg.market === "total") {
+      const sum = H + A;
+      if (sum === leg.line) return "PUSH";
+      const over = sum > leg.line;
+      return (leg.pick === "over") === over ? "WON" : "LOST";
+    }
+    return "PUSH";
+  }
+
+  async function settleFromScores({ silent } = {}) {
+    const open = openBets();
+    if (!open.length) { if (!silent) toast("No open bets to settle."); return; }
+
+    let index = [];
+    try {
+      const res = await fetch("/.netlify/functions/scores", { cache: "no-store" });
+      if (res.ok) index = (await res.json()).results || [];
+    } catch { /* no scores reachable */ }
+
+    const completed = index.filter(r => r.completed);
+    if (!completed.length) { if (!silent) toast("No final scores yet — bets stay open."); return; }
+
+    const stillOpen = [];
+    const hist = history();
+    let settled = 0, wins = 0, net = 0;
+
+    open.forEach(bet => {
+      // grade every leg; if any leg has no final result yet, keep bet open
+      const graded = bet.legs.map(leg => {
+        const res = findResult(completed, leg);
+        return res && res.completed ? gradeLeg(leg, res) : null;
+      });
+      if (graded.some(g => g === null)) { stillOpen.push(bet); return; }
+
+      // Parlay rules: any LOST → bet lost. PUSH legs drop out (dec→1),
+      // recompute payout on the surviving legs.
+      const lost = graded.includes("LOST");
+      let dec = 1;
+      bet.legs.forEach((leg, i) => { if (graded[i] === "WON") dec *= leg.dec; });
+      bet.legResults = graded;
+      bet.settledAt = new Date().toISOString();
+
+      if (lost) {
+        bet.status = "LOST"; net -= bet.stake;
+      } else {
+        bet.status = "WON";
+        bet.payout = Math.round(bet.stake * dec);
+        setBalance(balance() + bet.payout);
+        net += bet.payout - bet.stake; wins++;
+      }
+      hist.unshift(bet); settled++;
+    });
+
+    set(LS.open, stillOpen);
+    let s = 0; for (const b of hist) { if (b.status === "WON") s++; else break; }
+    set(LS.streak, s);
+    set(LS.history, hist.slice(0, 100));
+
+    if (!silent || settled) {
+      const pending = stillOpen.length;
+      toast(settled
+        ? `${wins}/${settled} settled · net ${net >= 0 ? "+" : ""}${net.toLocaleString()} coins${pending ? ` · ${pending} still open` : ""}`
+        : "No open bets had final scores yet.");
+    }
+    refreshAll();
+  }
+
+  // ── Demo settlement: simulate results by implied probability ──
   function simulateResults() {
     const open = openBets();
     if (!open.length) { toast("No open bets to settle."); return; }
@@ -244,7 +370,6 @@ const BETME = (() => {
       hist.unshift(bet);
     });
 
-    // streak: count consecutive most-recent wins
     let s = 0; for (const b of hist) { if (b.status === "WON") s++; else break; }
     set(LS.streak, s);
     set(LS.history, hist.slice(0, 100));
@@ -344,11 +469,22 @@ const BETME = (() => {
     renderLeagueTabs();
     refreshAll();
 
+    // In LIVE mode, settle any open bets whose games are already final,
+    // quietly, the moment the player loads the page.
+    if (mode === "LIVE") settleFromScores({ silent: true });
+
     document.getElementById("stake").addEventListener("input", updatePayout);
     document.querySelectorAll("[data-quick]").forEach(b =>
       b.onclick = () => { document.getElementById("stake").value = b.dataset.quick; updatePayout(); });
     document.getElementById("place-bet").onclick = placeBet;
-    document.getElementById("simulate").onclick = simulateResults;
+
+    // Settle button: real scores in LIVE mode, simulation in DEMO mode.
+    const settleBtn = document.getElementById("simulate");
+    settleBtn.textContent = mode === "LIVE" ? "Settle Bets" : "Simulate Results";
+    settleBtn.title = mode === "LIVE"
+      ? "Grade open bets against final scores and pay out winners"
+      : "Demo only: instantly settle open bets with simulated results";
+    settleBtn.onclick = () => settleBets();
     document.getElementById("daily-bonus").onclick = dailyBonus;
     document.getElementById("reset-acct").onclick = resetAccount;
 
