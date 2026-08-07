@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BETME — Play-Money Sports Picks</title>
+  <meta name="description" content="BETME is a free, play-money sports prediction game. Bet virtual coins on real matchups, build streaks, and climb the leaderboard. No real money — entertainment only.">
+  <meta name="theme-color" content="#050505">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BETME — Play-Money Sports Picks">
+  <meta property="og:description" content="Free virtual-coin sports predictions. Real games, fake money, real bragging rights.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Top bar / HUD ── -->
+  <header class="betme-topbar">
+    <a class="betme-logo" href="#">BET<span>ME</span></a>
+    <div class="betme-hud">
+      <div class="betme-hud-item">
+        <span class="betme-hud-label">Coins</span>
+        <span class="betme-hud-val" id="hud-balance">10,000</span>
+      </div>
+      <div class="betme-hud-item betme-hud-streak">
+        <span class="betme-hud-val" id="hud-streak">No streak</span>
+      </div>
+      <span class="betme-mode is-demo" id="data-mode">DEMO ODDS</span>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="betme-hero">
+    <div class="betme-hero-inner">
+      <p class="betme-eyebrow">Real games · Fake money · Real bragging rights</p>
+      <h1>Bet with your gut,<br>not your wallet.</h1>
+      <p class="betme-lead">BETME is a <strong>play-money</strong> sports prediction game. Start with 10,000 free coins, back your picks on tonight's real matchups — from the NFL to <strong>Alabama high-school football</strong> — and climb the leaderboard. No cash in, no cash out, ever.</p>
+      <div class="betme-hero-actions">
+        <a href="#board" class="betme-btn betme-btn-gold">Start Picking</a>
+        <button class="betme-btn betme-btn-ghost" id="daily-bonus">Claim +500 Daily</button>
+      </div>
+      <p class="betme-disclaimer-mini">18+ · Entertainment only · Virtual coins have no cash value and cannot be redeemed.</p>
+    </div>
+  </section>
+
+  <!-- ── Main app ── -->
+  <main class="betme-app" id="board">
+    <div class="betme-app-grid">
+
+      <!-- Odds board -->
+      <section class="betme-board-col">
+        <div class="betme-board-head">
+          <h2>Today's Board</h2>
+          <div class="betme-board-controls">
+            <button class="betme-btn betme-btn-sm" id="simulate" title="Demo only: instantly settle open bets with simulated results">Simulate Results</button>
+          </div>
+        </div>
+        <div class="betme-tabs" id="league-tabs"></div>
+        <div class="betme-board" id="odds-board"></div>
+        <p class="betme-house-note">“HOUSE LINE” games (Alabama HS football) are BETME-generated — no sportsbook posts high-school odds, so we build them from records &amp; rankings.</p>
+      </section>
+
+      <!-- Bet slip + tickets -->
+      <aside class="betme-side-col">
+        <button class="betme-slip-toggle" id="slip-toggle">Bet Slip · <span id="slip-count">0</span></button>
+
+        <div class="betme-slip-panel" id="slip-panel">
+          <section class="betme-card">
+            <h3 class="betme-card-title">Bet Slip <span class="betme-badge" id="slip-count-2"></span></h3>
+            <div id="bet-slip"></div>
+            <div id="slip-footer" hidden>
+              <div class="betme-slip-summary">
+                <div><span>Type</span><strong id="slip-type">Single</strong></div>
+                <div><span>Odds</span><strong id="slip-odds">+100</strong></div>
+              </div>
+              <label class="betme-stake-label" for="stake">Stake (coins)</label>
+              <input type="number" id="stake" min="1" placeholder="0" inputmode="numeric">
+              <div class="betme-quick">
+                <button data-quick="100">100</button>
+                <button data-quick="500">500</button>
+                <button data-quick="1000">1K</button>
+                <button data-quick="5000">5K</button>
+              </div>
+              <div class="betme-payout">
+                <span>To win</span>
+                <span><strong id="slip-payout">0</strong> <em id="slip-profit">+0</em></span>
+              </div>
+              <button class="betme-btn betme-btn-gold betme-btn-block" id="place-bet" disabled>Place Bet</button>
+            </div>
+          </section>
+
+          <section class="betme-card">
+            <h3 class="betme-card-title">Open Bets <span class="betme-badge" id="open-count">0</span></h3>
+            <div id="open-bets"></div>
+          </section>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Leaderboard + history -->
+    <div class="betme-lower-grid">
+      <section class="betme-card">
+        <h3 class="betme-card-title">Leaderboard <span class="betme-sub">this week</span></h3>
+        <div class="betme-lb-head">
+          <span>#</span><span>Player</span><span></span><span>Coins</span>
+        </div>
+        <div id="leaderboard"></div>
+      </section>
+
+      <section class="betme-card">
+        <h3 class="betme-card-title">Recent Results</h3>
+        <div id="history-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="betme-footer">
+    <div class="betme-footer-inner">
+      <div>
+        <div class="betme-logo betme-logo-sm">BET<span>ME</span></div>
+        <p class="betme-footer-tag">A free-to-play sports prediction game. Keeping fans in the game — no wallet required.</p>
+      </div>
+      <div class="betme-footer-legal">
+        <p><strong>PLAY MONEY ONLY.</strong> BETME uses virtual coins with no monetary value. It is not gambling, no purchase is possible, and no winnings can be withdrawn. For entertainment only, intended for users 18+.</p>
+        <button class="betme-link-btn" id="reset-acct">Reset my account</button>
+      </div>
+    </div>
+    <p class="betme-copyright">© <span id="year"></span> BETME. Built by Elite Prodigy Media.</p>
+  </footer>
+
+  <div class="betme-toast" id="toast"></div>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="js/demo-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+/* ══════════════════════════════════════════════════════════════
+   BETME — Styles (EPSG dark/gold system, self-contained)
+   Token values copied from factory/core/ep-tokens.css — the EPSG
+   design authority. Do not diverge the palette.
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  --ep-gold: #C9A84C;
+  --ep-gold-light: #E8D49A;
+  --ep-gold-dark: #8B6914;
+  --ep-gold-bright: #F0C060;
+  --ep-black: #050505;
+  --ep-black-rich: #0a0a0a;
+  --ep-black-mid: #141414;
+  --ep-white: #F8F6F0;
+  --ep-green: #00cc55;
+  --ep-red: #e0563b;
+  --ep-silver: #B8B8B8;
+  --ep-silver-dark: #888;
+  --ep-gunmetal: #1C1C1E;
+  --ep-font-display: 'Playfair Display', Georgia, serif;
+  --ep-font-body: 'Montserrat', system-ui, sans-serif;
+  --ep-radius: 4px;
+  --ep-radius-lg: 8px;
+  --ep-radius-xl: 16px;
+  --ep-glass-bg: rgba(10, 10, 10, 0.72);
+  --ep-glass-border: rgba(201, 168, 76, 0.28);
+  --ep-shadow-card: 0 8px 44px rgba(0, 0, 0, 0.70);
+  --ep-shadow-gold: 0 0 28px rgba(201, 168, 76, 0.18);
+  --ep-ease: cubic-bezier(.25, .46, .45, .94);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--ep-font-body);
+  background: var(--ep-black);
+  color: var(--ep-white);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(201,168,76,.07), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(201,168,76,.05), transparent 40%);
+}
+
+/* ── Buttons ── */
+.betme-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--ep-font-body); font-weight: 700; font-size: .82rem;
+  letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  padding: 13px 26px; border-radius: var(--ep-radius); border: 1px solid transparent;
+  cursor: pointer; transition: all .28s var(--ep-ease); white-space: nowrap;
+}
+.betme-btn-gold {
+  background: linear-gradient(135deg, var(--ep-gold-bright), var(--ep-gold-dark));
+  color: var(--ep-black); box-shadow: var(--ep-shadow-gold);
+}
+.betme-btn-gold:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.08); }
+.betme-btn-gold:disabled { opacity: .45; cursor: not-allowed; filter: grayscale(.4); }
+.betme-btn-ghost {
+  background: transparent; color: var(--ep-gold-light);
+  border-color: var(--ep-glass-border);
+}
+.betme-btn-ghost:hover { border-color: var(--ep-gold); background: rgba(201,168,76,.08); }
+.betme-btn-sm { padding: 8px 16px; font-size: .7rem; }
+.betme-btn-block { width: 100%; margin-top: 10px; }
+
+/* ── Top bar / HUD ── */
+.betme-topbar {
+  position: sticky; top: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px clamp(16px, 4vw, 48px);
+  background: rgba(5,5,5,.82); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,168,76,.18);
+}
+.betme-logo {
+  font-family: var(--ep-font-display); font-weight: 900; font-size: 1.5rem;
+  letter-spacing: .04em; color: var(--ep-white); text-decoration: none;
+}
+.betme-logo span { color: var(--ep-gold); }
+.betme-hud { display: flex; align-items: center; gap: 18px; }
+.betme-hud-item { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
+.betme-hud-label { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ep-silver-dark); }
+.betme-hud-val { font-weight: 800; color: var(--ep-gold-light); font-size: 1.05rem; }
+.betme-hud-streak .betme-hud-val { font-size: .78rem; color: var(--ep-silver); }
+.betme-mode {
+  font-size: .58rem; font-weight: 800; letter-spacing: .12em; padding: 5px 9px;
+  border-radius: 40px; text-transform: uppercase;
+}
+.betme-mode.is-demo { background: rgba(184,184,184,.14); color: var(--ep-silver); border: 1px solid rgba(184,184,184,.3); }
+.betme-mode.is-live { background: rgba(0,204,85,.15); color: var(--ep-green); border: 1px solid rgba(0,204,85,.4); }
+
+/* ── Hero ── */
+.betme-hero {
+  padding: clamp(48px, 9vw, 110px) clamp(16px, 4vw, 48px) clamp(40px, 6vw, 70px);
+  max-width: 1200px; margin: 0 auto; text-align: center;
+}
+.betme-hero-inner { max-width: 760px; margin: 0 auto; }
+.betme-eyebrow {
+  color: var(--ep-gold); font-weight: 700; font-size: .74rem;
+  letter-spacing: .22em; text-transform: uppercase; margin-bottom: 22px;
+}
+.betme-hero h1 {
+  font-family: var(--ep-font-display); font-weight: 900;
+  font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: 1.02; letter-spacing: -.01em;
+}
+.betme-hero h1 { background: linear-gradient(180deg, #fff, var(--ep-gold-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.betme-lead {
+  color: var(--ep-silver); font-size: clamp(1rem, 2vw, 1.18rem);
+  margin: 22px auto 30px; max-width: 60ch;
+}
+.betme-lead strong { color: var(--ep-white); }
+.betme-hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.betme-disclaimer-mini { margin-top: 26px; font-size: .72rem; color: var(--ep-silver-dark); letter-spacing: .03em; }
+
+/* ── App layout ── */
+.betme-app { max-width: 1280px; margin: 0 auto; padding: 20px clamp(12px, 3vw, 40px) 80px; }
+.betme-app-grid { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
+.betme-lower-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+
+.betme-board-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.betme-board-head h2 { font-family: var(--ep-font-display); font-size: 1.7rem; }
+
+/* ── League tabs ── */
+.betme-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.betme-tab {
+  background: var(--ep-black-mid); color: var(--ep-silver); border: 1px solid rgba(255,255,255,.07);
+  padding: 8px 16px; border-radius: 40px; font-size: .74rem; font-weight: 600;
+  letter-spacing: .04em; cursor: pointer; transition: all .2s var(--ep-ease);
+}
+.betme-tab:hover { border-color: var(--ep-glass-border); color: var(--ep-white); }
+.betme-tab.is-active { background: var(--ep-gold); color: var(--ep-black); border-color: var(--ep-gold); font-weight: 700; }
+
+/* ── Game card ── */
+.betme-board { display: flex; flex-direction: column; gap: 12px; }
+.betme-game {
+  background: var(--ep-glass-bg); border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--ep-radius-lg); padding: 14px 16px;
+  transition: border-color .25s var(--ep-ease);
+}
+.betme-game:hover { border-color: var(--ep-glass-border); }
+.betme-game-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.betme-game-league { font-size: .66rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ep-gold); display: flex; align-items: center; gap: 8px; }
+.betme-game-time { font-size: .7rem; color: var(--ep-silver-dark); }
+.betme-synth {
+  font-size: .55rem; background: rgba(224,86,59,.15); color: #ff9179;
+  border: 1px solid rgba(224,86,59,.4); padding: 2px 6px; border-radius: 4px;
+  letter-spacing: .08em; cursor: help;
+}
+.betme-synth-mini { font-size: .5rem; color: #ff9179; letter-spacing: .06em; }
+
+.betme-game-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 8px; align-items: center; }
+.betme-col-team { display: flex; flex-direction: column; gap: 8px; }
+.betme-team { font-weight: 600; font-size: .9rem; padding: 8px 0; }
+.betme-market-label { font-size: .58rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ep-silver-dark); text-align: center; margin-bottom: 6px; }
+.betme-col-market { display: flex; flex-direction: column; gap: 8px; }
+
+.betme-odd {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: var(--ep-black-mid); border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--ep-radius); padding: 7px 6px; cursor: pointer;
+  transition: all .18s var(--ep-ease); min-height: 44px; justify-content: center;
+}
+.betme-odd:hover { border-color: var(--ep-gold); background: rgba(201,168,76,.08); }
+.betme-odd.is-picked { background: var(--ep-gold); border-color: var(--ep-gold); }
+.betme-odd.is-picked .betme-odd-label, .betme-odd.is-picked .betme-odd-val { color: var(--ep-black); }
+.betme-odd-label { font-size: .64rem; color: var(--ep-silver); }
+.betme-odd-val { font-weight: 800; font-size: .9rem; color: var(--ep-gold-light); }
+
+.betme-house-note { margin-top: 16px; font-size: .72rem; color: var(--ep-silver-dark); line-height: 1.5; }
+.betme-empty, .betme-slip-empty { color: var(--ep-silver-dark); font-size: .85rem; padding: 14px 2px; text-align: center; }
+
+/* ── Cards ── */
+.betme-card {
+  background: var(--ep-glass-bg); border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--ep-radius-lg); padding: 18px; margin-bottom: 18px;
+}
+.betme-card-title {
+  font-family: var(--ep-font-display); font-size: 1.15rem; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.betme-sub, .betme-card-title .betme-sub { font-family: var(--ep-font-body); font-size: .64rem; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; color: var(--ep-silver-dark); }
+.betme-badge { background: var(--ep-gold); color: var(--ep-black); font-size: .68rem; font-weight: 800; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; }
+
+/* ── Bet slip ── */
+.betme-slip-toggle { display: none; }
+.betme-slip-item { position: relative; padding: 10px 30px 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.betme-slip-item:last-child { border-bottom: none; }
+.betme-slip-pick { font-weight: 600; font-size: .9rem; }
+.betme-slip-odd { color: var(--ep-gold-light); font-weight: 800; margin-left: 6px; }
+.betme-slip-match { font-size: .72rem; color: var(--ep-silver-dark); margin-top: 2px; }
+.betme-slip-x {
+  position: absolute; right: 0; top: 8px; background: none; border: none;
+  color: var(--ep-silver-dark); font-size: 1.3rem; cursor: pointer; line-height: 1;
+}
+.betme-slip-x:hover { color: var(--ep-red); }
+
+.betme-slip-summary { display: flex; gap: 20px; margin: 14px 0 10px; }
+.betme-slip-summary div { display: flex; flex-direction: column; }
+.betme-slip-summary span { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ep-silver-dark); }
+.betme-slip-summary strong { font-size: 1rem; color: var(--ep-gold-light); }
+
+.betme-stake-label { display: block; font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ep-silver-dark); margin-bottom: 6px; }
+#stake {
+  width: 100%; background: var(--ep-black); border: 1px solid rgba(255,255,255,.12);
+  color: var(--ep-white); border-radius: var(--ep-radius); padding: 11px 12px;
+  font-size: 1.1rem; font-weight: 700; font-family: var(--ep-font-body);
+}
+#stake:focus { outline: none; border-color: var(--ep-gold); }
+.betme-quick { display: flex; gap: 6px; margin-top: 8px; }
+.betme-quick button {
+  flex: 1; background: var(--ep-black-mid); border: 1px solid rgba(255,255,255,.08);
+  color: var(--ep-silver); border-radius: var(--ep-radius); padding: 7px 0;
+  font-size: .74rem; font-weight: 700; cursor: pointer; transition: all .18s;
+}
+.betme-quick button:hover { border-color: var(--ep-gold); color: var(--ep-white); }
+.betme-payout { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.08); }
+.betme-payout span:first-child { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ep-silver-dark); }
+.betme-payout strong { font-size: 1.4rem; color: var(--ep-gold); font-weight: 800; }
+.betme-payout em { font-style: normal; color: var(--ep-green); font-size: .82rem; font-weight: 700; margin-left: 4px; }
+
+/* ── Tickets ── */
+.betme-ticket { background: var(--ep-black-mid); border-left: 3px solid var(--ep-silver-dark); border-radius: var(--ep-radius); padding: 10px 12px; margin-bottom: 8px; }
+.betme-ticket.is-open { border-left-color: var(--ep-gold); }
+.betme-ticket.is-won { border-left-color: var(--ep-green); }
+.betme-ticket.is-lost { border-left-color: var(--ep-red); opacity: .72; }
+.betme-ticket-top { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.betme-ticket-type { font-weight: 700; font-size: .82rem; }
+.betme-ticket-status { font-size: .6rem; font-weight: 800; letter-spacing: .1em; color: var(--ep-silver-dark); }
+.betme-ticket.is-won .betme-ticket-status { color: var(--ep-green); }
+.betme-ticket.is-lost .betme-ticket-status { color: var(--ep-red); }
+.betme-ticket-leg { font-size: .72rem; color: var(--ep-silver); margin: 2px 0; }
+.betme-ticket-foot { display: flex; justify-content: space-between; font-size: .72rem; color: var(--ep-silver-dark); margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.05); }
+
+/* ── Leaderboard ── */
+.betme-lb-head, .betme-lb-row {
+  display: grid; grid-template-columns: 28px 1fr 40px 80px; align-items: center; gap: 6px;
+  padding: 9px 4px; font-size: .85rem;
+}
+.betme-lb-head { font-size: .58rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ep-silver-dark); border-bottom: 1px solid rgba(255,255,255,.08); }
+.betme-lb-row { border-bottom: 1px solid rgba(255,255,255,.04); }
+.betme-lb-row.is-you { background: rgba(201,168,76,.1); border-radius: var(--ep-radius); }
+.betme-lb-rank { font-weight: 800; color: var(--ep-gold); }
+.betme-lb-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.betme-lb-streak { font-size: .74rem; text-align: center; }
+.betme-lb-coins { text-align: right; font-weight: 700; color: var(--ep-gold-light); }
+
+/* ── Footer ── */
+.betme-footer { border-top: 1px solid rgba(201,168,76,.18); margin-top: 40px; padding: 40px clamp(16px, 4vw, 48px) 24px; background: var(--ep-black-rich); }
+.betme-footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; }
+.betme-logo-sm { font-size: 1.2rem; }
+.betme-footer-tag { color: var(--ep-silver-dark); font-size: .82rem; margin-top: 8px; max-width: 34ch; }
+.betme-footer-legal p { font-size: .74rem; color: var(--ep-silver-dark); line-height: 1.6; }
+.betme-footer-legal strong { color: var(--ep-gold-light); }
+.betme-link-btn { background: none; border: none; color: var(--ep-silver-dark); text-decoration: underline; font-size: .72rem; cursor: pointer; margin-top: 10px; padding: 0; }
+.betme-link-btn:hover { color: var(--ep-red); }
+.betme-copyright { text-align: center; font-size: .7rem; color: var(--ep-silver-dark); margin-top: 30px; }
+
+/* ── Toast ── */
+.betme-toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(30px);
+  background: var(--ep-gold); color: var(--ep-black); font-weight: 700; font-size: .84rem;
+  padding: 12px 22px; border-radius: 40px; box-shadow: var(--ep-shadow-card);
+  opacity: 0; pointer-events: none; transition: all .35s var(--ep-ease); z-index: 5000;
+}
+.betme-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .betme-app-grid { grid-template-columns: 1fr; }
+  .betme-lower-grid { grid-template-columns: 1fr; }
+  .betme-footer-inner { grid-template-columns: 1fr; gap: 24px; }
+  .betme-slip-toggle {
+    display: block; position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    z-index: 1500; background: var(--ep-gold); color: var(--ep-black); border: none;
+    font-weight: 800; letter-spacing: .06em; padding: 13px 26px; border-radius: 40px;
+    box-shadow: var(--ep-shadow-card); cursor: pointer;
+  }
+  .betme-slip-panel {
+    position: fixed; inset: auto 0 0 0; z-index: 1400; max-height: 82vh; overflow-y: auto;
+    background: var(--ep-black-rich); border-top: 1px solid var(--ep-glass-border);
+    padding: 20px 16px 80px; border-radius: 18px 18px 0 0;
+    transform: translateY(105%); transition: transform .4s var(--ep-ease);
+  }
+  .betme-slip-panel.is-open { transform: translateY(0); }
+}
+@media (min-width: 901px) {
+  .betme-side-col { position: sticky; top: 76px; }
+}
+@media (max-width: 560px) {
+  .betme-game-grid { grid-template-columns: 1fr; gap: 4px; }
+  .betme-col-team { flex-direction: row; justify-content: space-between; }
+  .betme-col-market { display: grid; grid-template-columns: auto 1fr 1fr; align-items: center; }
+  .betme-market-label { margin: 0 8px 0 0; text-align: left; }
+  .betme-hud-streak { display: none; }
+}
